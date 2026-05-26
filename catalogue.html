@@ -27,88 +27,88 @@ body {
 }
 
 /* HEADER */
-.header {
-  text-align: center;
-  padding: 60px 20px 40px;
-  position: relative;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, #001a3a, transparent 70%);
-  border-bottom: 1px solid rgba(0,245,255,0.1);
+. رأس الصفحة  {
+  text-align : center ;
+  الحشو : 60 بكسل  20 بكسل  40 بكسل ؛
+  الموضع : نسبي ؛
+  الخلفية : تدرج شعاعي ( قطع ناقص  80 %  60 %  عند  50 %  0 % ، #001a3a، شفاف  70 % ) ؛
+  border-bottom : 1 px  solid  rgba ( 0 , 245 , 255 , 0.1 ) ;
 }
 
-.header::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), var(--purple), transparent);
+.header :: before {​ 
+  محتوى : '' ؛
+  الوضع : مطلق ؛
+  أعلى : 0 ؛ يسار : 0 ؛ يمين : 0 ؛
+  الارتفاع : 3 بكسل ؛
+  الخلفية : تدرج خطي ( 90 درجة ، شفاف ، var ( -سماوي ) ، var ( -gold ) ، var ( -purple ) ، شفاف ) ؛
 }
 
-.logo {
-  font-family: Impact, sans-serif;
-  font-size: 64px;
-  letter-spacing: 12px;
-  background: linear-gradient(135deg, #fff 0%, var(--cyan) 40%, var(--gold) 70%, #fff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 30px rgba(0,245,255,0.4));
-  margin-bottom: 8px;
+. logo  {
+  font-family : Impact , sans-serif ;
+  حجم الخط : 64 بكسل ؛
+  تباعد الأحرف : 12 بكسل ؛
+  الخلفية : تدرج خطي ( 135 درجة , #fff 0 % , var ( --cyan )  40 % , var ( --gold )  70 % , #fff 100 % ) ؛
+  -webkit-background-clip : text ;
+  -webkit-text-fill-color : transparent ;
+  background-clip : text ;
+  filter : drop-shadow ( 0  0  30 px  rgba ( 0 , 245 , 255 , 0.4 ) ) ;
+  margin-bottom : 8 px ;
 }
 
-.logo-sub {
+. logo-sub  {
   font-size: 13px;
   letter-spacing: 8px;
   color: rgba(255,255,255,0.4);
   text-transform: uppercase;
   margin-bottom: 20px;
-}
 
-.header-title {
+
+header-title {
   font-size: 28px;
   font-weight: 700;
   color: var(--white);
   margin-bottom: 8px;
-}
 
-.header-sub {
+
+header-sub {
   font-size: 15px;
   color: rgba(255,255,255,0.5);
   font-weight: 300;
-}
 
-/* GRID */
-.grid-container {
+
+
+grid-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 50px 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 28px;
+  الحشو: 50 بكسل 30 بكسل؛padding: 50px 30px;
+  العرض: شبكة؛display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  الفجوة: 28 بكسل؛gap: 28px;
 }
 
-/* CARD */
-.card {
-  background: linear-gradient(135deg, rgba(6,13,36,0.95) 0%, rgba(3,8,26,0.98) 100%);
-  border: 1px solid rgba(0,245,255,0.12);
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  transition: transform 0.3s, box-shadow 0.3s;
+/* بطاقة */
+.بطاقة {card {
+  الخلفية: تدرج خطي (135 درجة، rgba(6,13,36,0.95) 0%، rgba(3,8,26,0.98) 100%)؛background: linear-gradient(135deg, rgba(6,13,36,0.95) 0%, rgba(3,8,26,0.98) 100%);
+  border: 1px solid rgba(0,245,255,0.12);border: 1px solid rgba(0,245,255,0.12);
+  border-radius: 20px;border-radius: 20px;
+  overflow: hidden;overflow: hidden;
+  الموضع: نسبي؛position: relative;
+  الانتقال: تحويل 0.3 ثانية، ظل الصندوق 0.3 ثانية؛transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(0,245,255,0.12);
+.card:hover {card:hover {
+  transform: translateY(-6px);transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,245,255,0.12);box-shadow: 0 20px 60px rgba(0,245,255,0.12);
 }
 
-/* CARD TOP BAR */
-.card-bar {
-  height: 4px;
-  width: 100%;
+/* شريط البطاقة العلوي */
+.card-bar {card-bar {
+  الارتفاع: 4 بكسل؛height: 4px;
+  العرض: 100%؛width: 100%;
 }
 
-.bar-cyan { background: linear-gradient(90deg, var(--cyan), #0099AA); }
-.bar-gold { background: linear-gradient(90deg, var(--gold), #8B6B20); }
+.bar-cyan { background: linear-gradient(90deg, var(--cyan), #0099AA); }bar-cyan { background: linear-gradient(90deg, var(--cyan), #0099AA); }
+.bar-gold { background: linear-gradient(90deg, var(--gold), #8B6B20); }bar-gold { background: linear-gradient(90deg, var(--gold), #8B6B20); }
 .bar-purple { background: linear-gradient(90deg, var(--purple), #4A1A8C); }
 .bar-mixed { background: linear-gradient(90deg, var(--cyan), var(--gold), var(--purple)); }
 .bar-green { background: linear-gradient(90deg, #00FF88, #007744); }
