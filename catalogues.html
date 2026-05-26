@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAWJA — الكتالوجات</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;900&display=swap');
+
+:root {
+  --cyan: #00F5FF;
+  --gold: #C9A84C;
+  --purple: #7B2FBE;
+  --dark: #03081A;
+  --dark2: #060d24;
+  --white: #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  min-height: 100vh;
+  direction: rtl;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  padding: 60px 20px 40px;
+  position: relative;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, #001a3a, transparent 70%);
+  border-bottom: 1px solid rgba(0,245,255,0.1);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), var(--purple), transparent);
+}
+
+.logo {
+  font-family: Impact, sans-serif;
+  font-size: 64px;
+  letter-spacing: 12px;
+  background: linear-gradient(135deg, #fff 0%, var(--cyan) 40%, var(--gold) 70%, #fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(0,245,255,0.4));
+  margin-bottom: 8px;
+}
+
+.logo-sub {
+  font-size: 13px;
+  letter-spacing: 8px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.header-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+}
+
+/* GRID */
+.grid-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+}
+
+/* CARD */
+.card {
+  background: linear-gradient(135deg, rgba(6,13,36,0.95) 0%, rgba(3,8,26,0.98) 100%);
+  border: 1px solid rgba(0,245,255,0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,245,255,0.12);
+}
+
+/* CARD TOP BAR */
+.card-bar {
+  height: 4px;
+  width: 100%;
+}
+
+.bar-cyan { background: linear-gradient(90deg, var(--cyan), #0099AA); }
+.bar-gold { background: linear-gradient(90deg, var(--gold), #8B6B20); }
+.bar-purple { background: linear-gradient(90deg, var(--purple), #4A1A8C); }
+.bar-mixed { background: linear-gradient(90deg, var(--cyan), var(--gold), var(--purple)); }
+.bar-green { background: linear-gradient(90deg, #00FF88, #007744); }
+.bar-red { background: linear-gradient(90deg, #FF4466, #AA1133); }
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.badge-new { background: rgba(0,255,136,0.15); color: #00FF88; border: 1px solid rgba(0,255,136,0.3); }
+.badge-hot { background: rgba(255,68,102,0.15); color: #FF4466; border: 1px solid rgba(255,68,102,0.3); }
+.badge-best { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+.badge-pro { background: rgba(123,47,190,0.15); color: #BB77FF; border: 1px solid rgba(123,47,190,0.3); }
+
+/* CARD CONTENT */
+.card-inner {
+  padding: 28px 28px 24px;
+}
+
+.card-icon {
+  font-size: 42px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.card-num {
+  font-family: Impact, sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  margin-bottom: 6px;
+  opacity: 0.6;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* TARGET */
+.target-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,245,255,0.06);
+  border: 1px solid rgba(0,245,255,0.15);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: var(--cyan);
+  margin-bottom: 18px;
+}
+
+/* SERVICES LIST */
+.services {
+  list-style: none;
+  margin-bottom: 22px;
+}
+
+.services li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.services li:last-child { border-bottom: none; }
+
+.check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check-cyan { background: rgba(0,245,255,0.15); color: var(--cyan); }
+.check-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+.check-purple { background: rgba(123,47,190,0.15); color: #BB77FF; }
+
+/* RESULT PILL */
+.result-pill {
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-icon { font-size: 20px; }
+.result-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.result-text strong { color: #00FF88; }
+
+/* DIVIDER */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,245,255,0.15), rgba(201,168,76,0.15), transparent);
+  margin: 18px 0;
+}
+
+/* PRICE */
+.price-block {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.price-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.price-value {
+  font-family: Impact, sans-serif;
+  font-size: 42px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--cyan), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-unit {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+  margin-right: 6px;
+}
+
+.price-old {
+  font-size: 13px;
+  color: rgba(255,68,102,0.6);
+  text-decoration: line-through;
+}
+
+.saving-badge {
+  background: rgba(255,68,102,0.1);
+  border: 1px solid rgba(255,68,102,0.25);
+  border-radius: 8px;
+  padding: 6px 12px;
+  text-align: center;
+}
+
+.saving-pct { font-family: Impact, sans-serif; font-size: 22px; color: #FF4466; }
+.saving-txt { font-size: 10px; color: rgba(255,68,102,0.7); display: block; }
+
+/* CTA BUTTON */
+.cta-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Cairo', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.btn-cyan {
+  background: linear-gradient(135deg, rgba(0,245,255,0.15), rgba(0,245,255,0.08));
+  border: 1px solid rgba(0,245,255,0.35);
+  color: var(--cyan);
+}
+
+.btn-cyan:hover {
+  background: linear-gradient(135deg, rgba(0,245,255,0.25), rgba(0,245,255,0.15));
+  box-shadow: 0 0 25px rgba(0,245,255,0.2);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.1));
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold);
+}
+
+.btn-solid {
+  background: linear-gradient(135deg, var(--cyan), #0099AA);
+  color: #000;
+  font-weight: 900;
+}
+
+.btn-solid:hover {
+  box-shadow: 0 0 30px rgba(0,245,255,0.35);
+  transform: translateY(-1px);
+}
+
+.btn-gold-solid {
+  background: linear-gradient(135deg, var(--gold), #8B6B20);
+  color: #000;
+  font-weight: 900;
+}
+
+.btn-purple-solid {
+  background: linear-gradient(135deg, var(--purple), #4A1A8C);
+  color: #fff;
+  font-weight: 900;
+}
+
+/* TIMING */
+.timing-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.timing-chip {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* POPULAR CARD */
+.card.popular {
+  border-color: rgba(201,168,76,0.3);
+  box-shadow: 0 0 40px rgba(201,168,76,0.08);
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 50px 20px;
+  border-top: 1px solid rgba(0,245,255,0.08);
+}
+
+.footer-logo { font-family: Impact, sans-serif; font-size: 36px; letter-spacing: 8px;
+  background: linear-gradient(135deg, #fff, var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 10px; }
+.footer-text { font-size: 13px; color: rgba(255,255,255,0.35); letter-spacing: 2px; }
+.footer-line { width: 100px; height: 2px; background: linear-gradient(90deg, var(--cyan), var(--gold));
+  margin: 20px auto; }
+.footer-contact { font-size: 14px; color: var(--cyan); letter-spacing: 2px; }
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  margin-bottom: 16px;
+  padding: 0 20px;
+}
+
+.section-title h2 {
+  font-size: 13px;
+  letter-spacing: 8px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.section-title p {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--white);
+}
+
+/* GUARANTEE */
+.guarantee {
+  background: rgba(0,255,136,0.04);
+  border: 1px solid rgba(0,255,136,0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: rgba(0,255,136,0.7);
+  text-align: center;
+}
+
+/* URGENCY */
+.urgency {
+  background: rgba(255,68,102,0.06);
+  border: 1px solid rgba(255,68,102,0.15);
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: rgba(255,100,120,0.8);
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">MAWJA</div>
+  <div class="logo-sub">Digital Agency · Morocco</div>
+  <div class="header-title">🌊 كتالوج الخدمات 2026</div>
+  <div class="header-sub">10 باقات مصممة خصيصاً لتنمية مقاولتك — الاستشارة الأولى مجانية دائماً</div>
+</div>
+
+<div class="section-title" style="padding-top: 50px;">
+  <h2>✦ اختار باقتك</h2>
+  <p>كل باقة = نتيجة واضحة قابلة للقياس</p>
+</div>
+
+<!-- CATALOGUES GRID -->
+<div class="grid-container">
+
+  <!-- 01 - STARTER -->
+  <div class="card">
+    <div class="card-bar bar-cyan"></div>
+    <div class="card-inner">
+      <span class="badge badge-new">للبداية</span>
+      <span class="card-icon" style="margin-top: 36px;">🚀</span>
+      <div class="card-num">PACK 01</div>
+      <div class="card-title">الباقة الأساسية<br>Starter Pack</div>
+      <div class="card-desc">للمقاولات اللي بغات تبدأ حضورها الرقمي — بأقل تكلفة وأعلى جودة.</div>
+
+      <div class="target-tag">🎯 مطاعم · محلات · خدمات محلية</div>
+
+      <ul class="services">
+        <li><span class="check check-cyan">✓</span> إدارة صفحة إنستغرام (8 منشورات/شهر)</li>
+        <li><span class="check check-cyan">✓</span> تصميم 8 منشورات احترافية</li>
+        <li><span class="check check-cyan">✓</span> كتابة الكابشنات بالدارجة/العربية</li>
+        <li><span class="check check-cyan">✓</span> جدولة المنشورات</li>
+        <li><span class="check check-cyan">✓</span> تقرير شهري للنتائج</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">📈</span>
+        <span class="result-text">متوسط النتيجة: <strong>+200 متابع في أول شهر</strong> وزيادة التفاعل 3×</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">ابتداءً من</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">1,500</span>
+            <span class="price-unit">درهم/شهر</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">⚡ يبدأ خلال 48 ساعة</div>
+          <div class="timing-chip">🔄 عقد شهري</div>
+        </div>
+      </div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت الباقة الأساسية Starter Pack" class="cta-btn btn-cyan">💬 احجز استشارة مجانية</a>
+    </div>
+  </div>
+
+  <!-- 02 - SOCIAL GROWTH -->
+  <div class="card">
+    <div class="card-bar bar-mixed"></div>
+    <div class="card-inner">
+      <span class="badge badge-hot">🔥 الأكثر طلباً</span>
+      <span class="card-icon" style="margin-top: 36px;">📱</span>
+      <div class="card-num">PACK 02</div>
+      <div class="card-title">نمو السوشيال ميديا<br>Social Growth</div>
+      <div class="card-desc">إنستغرام + فيسبوك + تيك توك — حضور كامل على كل المنصات بمحتوى احترافي يومي.</div>
+
+      <div class="target-tag">🎯 براندات · مطاعم راقية · عيادات · فنادق</div>
+
+      <ul class="services">
+        <li><span class="check check-cyan">✓</span> إدارة 3 منصات (IG + FB + TikTok)</li>
+        <li><span class="check check-cyan">✓</span> 15 منشور + 4 ريلز شهرياً</li>
+        <li><span class="check check-cyan">✓</span> استراتيجية محتوى مخصصة</li>
+        <li><span class="check check-cyan">✓</span> الرد على التعليقات والرسائل</li>
+        <li><span class="check check-cyan">✓</span> هاشتاقات وSEO للمنصات</li>
+        <li><span class="check check-cyan">✓</span> تقرير أسبوعي + شهري</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">🚀</span>
+        <span class="result-text">متوسط النتيجة: <strong>+700 متابع شهرياً</strong> وزيادة المبيعات 2.5×</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">ابتداءً من</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">3,200</span>
+            <span class="price-unit">درهم/شهر</span>
+          </div>
+          <span class="price-old">كان 4,000 درهم</span>
+        </div>
+        <div class="saving-badge">
+          <div class="saving-pct">-20%</div>
+          <span class="saving-txt">توفير الآن</span>
+        </div>
+      </div>
+      <div class="urgency">⏰ هذا السعر متاح لـ 5 عملاء فقط هذا الشهر</div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة Social Growth" class="cta-btn btn-solid">🌊 ابدأ الآن</a>
+    </div>
+  </div>
+
+  <!-- 03 - BRAND IDENTITY -->
+  <div class="card">
+    <div class="card-bar bar-gold"></div>
+    <div class="card-inner">
+      <span class="badge badge-best">⭐ الأفضل قيمة</span>
+      <span class="card-icon" style="margin-top: 36px;">🎨</span>
+      <div class="card-num">PACK 03</div>
+      <div class="card-title">الهوية البصرية الكاملة<br>Brand Identity</div>
+      <div class="card-desc">لوغو + ألوان + خطوط + بطاقات + موك أبس — هوية تجارية تجعل علامتك لا تُنسى.</div>
+
+      <div class="target-tag">🎯 مشاريع جديدة · براندات تريد ريبراندينغ</div>
+
+      <ul class="services">
+        <li><span class="check check-gold">✓</span> لوغو احترافي (3 مقترحات)</li>
+        <li><span class="check check-gold">✓</span> دليل الهوية البصرية الكامل</li>
+        <li><span class="check check-gold">✓</span> ألوان + خطوط + أنماط</li>
+        <li><span class="check check-gold">✓</span> بطاقة العمل + ورق الرسائل</li>
+        <li><span class="check check-gold">✓</span> موك أبس على المنتجات</li>
+        <li><span class="check check-gold">✓</span> ملفات مفتوحة (AI, PDF, PNG)</li>
+        <li><span class="check check-gold">✓</span> 3 تعديلات مجانية</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">💎</span>
+        <span class="result-text">النتيجة: <strong>هوية احترافية كاملة جاهزة</strong> في أقل من 10 أيام</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">سعر ثابت</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">2,500</span>
+            <span class="price-unit">درهم</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">⏱️ 7-10 أيام</div>
+          <div class="timing-chip">✅ دفعة واحدة</div>
+        </div>
+      </div>
+      <div class="guarantee">🛡️ ضمان الرضا الكامل — نعدل حتى تعجبك</div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة الهوية البصرية" class="cta-btn btn-gold-solid">🎨 اطلب هويتك الآن</a>
+    </div>
+  </div>
+
+  <!-- 04 - ADS BOOSTER -->
+  <div class="card">
+    <div class="card-bar bar-red"></div>
+    <div class="card-inner">
+      <span class="badge badge-hot">⚡ نتائج سريعة</span>
+      <span class="card-icon" style="margin-top: 36px;">📢</span>
+      <div class="card-num">PACK 04</div>
+      <div class="card-title">الإعلانات الممولة<br>Ads Booster</div>
+      <div class="card-desc">Meta Ads + Google Ads مستهدفة — كل درهم تنفقه يرجع ليك مضاعفاً.</div>
+
+      <div class="target-tag">🎯 متاجر · عيادات · خدمات · عقارات</div>
+
+      <ul class="services">
+        <li><span class="check check-cyan">✓</span> إنشاء وإدارة حملات Meta Ads</li>
+        <li><span class="check check-cyan">✓</span> استهداف جمهور مخصص بدقة</li>
+        <li><span class="check check-cyan">✓</span> تصميم الإعلانات (صور + فيديو)</li>
+        <li><span class="check check-cyan">✓</span> A/B Testing للحصول على أعلى ROI</li>
+        <li><span class="check check-cyan">✓</span> إدارة الميزانية اليومية</li>
+        <li><span class="check check-cyan">✓</span> تقرير أسبوعي بالأرقام الحقيقية</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">💰</span>
+        <span class="result-text">متوسط العملاء: <strong>ROI 400%</strong> — كل 1,000 درهم تجلب 4,000 درهم مبيعات</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">رسوم الإدارة</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">1,500</span>
+            <span class="price-unit">درهم/شهر</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">💰 ميزانية الإعلانات منفصلة</div>
+          <div class="timing-chip">⚡ يبدأ في 24 ساعة</div>
+        </div>
+      </div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة الإعلانات الممولة" class="cta-btn btn-cyan">📢 ابدأ إعلاناتك الآن</a>
+    </div>
+  </div>
+
+  <!-- 05 - WEB PRESENCE -->
+  <div class="card">
+    <div class="card-bar bar-purple"></div>
+    <div class="card-inner">
+      <span class="badge badge-pro">💻 ديجيتال</span>
+      <span class="card-icon" style="margin-top: 36px;">🌐</span>
+      <div class="card-num">PACK 05</div>
+      <div class="card-title">الموقع الإلكتروني<br>Web Presence</div>
+      <div class="card-desc">موقع احترافي سريع + SEO + نموذج تواصل — يشتغل 24/7 ويجلب ليك عملاء حتى وأنت نايم.</div>
+
+      <div class="target-tag">🎯 كل المقاولات اللي بغات موقع احترافي</div>
+
+      <ul class="services">
+        <li><span class="check check-purple">✓</span> تصميم موقع احترافي (5 صفحات)</li>
+        <li><span class="check check-purple">✓</span> تحسين SEO كامل</li>
+        <li><span class="check check-purple">✓</span> نموذج تواصل + WhatsApp</li>
+        <li><span class="check check-purple">✓</span> نسخة موبايل مثالية</li>
+        <li><span class="check check-purple">✓</span> سرعة تحميل عالية</li>
+        <li><span class="check check-purple">✓</span> استضافة + دومين سنة كاملة</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">🌍</span>
+        <span class="result-text">النتيجة: <strong>موقع جاهز في 14 يوم</strong> يظهر في نتائج Google</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">سعر ثابت</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">3,500</span>
+            <span class="price-unit">درهم</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">⏱️ 10-14 يوم</div>
+          <div class="timing-chip">🔧 دعم 3 أشهر</div>
+        </div>
+      </div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة الموقع الإلكتروني" class="cta-btn btn-purple-solid">🌐 احصل على موقعك</a>
+    </div>
+  </div>
+
+  <!-- 06 - CONTENT CREATOR -->
+  <div class="card">
+    <div class="card-bar bar-cyan"></div>
+    <div class="card-inner">
+      <span class="badge badge-new">🤖 AI محتوى</span>
+      <span class="card-icon" style="margin-top: 36px;">🎬</span>
+      <div class="card-num">PACK 06</div>
+      <div class="card-title">المحتوى الذكي<br>AI Content Creator</div>
+      <div class="card-desc">ريلز + قصص + كابشنات بالذكاء الاصطناعي — محتوى ينتشر ويجلب ليك متابعين حقيقيين.</div>
+
+      <div class="target-tag">🎯 إنفلوانسرز · براندات · كوتشات</div>
+
+      <ul class="services">
+        <li><span class="check check-cyan">✓</span> 8 ريلز شهرياً (سكريبت + تصميم)</li>
+        <li><span class="check check-cyan">✓</span> 30 كابشن بالدارجة/العربية/الفرنسية</li>
+        <li><span class="check check-cyan">✓</span> 15 ستوري جاهزة</li>
+        <li><span class="check check-cyan">✓</span> أفكار محتوى شهرية</li>
+        <li><span class="check check-cyan">✓</span> هوية بصرية للمنشورات</li>
+        <li><span class="check check-cyan">✓</span> تحسين للخوارزميات</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">🔥</span>
+        <span class="result-text">متوسط النتيجة: <strong>ريل واحد يوصل 50,000 مشاهدة</strong> في أول أسبوع</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">ابتداءً من</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">2,000</span>
+            <span class="price-unit">درهم/شهر</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">📅 تسليم أسبوعي</div>
+          <div class="timing-chip">🔄 عقد شهري</div>
+        </div>
+      </div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة المحتوى الذكي AI Content" class="cta-btn btn-cyan">🎬 ابدأ إنتاج محتواك</a>
+    </div>
+  </div>
+
+  <!-- 07 - PHOTOGRAPHY -->
+  <div class="card">
+    <div class="card-bar bar-gold"></div>
+    <div class="card-inner">
+      <span class="badge badge-best">📸 حصري</span>
+      <span class="card-icon" style="margin-top: 36px;">📸</span>
+      <div class="card-num">PACK 07</div>
+      <div class="card-title">التصوير الاحترافي<br>Professional Shoot</div>
+      <div class="card-desc">صور تبيع بدون ما تتكلم — جلسة تصوير احترافية لمنتجاتك أو مطعمك أو فضائك.</div>
+
+      <div class="target-tag">🎯 مطاعم · منتجات · فنادق · عيادات</div>
+
+      <ul class="services">
+        <li><span class="check check-gold">✓</span> جلسة تصوير كاملة (3-4 ساعات)</li>
+        <li><span class="check check-gold">✓</span> 50+ صورة معالجة احترافياً</li>
+        <li><span class="check check-gold">✓</span> تعديل الألوان والإضاءة</li>
+        <li><span class="check check-gold">✓</span> تسليم بجودة عالية + موبايل</li>
+        <li><span class="check check-gold">✓</span> حقوق الاستخدام التجاري كاملة</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">⭐</span>
+        <span class="result-text">النتيجة: <strong>صور احترافية جاهزة</strong> لكل منصاتك وموقعك</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">ابتداءً من</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">1,200</span>
+            <span class="price-unit">درهم/جلسة</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">📦 تسليم في 72 ساعة</div>
+          <div class="timing-chip">📍 الدارالبيضاء + الرباط</div>
+        </div>
+      </div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة التصوير الاحترافي" class="cta-btn btn-gold-solid">📸 احجز جلستك الآن</a>
+    </div>
+  </div>
+
+  <!-- 08 - GROWTH PACK (POPULAR) -->
+  <div class="card popular">
+    <div class="card-bar bar-mixed"></div>
+    <div class="card-inner">
+      <span class="badge badge-best">🏆 الأكثر نجاحاً</span>
+      <span class="card-icon" style="margin-top: 36px;">⚡</span>
+      <div class="card-num">PACK 08</div>
+      <div class="card-title">باقة النمو المتكاملة<br>Full Growth Pack</div>
+      <div class="card-desc">سوشيال ميديا + إعلانات + محتوى — كل شيء في باقة واحدة بسعر استثنائي.</div>
+
+      <div class="target-tag">🎯 مقاولات تريد نمو سريع وقابل للقياس</div>
+
+      <ul class="services">
+        <li><span class="check check-gold">✓</span> إدارة 3 منصات كاملة</li>
+        <li><span class="check check-gold">✓</span> 20 منشور + 6 ريلز شهرياً</li>
+        <li><span class="check check-gold">✓</span> حملة Meta Ads مدارة</li>
+        <li><span class="check check-gold">✓</span> كابشنات + ستوريات يومية</li>
+        <li><span class="check check-gold">✓</span> تقرير أسبوعي مفصل</li>
+        <li><span class="check check-gold">✓</span> استشارة استراتيجية شهرية</li>
+        <li><span class="check check-gold">✓</span> مدير حساب مخصص</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">🚀</span>
+        <span class="result-text">متوسط النتيجة: <strong>نمو 7× في المبيعات</strong> خلال 3 أشهر</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">ابتداءً من</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">5,500</span>
+            <span class="price-unit">درهم/شهر</span>
+          </div>
+          <span class="price-old">قيمة فعلية: 7,500 درهم</span>
+        </div>
+        <div class="saving-badge">
+          <div class="saving-pct">-27%</div>
+          <span class="saving-txt">توفير</span>
+        </div>
+      </div>
+      <div class="urgency">🔥 3 أماكن متبقية فقط هذا الشهر — لا تفوّت الفرصة</div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة النمو المتكاملة Full Growth Pack" class="cta-btn btn-gold-solid">⚡ احجز مكانك الآن</a>
+    </div>
+  </div>
+
+  <!-- 09 - LOCAL BUSINESS -->
+  <div class="card">
+    <div class="card-bar bar-green"></div>
+    <div class="card-inner">
+      <span class="badge badge-new">🏪 محلي</span>
+      <span class="card-icon" style="margin-top: 36px;">🏪</span>
+      <div class="card-num">PACK 09</div>
+      <div class="card-title">باقة المقاولة المحلية<br>Local Business Pack</div>
+      <div class="card-desc">خصيصاً للمقاولات الصغيرة — حضور رقمي احترافي بميزانية في متناول الجميع.</div>
+
+      <div class="target-tag">🎯 حلاقون · مقاهي · محلات · حرفيون</div>
+
+      <ul class="services">
+        <li><span class="check check-cyan">✓</span> إعداد وتحسين Google My Business</li>
+        <li><span class="check check-cyan">✓</span> إدارة صفحة فيسبوك + إنستغرام</li>
+        <li><span class="check check-cyan">✓</span> 10 منشورات/شهر</li>
+        <li><span class="check check-cyan">✓</span> الرد على التقييمات</li>
+        <li><span class="check check-cyan">✓</span> تصميم شعار بسيط</li>
+        <li><span class="check check-cyan">✓</span> بطاقة عمل رقمية</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">📍</span>
+        <span class="result-text">النتيجة: <strong>تظهر في جوجل</strong> عندما يبحث الزبائن القريبين منك</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">ابتداءً من</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value">900</span>
+            <span class="price-unit">درهم/شهر</span>
+          </div>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">✅ بدون عقد طويل</div>
+          <div class="timing-chip">💳 دفع شهري</div>
+        </div>
+      </div>
+      <div class="guarantee">🛡️ إذا ما شفتيش نتيجة في 30 يوم — نرجع ليك فلوسك</div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت باقة المقاولة المحلية" class="cta-btn btn-cyan">🏪 ابدأ بأقل تكلفة</a>
+    </div>
+  </div>
+
+  <!-- 10 - ELITE PREMIUM -->
+  <div class="card popular">
+    <div class="card-bar bar-mixed"></div>
+    <div class="card-inner">
+      <span class="badge badge-pro">👑 ELITE</span>
+      <span class="card-icon" style="margin-top: 36px;">👑</span>
+      <div class="card-num">PACK 10</div>
+      <div class="card-title">الباقة الاستثنائية<br>Elite Premium</div>
+      <div class="card-desc">للمقاولات الطموحة — استراتيجية رقمية شاملة 360° تحوّل علامتك لـ brand لا يُنسى.</div>
+
+      <div class="target-tag">🎯 شركات · سلاسل · علامات تجارية كبرى</div>
+
+      <ul class="services">
+        <li><span class="check check-gold">✓</span> كل خدمات الباقات السابقة</li>
+        <li><span class="check check-gold">✓</span> استراتيجية رقمية 360° سنوية</li>
+        <li><span class="check check-gold">✓</span> مدير حساب VIP مخصص</li>
+        <li><span class="check check-gold">✓</span> تصوير شهري احترافي</li>
+        <li><span class="check check-gold">✓</span> موقع ويب + تطبيق ويب</li>
+        <li><span class="check check-gold">✓</span> تقارير يومية + اجتماع أسبوعي</li>
+        <li><span class="check check-gold">✓</span> إعلانات غير محدودة</li>
+        <li><span class="check check-gold">✓</span> أولوية في التنفيذ 24/7</li>
+      </ul>
+
+      <div class="result-pill">
+        <span class="result-icon">👑</span>
+        <span class="result-text">للعلامات الطموحة: <strong>نمو لا يتوقف</strong> — شريك رقمي كامل لا مزود خدمة</span>
+      </div>
+
+      <div class="divider"></div>
+      <div class="price-block">
+        <div class="price-main">
+          <span class="price-label">بالتشاور</span>
+          <div style="display:flex;align-items:flex-end;gap:4px">
+            <span class="price-value" style="font-size:30px;">مخصص</span>
+          </div>
+          <span style="font-size:12px;color:rgba(255,255,255,0.4)">حسب حجم المشروع</span>
+        </div>
+        <div class="timing-row" style="margin-bottom:0;flex-direction:column;align-items:flex-end;gap:4px">
+          <div class="timing-chip">💎 VIP فقط</div>
+          <div class="timing-chip">🤝 عقد سنوي</div>
+        </div>
+      </div>
+      <div class="urgency">👑 أماكن محدودة — 3 عملاء Elite فقط في نفس الوقت</div>
+      <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت الباقة Elite Premium" class="cta-btn btn-gold-solid">👑 تحدث مع مدير VIP</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">MAWJA</div>
+  <div class="footer-text">DIGITAL AGENCY · MOROCCO · 2026</div>
+  <div class="footer-line"></div>
+  <div class="footer-contact">📱 +212 702 648 233 &nbsp;·&nbsp; 📸 @mawja_digital &nbsp;·&nbsp; 🌐 mawja.agency</div>
+  <div style="margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.25); letter-spacing: 2px;">
+    الاستشارة الأولى مجانية دائماً ✦ نبدأ في 48 ساعة ✦ نتائج مضمونة
+  </div>
+</div>
+
+</body>
+</html>
