@@ -3,778 +3,668 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAWJA موجة | وكالة رقمية احترافية في المغرب</title>
-<meta name="description" content="MAWJA وكالة رقمية متخصصة في التسويق الرقمي وإدارة السوشيال ميديا وتصميم المواقع في المغرب. نخدم المقاولات الصغيرة والمتوسطة.">
-<meta name="keywords" content="وكالة رقمية المغرب, تسويق رقمي, سوشيال ميديا, MAWJA, موجة, digital agency Maroc">
-<meta name="author" content="MAWJA Digital Agency">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://mawja.agency">
-<meta property="og:title" content="MAWJA موجة | وكالة رقمية احترافية">
-<meta property="og:description" content="نحوّل غياب علامتك التجارية إلى حضور رقمي يُذكر.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mawja.agency">
-<meta property="og:locale" content="ar_MA">
-<meta name="twitter:card" content="summary_large_image">
-<!-- ✅ AdSense: ضع كود publisher هنا بعد الموافقة -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script> -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<title>MAWJA — كتالوج الخدمات</title>
 <style>
-:root{--gold:#C9A84C;--gold-l:#E8C97A;--dark:#0A0A0F;--dark2:#111118;--dark3:#1A1A28;--white:#FAFAF5;--gray:#777788;--wa:#25D366;}
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
-body{background:var(--dark);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden;}
-a{text-decoration:none;color:inherit;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#03040c;color:#fff;font-family:Arial,sans-serif;min-height:100vh;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,0.12);transition:padding 0.3s;}
-nav.scrolled{padding:12px 60px;}
-.nav-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;letter-spacing:6px;background:linear-gradient(135deg,#fff,var(--gold-l),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.nav-logo small{font-family:'Amiri',serif;font-size:13px;-webkit-text-fill-color:var(--gold);color:var(--gold);letter-spacing:2px;margin-right:10px;}
-.nav-links{display:flex;gap:28px;align-items:center;}
-.nav-links a{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gray);transition:color 0.3s;}
-.nav-links a:hover{color:var(--gold);}
-.nav-cta{background:var(--gold);color:var(--dark);padding:10px 24px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s;}
-.nav-cta:hover{background:var(--gold-l);}
+.hero{
+  background:linear-gradient(135deg,#03040c,#0a0800,#03040c);
+  text-align:center;padding:40px 20px 30px;
+  border-bottom:1px solid rgba(201,169,110,0.15);
+}
+.hero-logo{
+  font-size:3.5rem;font-weight:900;letter-spacing:8px;
+  color:#C9A96E;margin-bottom:6px;
+}
+.hero-ar{font-size:13px;letter-spacing:5px;color:rgba(201,169,110,0.4);margin-bottom:16px;}
+.hero-tag{
+  display:inline-block;padding:6px 18px;border-radius:50px;
+  border:1px solid rgba(201,169,110,0.25);
+  font-size:11px;letter-spacing:3px;color:rgba(201,169,110,0.6);
+  margin-bottom:24px;
+}
+.stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.stat-n{font-size:1.8rem;font-weight:900;color:#C9A96E;}
+.stat-l{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);}
 
-/* PAGE SYSTEM */
-.page{display:none;}
-.page.active{display:block;}
+.nav{
+  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;
+  padding:14px 12px;position:sticky;top:0;z-index:50;
+  background:rgba(3,4,12,0.95);
+  border-bottom:1px solid rgba(201,169,110,0.08);
+}
+.np{
+  padding:5px 14px;border-radius:50px;font-size:11px;font-weight:700;
+  letter-spacing:1px;text-decoration:none;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.4);
+}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,#16163a 0%,var(--dark) 65%);}
-.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);}
-.hero-badge{display:inline-block;margin-bottom:36px;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,0.35);padding:8px 22px;}
-.hero-svg{width:140px;height:140px;margin-bottom:32px;filter:drop-shadow(0 0 50px rgba(201,168,76,0.25));}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(56px,10vw,110px);font-weight:900;letter-spacing:18px;background:linear-gradient(135deg,#fff 0%,var(--gold-l) 50%,#fff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:14px;}
-.hero-ar{font-family:'Amiri',serif;font-size:26px;color:var(--gold);margin-bottom:24px;}
-.hero-sub{font-size:12px;font-weight:300;letter-spacing:4px;color:var(--gray);text-transform:uppercase;margin-bottom:48px;max-width:560px;}
-.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-.btn-p{background:var(--gold);color:var(--dark);padding:15px 36px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s;}
-.btn-p:hover{background:var(--gold-l);transform:translateY(-3px);box-shadow:0 20px 40px rgba(201,168,76,0.25);}
-.btn-o{border:1px solid rgba(201,168,76,0.4);color:var(--gold-l);padding:15px 36px;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;background:transparent;cursor:pointer;transition:all 0.3s;}
-.btn-o:hover{border-color:var(--gold);background:rgba(201,168,76,0.05);}
+.grid{padding:14px 12px;display:flex;flex-direction:column;gap:12px;}
 
-/* STATS */
-.stats-bar{background:var(--dark3);padding:60px 80px;}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;max-width:1200px;margin:0 auto;}
-.stat-box{text-align:center;}
-.stat-n{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--gold-l);display:block;}
-.stat-l{font-family:'Amiri',serif;font-size:15px;color:var(--gray);margin-top:8px;}
+.cat{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);}
 
-/* SECTIONS */
-.sec{padding:90px 80px;max-width:1200px;margin:0 auto;}
-.lbl{font-size:10px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block;}
-.sec-h{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,44px);font-weight:700;margin-bottom:14px;line-height:1.3;}
-.sec-sub{font-family:'Amiri',serif;font-size:18px;color:var(--gray);line-height:1.9;margin-bottom:50px;}
-.dvd{display:flex;align-items:center;gap:14px;margin:16px 0 50px;}
-.dvd-l{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.dvd-d{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);}
+.ch{
+  padding:20px 18px 16px;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  position:relative;overflow:hidden;min-height:130px;
+}
+.bnum{
+  position:absolute;font-size:7rem;font-weight:900;
+  color:rgba(255,255,255,0.025);right:10px;top:-8px;
+  pointer-events:none;letter-spacing:-4px;
+}
+.ch-left{flex:1;position:relative;z-index:2;}
+.badge{
+  display:inline-block;padding:3px 10px;border-radius:20px;
+  font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid currentColor;opacity:0.85;margin-bottom:8px;
+}
+.title{font-size:1.5rem;font-weight:900;margin-bottom:3px;}
+.en{font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:0.3;}
+.ch-right{position:relative;z-index:2;flex-shrink:0;}
+.plabel{font-size:8px;letter-spacing:2px;text-transform:uppercase;opacity:0.35;text-align:left;}
+.price{font-size:1.4rem;font-weight:900;text-align:left;line-height:1.1;}
+.price sub{font-size:0.6rem;opacity:0.6;}
+.pnote{font-size:9px;opacity:0.35;text-align:left;margin-top:3px;}
 
-/* SERVICES */
-.svc-bg{background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 100%);border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(201,168,76,0.07);}
-.svc-card{background:var(--dark2);padding:44px 36px;transition:all 0.4s;position:relative;overflow:hidden;}
-.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform 0.4s;}
-.svc-card:hover{background:var(--dark3);transform:translateY(-4px);}
-.svc-card:hover::after{transform:scaleX(1);}
-.svc-ico{font-size:38px;margin-bottom:20px;display:block;}
-.svc-t{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold-l);margin-bottom:14px;}
-.svc-txt{font-family:'Amiri',serif;font-size:17px;line-height:1.9;color:rgba(250,250,245,0.65);direction:rtl;}
-.svc-p{margin-top:20px;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+/* wave */
+.wave{position:absolute;bottom:0;left:0;right:0;height:40px;overflow:hidden;pointer-events:none;}
+.wave svg{position:absolute;bottom:0;width:100%;}
 
-/* WHY */
-.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:rgba(201,168,76,0.06);}
-.why-item{background:var(--dark2);padding:38px;transition:background 0.3s;}
-.why-item:hover{background:var(--dark3);}
-.why-ico{font-size:28px;margin-bottom:14px;}
-.why-t{font-size:13px;font-weight:700;letter-spacing:2px;color:var(--gold-l);margin-bottom:10px;text-transform:uppercase;}
-.why-txt{font-family:'Amiri',serif;font-size:17px;line-height:1.9;color:rgba(250,250,245,0.6);direction:rtl;}
+.cb{
+  background:rgba(0,0,0,0.45);padding:14px 18px 16px;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.for{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:12px;}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;margin-bottom:14px;}
+.feat{display:flex;align-items:center;gap:7px;font-size:12px;color:rgba(255,255,255,0.75);}
+.dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;}
+.result{
+  padding:10px 14px;border-radius:8px;font-size:11px;font-weight:700;
+  margin-bottom:14px;border-right:2px solid;line-height:1.6;
+}
+.actions{display:flex;gap:8px;}
+.btn-wa{
+  flex:1;padding:11px 10px;border-radius:50px;
+  font-size:12px;font-weight:800;letter-spacing:1px;
+  border:none;cursor:pointer;text-align:center;
+  transition:transform .15s;
+}
+.btn-wa:hover{transform:translateY(-2px);}
+.btn-info{
+  padding:11px 14px;border-radius:50px;font-size:12px;font-weight:700;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  color:rgba(255,255,255,0.5);cursor:pointer;
+}
 
-/* PROCESS */
-.proc-bg{background:var(--dark);border-top:1px solid rgba(201,168,76,0.08);}
-.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:50px;position:relative;}
-.proc-steps::before{content:'';position:absolute;top:28px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.step{text-align:center;}
-.step-n{width:56px;height:56px;border-radius:50%;background:var(--dark2);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--gold);margin:0 auto 20px;position:relative;z-index:1;}
-.step-t{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--white);margin-bottom:10px;text-transform:uppercase;}
-.step-txt{font-family:'Amiri',serif;font-size:16px;color:var(--gray);line-height:1.8;}
+.footer{
+  text-align:center;padding:30px 20px;
+  font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.1);
+  text-transform:uppercase;
+}
 
-/* BLOG PREVIEW - ✅ AdSense likes content */
-.blog-bg{background:var(--dark2);border-top:1px solid rgba(201,168,76,0.1);}
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:50px;}
-.blog-card{background:var(--dark);border:1px solid rgba(201,168,76,0.1);padding:36px;transition:all 0.3s;cursor:pointer;}
-.blog-card:hover{border-color:var(--gold);transform:translateY(-4px);}
-.blog-cat{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
-.blog-t{font-family:'Playfair Display',serif;font-size:20px;color:var(--white);margin-bottom:12px;line-height:1.4;}
-.blog-txt{font-family:'Amiri',serif;font-size:16px;color:var(--gray);line-height:1.8;direction:rtl;}
-.blog-date{margin-top:20px;font-size:11px;color:var(--gray);letter-spacing:2px;}
-
-/* CONTACT */
-.contact-bg{background:linear-gradient(135deg,var(--dark2),var(--dark3));border-top:1px solid rgba(201,168,76,0.15);}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
-.c-info-txt{font-family:'Amiri',serif;font-size:19px;line-height:2;color:rgba(250,250,245,0.8);direction:rtl;margin-bottom:36px;}
-.c-item{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
-.c-lbl{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
-.c-val{font-family:'Amiri',serif;font-size:17px;color:var(--white);}
-.wa-btn{display:flex;align-items:center;gap:12px;background:var(--wa);color:white;padding:16px 30px;font-size:14px;font-weight:700;margin-top:28px;transition:all 0.3s;width:fit-content;}
-.wa-btn:hover{background:#1ebe5d;transform:translateY(-3px);box-shadow:0 20px 40px rgba(37,211,102,0.3);}
-.form{display:flex;flex-direction:column;gap:18px;}
-.f-lbl{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:block;}
-.f-in,.f-ta,.f-sel{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);color:var(--white);padding:14px 18px;font-size:15px;font-family:'Amiri',serif;direction:rtl;outline:none;width:100%;transition:border-color 0.3s;}
-.f-in::placeholder,.f-ta::placeholder{color:var(--gray);}
-.f-in:focus,.f-ta:focus,.f-sel:focus{border-color:var(--gold);background:rgba(201,168,76,0.03);}
-.f-ta{min-height:130px;resize:vertical;}
-.f-sel{cursor:pointer;}
-.f-btn{background:var(--gold);color:var(--dark);padding:16px;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.3s;width:100%;}
-.f-btn:hover{background:var(--gold-l);transform:translateY(-2px);}
-
-/* ✅ ADSENSE SLOT */
-.ad-slot{background:rgba(201,168,76,0.04);border:1px dashed rgba(201,168,76,0.2);padding:40px;text-align:center;margin:40px 0;}
-.ad-slot-label{font-size:10px;letter-spacing:3px;color:var(--gray);text-transform:uppercase;margin-bottom:10px;display:block;}
-.ad-placeholder{background:rgba(255,255,255,0.03);height:90px;display:flex;align-items:center;justify-content:center;color:var(--gray);font-size:12px;letter-spacing:2px;}
-
-/* LEGAL PAGES */
-.legal-page{padding:120px 80px 80px;max-width:900px;margin:0 auto;}
-.legal-page h1{font-family:'Playfair Display',serif;font-size:40px;color:var(--gold-l);margin-bottom:12px;}
-.legal-page .date{font-size:12px;color:var(--gray);letter-spacing:2px;margin-bottom:50px;}
-.legal-page h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);margin:40px 0 16px;}
-.legal-page p{font-family:'Amiri',serif;font-size:18px;line-height:2;color:rgba(250,250,245,0.75);direction:rtl;margin-bottom:16px;}
-.legal-page ul{font-family:'Amiri',serif;font-size:18px;line-height:2;color:rgba(250,250,245,0.7);direction:rtl;padding-right:30px;margin-bottom:16px;}
-.legal-page ul li{margin-bottom:8px;}
-.legal-email{color:var(--gold);font-weight:bold;}
-
-/* FOOTER */
-footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.12);padding:50px 80px 36px;text-align:center;}
-.f-logo{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;letter-spacing:10px;color:var(--gold-l);margin-bottom:6px;}
-.f-ar{font-family:'Amiri',serif;font-size:15px;color:var(--gold);letter-spacing:3px;margin-bottom:28px;}
-.f-links{display:flex;gap:28px;justify-content:center;margin-bottom:36px;flex-wrap:wrap;}
-.f-links a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);transition:color 0.3s;}
-.f-links a:hover{color:var(--gold);}
-.f-copy{font-size:11px;color:rgba(136,136,153,0.45);letter-spacing:2px;}
-
-/* FLOATING WA */
-.wa-float{position:fixed;bottom:28px;left:28px;z-index:9999;display:flex;align-items:center;}
-.wa-float-btn{width:60px;height:60px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 30px rgba(37,211,102,0.4);animation:wap 2.5s infinite;cursor:pointer;text-decoration:none;flex-shrink:0;}
-.wa-float-lbl{background:var(--wa);color:white;padding:10px 18px 10px 26px;margin-right:-8px;font-size:13px;font-weight:700;white-space:nowrap;border-radius:0 30px 30px 0;opacity:0;transform:translateX(-10px);transition:all 0.4s;pointer-events:none;}
-.wa-float:hover .wa-float-lbl{opacity:1;transform:translateX(0);}
-@keyframes wap{0%,100%{box-shadow:0 8px 30px rgba(37,211,102,0.4),0 0 0 0 rgba(37,211,102,0.4)}70%{box-shadow:0 8px 30px rgba(37,211,102,0.4),0 0 0 16px rgba(37,211,102,0)}}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(35px);transition:all 0.8s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-
-/* MOBILE */
-@media(max-width:900px){
-  nav{padding:14px 20px;}
-  .nav-links{display:none;}
-  .sec{padding:60px 24px;}
-  .stats-bar{padding:50px 24px;}
-  .stats-grid,.svc-grid,.why-grid,.proc-steps,.blog-grid,.contact-grid{grid-template-columns:1fr;}
-  .proc-steps::before{display:none;}
-  footer{padding:40px 20px;}
-  .wa-float{bottom:16px;left:16px;}
-  .legal-page{padding:100px 24px 60px;}
+@media(max-width:420px){
+  .feats{grid-template-columns:1fr;}
+  .hero-logo{font-size:2.8rem;}
 }
 </style>
-
-<!-- ✅ Adsterra Auto Ads -->
-<script type="text/javascript">
-  atOptions = {
-    'key' : 'YOUR_ADSTERRA_KEY_HERE',
-    'format' : 'auto',
-    'async' : true,
-    'container' : 'atContainer-YOUR_KEY',
-    'display_banner_zones' : true
-  };
-</script>
-<script type="text/javascript" src="//www.topcreativeformat.com/YOUR_ADSTERRA_KEY_HERE/invoke.js"></script>
-<!-- ✅ Adsterra Social Bar (أحسن فورمات للربح) -->
-<script type="text/javascript" src="//pl00000000.profitablegatecpm.com/YOUR_SOCIAL_BAR_KEY.js"></script>
-
 </head>
 <body>
 
-
-
-<!-- NAV -->
-<nav id="nav">
-  <div class="nav-logo">MAWJA <small>موجة</small></div>
-  <div class="nav-links">
-    <a href="#" onclick="showPage('home')">الرئيسية</a>
-    <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('#services'),300)">الخدمات</a>
-    <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('#blog'),300)">المدونة</a>
-    <a href="#" onclick="showPage('about')">من نحن</a>
-    <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('#contact'),300)">تواصل</a>
-    <a href="#" onclick="showPage('privacy')" style="font-size:10px">سياسة الخصوصية</a>
-  </div>
-  <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت استشارة مع MAWJA" target="_blank">
-    <button class="nav-cta">ابدأ الآن</button>
-  </a>
-</nav>
-
-<!-- ========== HOME PAGE ========== -->
-<div id="page-home" class="page active">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="grid-bg"></div>
-    <div class="hero-badge">✦ وكالة رقمية — المغرب والعالم العربي ✦</div>
-    <svg class="hero-svg" viewBox="0 0 200 200" fill="none">
-      <circle cx="100" cy="100" r="95" stroke="#C9A84C" stroke-width="0.8" stroke-dasharray="4 6" opacity="0.4">
-        <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="30s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="100" cy="100" r="78" stroke="#C9A84C" stroke-width="0.5" opacity="0.2"/>
-      <path d="M18,100 Q40,55 65,100 Q90,145 115,100 Q140,55 165,100 Q172,113 182,100" stroke="#C9A84C" stroke-width="3.5" fill="none" stroke-linecap="round">
-        <animate attributeName="d" values="M18,100 Q40,55 65,100 Q90,145 115,100 Q140,55 165,100 Q172,113 182,100;M18,100 Q40,145 65,100 Q90,55 115,100 Q140,145 165,100 Q172,87 182,100;M18,100 Q40,55 65,100 Q90,145 115,100 Q140,55 165,100 Q172,113 182,100" dur="4s" repeatCount="indefinite"/>
-      </path>
-      <path d="M18,108 Q40,70 65,108 Q90,146 115,108 Q140,70 165,108" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.3">
-        <animate attributeName="d" values="M18,108 Q40,70 65,108 Q90,146 115,108 Q140,70 165,108;M18,108 Q40,146 65,108 Q90,70 115,108 Q140,146 165,108;M18,108 Q40,70 65,108 Q90,146 115,108 Q140,70 165,108" dur="4s" repeatCount="indefinite"/>
-      </path>
-      <rect x="94" y="94" width="12" height="12" fill="#C9A84C" transform="rotate(45 100 100)"/>
-      <rect x="96.5" y="96.5" width="7" height="7" fill="#0A0A0F" transform="rotate(45 100 100)"/>
-      <line x1="100" y1="16" x2="100" y2="28" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
-      <line x1="100" y1="172" x2="100" y2="184" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
-      <line x1="16" y1="100" x2="28" y2="100" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
-      <line x1="172" y1="100" x2="184" y2="100" stroke="#C9A84C" stroke-width="1.5" opacity="0.5"/>
-    </svg>
-    <h1 class="hero-title">MAWJA</h1>
-    <div class="hero-ar">المَوجة التي تُغيّر كل شيء</div>
-    <p class="hero-sub">Digital Agency · Branding · Social Media · Web Design · AI Content</p>
-    <div class="hero-btns">
-      <button class="btn-p" onclick="showPage('home');setTimeout(()=>scrollTo('#contact'),300)">ابدأ مشروعك معنا</button>
-      <button class="btn-o" onclick="showPage('home');setTimeout(()=>scrollTo('#services'),300)">اكتشف خدماتنا</button>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats-bar reveal">
-    <div class="stats-grid">
-      <div class="stat-box"><span class="stat-n">0</span><div class="stat-l">درهم رأس المال للبداية</div></div>
-      <div class="stat-box"><span class="stat-n">95%</span><div class="stat-l">من المقاولات بدون حضور رقمي</div></div>
-      <div class="stat-box"><span class="stat-n">22B</span><div class="stat-l">درهم حجم السوق الرقمي 2026</div></div>
-      <div class="stat-box"><span class="stat-n">7×</span><div class="stat-l">متوسط نمو مبيعات عملائنا</div></div>
-    </div>
-  </div>
-
-  <!-- ✅ AD SLOT 1 (بين الستاتس والخدمات) -->
-  <div class="sec" style="padding-top:0;padding-bottom:0;">
-    
-    <!-- ✅ Adsterra Banner 728x90 -->
-    <div style="text-align:center;margin:30px 0;">
-      <script type="text/javascript">
-        atOptions = {'key':'YOUR_KEY','format':'iframe','height':90,'width':728,'params':{}};
-      </script>
-      <script type="text/javascript" src="//www.topcreativeformat.com/YOUR_KEY/invoke.js"></script>
-    </div>
-    </div>
-  </div>
-
-  <!-- SERVICES -->
-  <section class="svc-bg" id="services">
-    <div class="sec reveal">
-      <span class="lbl">✦ خدماتنا</span>
-      <h2 class="sec-h">كل ما تحتاجه<br>في مكان واحد</h2>
-      <div class="dvd"><div class="dvd-l"></div><div class="dvd-d"></div><div class="dvd-l"></div></div>
-      <div class="svc-grid">
-        <div class="svc-card"><span class="svc-ico">📱</span><div class="svc-t">إدارة السوشيال ميديا</div><div class="svc-txt">إنستغرام، فيسبوك، تيك توك — محتوى احترافي منتظم يبني جمهورك ويجلب عملاء حقيقيين.</div><div class="svc-p">من 1,500 درهم/شهر</div></div>
-        <div class="svc-card"><span class="svc-ico">🎨</span><div class="svc-t">الهوية البصرية</div><div class="svc-txt">لوغو، ألوان، خطوط، بطاقات — هوية متكاملة تجعل علامتك التجارية لا تُنسى.</div><div class="svc-p">من 1,200 درهم</div></div>
-        <div class="svc-card"><span class="svc-ico">🌐</span><div class="svc-t">تصميم المواقع</div><div class="svc-txt">مواقع احترافية سريعة ومحسّنة لمحركات البحث — تحوّل الزوار إلى عملاء.</div><div class="svc-p">من 2,000 درهم</div></div>
-        <div class="svc-card"><span class="svc-ico">📢</span><div class="svc-t">الإعلانات الممولة</div><div class="svc-txt">حملات Meta Ads و Google Ads مستهدفة بعائد استثمار حقيقي وقابل للقياس.</div><div class="svc-p">من 1,500 درهم/شهر</div></div>
-        <div class="svc-card"><span class="svc-ico">📸</span><div class="svc-t">التصوير الاحترافي</div><div class="svc-txt">جلسات تصوير للمنتجات، المطاعم، والفضاءات — صور تبيع بدون أن تتكلم.</div><div class="svc-p">من 800 درهم/جلسة</div></div>
-        <div class="svc-card"><span class="svc-ico">🤖</span><div class="svc-t">محتوى بالذكاء الاصطناعي</div><div class="svc-txt">نصوص، فيديوهات، ريلز — محتوى ذكي بالدارجة والعربية والفرنسية يصل لجمهورك.</div><div class="svc-p">من 1,000 درهم/شهر</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section>
-    <div class="sec reveal">
-      <span class="lbl">✦ لماذا MAWJA</span>
-      <h2 class="sec-h">ليس كل الوكالات <span style="color:var(--gold)">متشابهة</span></h2>
-      <div class="dvd"><div class="dvd-l"></div><div class="dvd-d"></div><div class="dvd-l"></div></div>
-      <div class="why-grid">
-        <div class="why-item"><div class="why-ico">🎯</div><div class="why-t">نتائج قبل وعود</div><div class="why-txt">كل عقد يبدأ بأرقام واضحة — أين أنت اليوم وأين ستكون بعد 3 أشهر.</div></div>
-        <div class="why-item"><div class="why-ico">🌊</div><div class="why-t">موجة وراء موجة</div><div class="why-txt">كل حملة تبني على التي قبلها — زخم متصاعد لا يتوقف.</div></div>
-        <div class="why-item"><div class="why-ico">🤝</div><div class="why-t">شريك لا مزود خدمة</div><div class="why-txt">أنت تربح — أحنا نربح. مصالحنا واحدة من أول يوم.</div></div>
-        <div class="why-item"><div class="why-ico">⚡</div><div class="why-t">سرعة التنفيذ</div><div class="why-txt">في اليوم الأول تبدأ الخدمة — لا بيروقراطية ولا انتظار.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ✅ AD SLOT 2 -->
-  <div class="sec" style="padding-top:0;padding-bottom:20px;">
-    
-    <!-- ✅ Adsterra Rectangle 300x250 -->
-    <div style="text-align:center;margin:30px auto;max-width:300px;">
-      <script type="text/javascript">
-        atOptions = {'key':'YOUR_KEY_RECT','format':'iframe','height':250,'width':300,'params':{}};
-      </script>
-      <script type="text/javascript" src="//www.topcreativeformat.com/YOUR_KEY_RECT/invoke.js"></script>
-    </div>
-    </div>
-  </div>
-
-  <!-- PROCESS -->
-  <section class="proc-bg">
-    <div class="sec reveal">
-      <span class="lbl">✦ كيف نعمل</span>
-      <h2 class="sec-h">من أول اتصال إلى أول نتيجة</h2>
-      <div class="dvd"><div class="dvd-l"></div><div class="dvd-d"></div><div class="dvd-l"></div></div>
-      <div class="proc-steps">
-        <div class="step"><div class="step-n">01</div><div class="step-t">الاستشارة المجانية</div><div class="step-txt">نفهم مشروعك وأهدافك بدون أي التزام.</div></div>
-        <div class="step"><div class="step-n">02</div><div class="step-t">الاستراتيجية</div><div class="step-txt">خطة مخصصة لك — ليست نسخة من عميل آخر.</div></div>
-        <div class="step"><div class="step-n">03</div><div class="step-t">التنفيذ السريع</div><div class="step-txt">نبدأ فوراً — محتوى، إعلانات، تصميم.</div></div>
-        <div class="step"><div class="step-n">04</div><div class="step-t">النتائج والتقارير</div><div class="step-txt">تقرير شهري واضح — ترى كل درهم أين ذهب.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ✅ BLOG — مطلوب لـ AdSense -->
-  <section class="blog-bg" id="blog">
-    <div class="sec reveal">
-      <span class="lbl">✦ المدونة</span>
-      <h2 class="sec-h">نصائح ومعرفة <span style="color:var(--gold)">مجانية</span></h2>
-      <div class="dvd"><div class="dvd-l"></div><div class="dvd-d"></div><div class="dvd-l"></div></div>
-      <div class="blog-grid">
-        <div class="blog-card">
-          <div class="blog-cat">تسويق رقمي</div>
-          <div class="blog-t">كيف تبني صفحة إنستغرام من الصفر وتوصل لـ 10,000 متابع في 6 أشهر</div>
-          <div class="blog-txt">دليل كامل وعملي للمقاولات المغربية الصغيرة — بدون إعلانات ممولة وبدون ميزانية ضخمة.</div>
-          <div class="blog-date">ماي 2026</div>
-        </div>
-        <div class="blog-card">
-          <div class="blog-cat">إعلانات</div>
-          <div class="blog-t">Meta Ads في المغرب: كيف تصل لعملائك بـ 200 درهم فقط</div>
-          <div class="blog-txt">أسرار استهداف الجمهور المغربي على فيسبوك وإنستغرام بأقل تكلفة وأعلى عائد.</div>
-          <div class="blog-date">ماي 2026</div>
-        </div>
-        <div class="blog-card">
-          <div class="blog-cat">هوية بصرية</div>
-          <div class="blog-t">لماذا اللوغو وحده لا يكفي — الهوية البصرية الكاملة التي تجعلك لا تُنسى</div>
-          <div class="blog-txt">الفرق بين العلامة التجارية القوية والضعيفة ليس في الجودة — بل في الاتساق والهوية.</div>
-          <div class="blog-date">أبريل 2026</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact-bg" id="contact">
-    <div class="sec reveal">
-      <span class="lbl">✦ تواصل معنا</span>
-      <h2 class="sec-h">موجتك تبدأ <span style="color:var(--gold)">بكلمة واحدة</span></h2>
-      <div class="dvd"><div class="dvd-l"></div><div class="dvd-d"></div><div class="dvd-l"></div></div>
-      <div class="contact-grid">
-        <div>
-          <div class="c-info-txt">عندك مشروع أو فكرة أو مجرد سؤال؟<br><strong style="color:var(--gold-l)">الاستشارة الأولى مجانية دائماً.</strong></div>
-          <div class="c-item"><span style="font-size:22px">📱</span><div><div class="c-lbl">WhatsApp & هاتف</div><div class="c-val">+212 702 648 233</div></div></div>
-          <div class="c-item"><span style="font-size:22px">📸</span><div><div class="c-lbl">Instagram</div><div class="c-val">@mawja_digital</div></div></div>
-          <div class="c-item"><span style="font-size:22px">✉️</span><div><div class="c-lbl">البريد الإلكتروني</div><div class="c-val">contact@mawja.agency</div></div></div>
-          <div class="c-item"><span style="font-size:22px">🌍</span><div><div class="c-lbl">الموقع</div><div class="c-val">المغرب — العالم العربي</div></div></div>
-          <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت استشارة مجانية مع MAWJA" target="_blank" class="wa-btn">💬 راسلنا على WhatsApp</a>
-        </div>
-        <div>
-          <form class="form" onsubmit="submitForm(event)">
-            <div><label class="f-lbl">اسمك الكامل</label><input class="f-in" type="text" placeholder="محمد..." required></div>
-            <div><label class="f-lbl">رقم WhatsApp</label><input class="f-in" type="tel" placeholder="+212 6XX XXX XXX" required></div>
-            <div><label class="f-lbl">الخدمة المطلوبة</label>
-              <select class="f-sel f-in">
-                <option disabled selected>اختر الخدمة...</option>
-                <option>إدارة السوشيال ميديا</option>
-                <option>هوية بصرية ولوغو</option>
-                <option>تصميم موقع ويب</option>
-                <option>إعلانات ممولة</option>
-                <option>تصوير احترافي</option>
-                <option>باقة كاملة</option>
-              </select>
-            </div>
-            <div><label class="f-lbl">اشرح لنا مشروعك</label><textarea class="f-ta" placeholder="اشرح لنا ما تحتاجه..." required></textarea></div>
-            <button type="submit" class="f-btn">أرسل الطلب — الاستشارة مجانية ✦</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- ========== ABOUT PAGE ========== -->
-<div id="page-about" class="page">
-  <div class="legal-page">
-    <h1>من نحن</h1>
-    <div class="date">MAWJA Digital Agency · Est. 2026</div>
-
-    <h2>قصتنا</h2>
-    <p>MAWJA — موجة — وكالة رقمية مغربية وُلدت من إيمان راسخ: أن كل مقاولة صغيرة في المغرب تستحق حضوراً رقمياً احترافياً، بصرف النظر عن ميزانيتها أو حجمها.</p>
-    <p>في عالم حيث 92٪ من المغاربة يستخدمون الإنترنت، لا يمكن لأي مقاولة أن تتجاهل الفضاء الرقمي. نحن هنا لنجعل هذا التحول ممكناً وبسيطاً وقابلاً للقياس.</p>
-
-    <h2>مهمتنا</h2>
-    <p>تحويل الغياب الرقمي للمقاولات المغربية إلى حضور يُذكر — عبر استراتيجيات مخصصة، محتوى أصيل، وأدوات رقمية حديثة.</p>
-
-    <h2>قيمنا</h2>
-    <ul>
-      <li><strong>الشفافية:</strong> كل قرش تدفعه تعرف أين ذهب.</li>
-      <li><strong>النتائج:</strong> لا نبيع وعوداً — نبيع أرقاماً.</li>
-      <li><strong>الشراكة:</strong> نجاحك هو نجاحنا.</li>
-      <li><strong>الإبداع:</strong> كل حملة فريدة مثل العميل الذي صُممت له.</li>
-    </ul>
-
-    <h2>تواصل معنا</h2>
-    <p>📱 WhatsApp: +212 702 648 233</p>
-    <p>📸 Instagram: @mawja_digital</p>
-    <p>✉️ Email: <span class="legal-email">contact@mawja.agency</span></p>
+<div class="hero">
+  <div class="hero-logo">MAWJA</div>
+  <div class="hero-ar">م و ج ة · د ي ج ي ت ا ل</div>
+  <div class="hero-tag">وكالة رقمية · المغرب والعالم العربي</div>
+  <div class="stats">
+    <div class="stat"><span class="stat-n">7×</span><span class="stat-l">نمو المبيعات</span></div>
+    <div class="stat"><span class="stat-n">95%</span><span class="stat-l">رضا العملاء</span></div>
+    <div class="stat"><span class="stat-n">48h</span><span class="stat-l">بداية العمل</span></div>
+    <div class="stat"><span class="stat-n">15</span><span class="stat-l">باقة متاحة</span></div>
   </div>
 </div>
 
-<!-- ========== PRIVACY POLICY PAGE ✅ مطلوبة لـ AdSense ========== -->
-<div id="page-privacy" class="page">
-  <div class="legal-page">
-    <h1>سياسة الخصوصية</h1>
-    <div class="date">آخر تحديث: ماي 2026</div>
+<div class="nav">
+  <a class="np" href="#c01">01</a><a class="np" href="#c02">02</a><a class="np" href="#c03">03</a>
+  <a class="np" href="#c04">04</a><a class="np" href="#c05">05</a><a class="np" href="#c06">06</a>
+  <a class="np" href="#c07">07</a><a class="np" href="#c08">08</a><a class="np" href="#c09">09</a>
+  <a class="np" href="#c10">10</a><a class="np" href="#c11">11</a><a class="np" href="#c12">12</a>
+  <a class="np" href="#c13">13</a><a class="np" href="#c14">14</a><a class="np" href="#c15">15</a>
+</div>
 
-    <h2>1. المقدمة</h2>
-    <p>مرحباً بك في MAWJA موجة ("نحن"، "موقعنا"). تصف سياسة الخصوصية هذه كيفية جمع معلوماتك الشخصية واستخدامها وحمايتها عند زيارتك لموقعنا.</p>
+<div class="grid">
 
-    <h2>2. المعلومات التي نجمعها</h2>
-    <p>قد نجمع المعلومات التالية:</p>
-    <ul>
-      <li>الاسم ورقم الهاتف عبر نموذج التواصل</li>
-      <li>بيانات الاستخدام والتصفح (عبر Google Analytics)</li>
-      <li>ملفات تعريف الارتباط (Cookies) لتحسين تجربة الزيارة</li>
-    </ul>
-
-    <h2>3. كيف نستخدم معلوماتك</h2>
-    <ul>
-      <li>للرد على استفساراتك وطلباتك</li>
-      <li>لتحسين خدماتنا وموقعنا</li>
-      <li>لإرسال تحديثات تتعلق بخدماتنا (بموافقتك)</li>
-    </ul>
-
-    <h2>4. Google AdSense والإعلانات</h2>
-    <p>يستخدم هذا الموقع Google AdSense لعرض الإعلانات. يستخدم Google ملفات تعريف الارتباط لعرض إعلانات بناءً على زياراتك السابقة لهذا الموقع أو مواقع أخرى. يمكنك إلغاء الاشتراك في الإعلانات المخصصة عبر إعدادات الإعلانات من Google.</p>
-
-    <h2>5. ملفات تعريف الارتباط (Cookies)</h2>
-    <p>نستخدم ملفات تعريف الارتباط لتحسين تجربتك. يمكنك ضبط متصفحك لرفضها، لكن ذلك قد يؤثر على بعض وظائف الموقع.</p>
-
-    <h2>6. مشاركة البيانات</h2>
-    <p>لا نبيع معلوماتك الشخصية لأي طرف ثالث. قد نشاركها فقط مع موفري الخدمات الضروريين (مثل Google) وفق سياساتهم الخاصة.</p>
-
-    <h2>7. حقوقك</h2>
-    <ul>
-      <li>الحق في الوصول إلى بياناتك</li>
-      <li>الحق في تصحيح بياناتك</li>
-      <li>الحق في حذف بياناتك</li>
-    </ul>
-
-    <h2>8. تواصل معنا</h2>
-    <p>لأي استفسار حول هذه السياسة، تواصل معنا على: <span class="legal-email">contact@mawja.agency</span></p>
-    <p>أو عبر WhatsApp: +212 702 648 233</p>
+<!-- 01 -->
+<div class="cat" id="c01">
+  <div class="ch" style="background:linear-gradient(135deg,#020d1a,#041a30)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(0,194,240,0.15)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(0,194,240,0.08)"/></svg></div>
+    <div class="bnum">01</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#00C2F0">⚡ Starter</div>
+      <div class="title" style="color:#00C2F0">الباقة الأساسية</div>
+      <div class="en">Digital Starter Pack</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#00C2F0">1,500<sub> د.م/شهر</sub></div>
+      <div class="pnote">⚡ يبدأ في 48h</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">مطاعم · محلات · خدمات محلية</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#00C2F0"></div>إدارة إنستغرام كاملة</div>
+      <div class="feat"><div class="dot" style="background:#00C2F0"></div>8 منشورات/شهر</div>
+      <div class="feat"><div class="dot" style="background:#00C2F0"></div>كابشنات بالدارجة</div>
+      <div class="feat"><div class="dot" style="background:#00C2F0"></div>تقرير شهري</div>
+      <div class="feat"><div class="dot" style="background:#00C2F0"></div>جدولة المنشورات</div>
+      <div class="feat"><div class="dot" style="background:#00C2F0"></div>استشارة مجانية</div>
+    </div>
+    <div class="result" style="background:rgba(0,194,240,0.07);color:#00C2F0;border-color:#00C2F0">📈 +200 متابع في أول شهر · زيادة التفاعل 3× مضمونة</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#00b4e0,#0070b0);color:#fff" onclick="wa('الباقة الأساسية')">💬 احجز الآن</button>
+    </div>
   </div>
 </div>
 
-<!-- ========== TERMS PAGE ✅ مطلوبة لـ AdSense ========== -->
-<div id="page-terms" class="page">
-  <div class="legal-page">
-    <h1>شروط الاستخدام</h1>
-    <div class="date">آخر تحديث: ماي 2026</div>
-
-    <h2>1. القبول بالشروط</h2>
-    <p>باستخدامك لهذا الموقع، فإنك توافق على الالتزام بهذه الشروط. إذا كنت لا توافق على هذه الشروط، يرجى عدم استخدام الموقع.</p>
-
-    <h2>2. الخدمات</h2>
-    <p>تقدم MAWJA خدمات التسويق الرقمي وإدارة السوشيال ميديا وتصميم المواقع والهوية البصرية للمقاولات في المغرب والعالم العربي.</p>
-
-    <h2>3. الملكية الفكرية</h2>
-    <p>جميع المحتويات المنشورة على هذا الموقع — بما في ذلك النصوص والصور والتصاميم واللوغو — هي ملك حصري لـ MAWJA ومحمية بقوانين الملكية الفكرية.</p>
-
-    <h2>4. إخلاء المسؤولية</h2>
-    <p>نسعى لتقديم معلومات دقيقة وحديثة، لكننا لا نضمن دقة جميع المعلومات. لا نتحمل المسؤولية عن أي خسائر ناتجة عن الاعتماد على معلومات الموقع.</p>
-
-    <h2>5. الروابط الخارجية</h2>
-    <p>قد يحتوي موقعنا على روابط لمواقع خارجية. نحن لسنا مسؤولين عن محتوى أو سياسات خصوصية هذه المواقع.</p>
-
-    <h2>6. تواصل معنا</h2>
-    <p>لأي استفسار: <span class="legal-email">contact@mawja.agency</span></p>
+<!-- 02 -->
+<div class="cat" id="c02">
+  <div class="ch" style="background:linear-gradient(135deg,#0d0520,#1a0840)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(168,85,247,0.15)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(168,85,247,0.08)"/></svg></div>
+    <div class="bnum">02</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#a855f7">🔥 الأكثر طلباً</div>
+      <div class="title" style="color:#a855f7">نمو السوشيال</div>
+      <div class="en">Social Growth</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#a855f7">3,200<sub> د.م/شهر</sub></div>
+      <div class="pnote">كان 4,000 · وفر 20%</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">براندات · مطاعم راقية · عيادات · فنادق</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#a855f7"></div>IG + Facebook + TikTok</div>
+      <div class="feat"><div class="dot" style="background:#a855f7"></div>15 منشور + 4 ريلز</div>
+      <div class="feat"><div class="dot" style="background:#a855f7"></div>استراتيجية محتوى</div>
+      <div class="feat"><div class="dot" style="background:#a855f7"></div>الرد على التعليقات</div>
+      <div class="feat"><div class="dot" style="background:#a855f7"></div>SEO المنصات</div>
+      <div class="feat"><div class="dot" style="background:#a855f7"></div>تقرير أسبوعي</div>
+    </div>
+    <div class="result" style="background:rgba(168,85,247,0.07);color:#a855f7;border-color:#a855f7">🚀 +700 متابع شهرياً · مبيعات 2.5× · مضمون أو استرداد</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#8b30e0,#6010c0);color:#fff" onclick="wa('نمو السوشيال')">💬 احجز الآن</button>
+    </div>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="f-logo">MAWJA</div>
-  <div class="f-ar">مَوجة</div>
-  <div class="f-links">
-    <a href="#" onclick="showPage('home')">الرئيسية</a>
-    <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('#services'),300)">الخدمات</a>
-    <a href="#" onclick="showPage('home');setTimeout(()=>scrollTo('#blog'),300)">المدونة</a>
-    <a href="#" onclick="showPage('about')">من نحن</a>
-    <a href="#" onclick="showPage('privacy')">سياسة الخصوصية</a>
-    <a href="#" onclick="showPage('terms')">شروط الاستخدام</a>
-    <a href="https://wa.me/212702648233" target="_blank">WhatsApp</a>
+<!-- 03 -->
+<div class="cat" id="c03">
+  <div class="ch" style="background:linear-gradient(135deg,#150800,#2a1200)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(201,169,110,0.15)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(201,169,110,0.08)"/></svg></div>
+    <div class="bnum">03</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#C9A96E">⭐ الأفضل قيمة</div>
+      <div class="title" style="color:#C9A96E">الهوية البصرية</div>
+      <div class="en">Brand Identity</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">ثابت</div>
+      <div class="price" style="color:#C9A96E">2,500<sub> د.م</sub></div>
+      <div class="pnote">🛡️ ضمان الرضا</div>
+    </div>
   </div>
-  <div class="f-copy">© 2026 MAWJA Digital Agency · موجة · جميع الحقوق محفوظة</div>
-</footer>
+  <div class="cb">
+    <div class="for">مشاريع جديدة · براندات تريد ريبراندينغ</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#C9A96E"></div>لوغو (3 مقترحات)</div>
+      <div class="feat"><div class="dot" style="background:#C9A96E"></div>دليل الهوية كامل</div>
+      <div class="feat"><div class="dot" style="background:#C9A96E"></div>ألوان + خطوط</div>
+      <div class="feat"><div class="dot" style="background:#C9A96E"></div>بطاقة العمل</div>
+      <div class="feat"><div class="dot" style="background:#C9A96E"></div>موك أبس</div>
+      <div class="feat"><div class="dot" style="background:#C9A96E"></div>ملفات AI+PNG+PDF</div>
+    </div>
+    <div class="result" style="background:rgba(201,169,110,0.07);color:#C9A96E;border-color:#C9A96E">💎 هوية كاملة في 10 أيام · 3 تعديلات مجانية</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#C9A96E,#8B6030);color:#050505;font-weight:900" onclick="wa('الهوية البصرية')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
 
-<!-- FLOATING WA -->
-<a href="https://wa.me/212702648233?text=السلام عليكم، بغيت معلومات على MAWJA" target="_blank" class="wa-float">
-  <div class="wa-float-lbl">راسلنا الآن 🟢</div>
-  <div class="wa-float-btn">💬</div>
-</a>
+<!-- 04 -->
+<div class="cat" id="c04">
+  <div class="ch" style="background:linear-gradient(135deg,#001500,#002800)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(0,214,138,0.15)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(0,214,138,0.08)"/></svg></div>
+    <div class="bnum">04</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#00D68A">📊 ROI 400%</div>
+      <div class="title" style="color:#00D68A">الإعلانات الممولة</div>
+      <div class="en">Meta & Google Ads</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">رسوم الإدارة</div>
+      <div class="price" style="color:#00D68A">1,500<sub> د.م/شهر</sub></div>
+      <div class="pnote">💰 ميزانية منفصلة</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">متاجر · عيادات · خدمات · عقارات</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#00D68A"></div>Meta + Google Ads</div>
+      <div class="feat"><div class="dot" style="background:#00D68A"></div>استهداف مخصص</div>
+      <div class="feat"><div class="dot" style="background:#00D68A"></div>تصميم الإعلانات</div>
+      <div class="feat"><div class="dot" style="background:#00D68A"></div>A/B Testing</div>
+      <div class="feat"><div class="dot" style="background:#00D68A"></div>إدارة الميزانية</div>
+      <div class="feat"><div class="dot" style="background:#00D68A"></div>تقرير أسبوعي</div>
+    </div>
+    <div class="result" style="background:rgba(0,214,138,0.07);color:#00D68A;border-color:#00D68A">💰 1,000 د.م إعلانات = 4,000 د.م مبيعات في المتوسط</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#00cc7a,#009955);color:#050505;font-weight:900" onclick="wa('الإعلانات الممولة')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 05 -->
+<div class="cat" id="c05">
+  <div class="ch" style="background:linear-gradient(135deg,#1a0008,#300010)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(255,45,120,0.15)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(255,45,120,0.08)"/></svg></div>
+    <div class="bnum">05</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#FF2D78">🌐 ديجيتال</div>
+      <div class="title" style="color:#FF2D78">الموقع الإلكتروني</div>
+      <div class="en">Professional Website</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">ثابت</div>
+      <div class="price" style="color:#FF2D78">3,500<sub> د.م</sub></div>
+      <div class="pnote">⏱️ جاهز في 14 يوم</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">كل المقاولات التي تريد موقعاً احترافياً</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#FF2D78"></div>5 صفحات + SEO</div>
+      <div class="feat"><div class="dot" style="background:#FF2D78"></div>موبايل فرست</div>
+      <div class="feat"><div class="dot" style="background:#FF2D78"></div>نموذج + واتساب</div>
+      <div class="feat"><div class="dot" style="background:#FF2D78"></div>سرعة عالية</div>
+      <div class="feat"><div class="dot" style="background:#FF2D78"></div>استضافة + دومين</div>
+      <div class="feat"><div class="dot" style="background:#FF2D78"></div>دعم 3 أشهر</div>
+    </div>
+    <div class="result" style="background:rgba(255,45,120,0.07);color:#FF2D78;border-color:#FF2D78">🌍 موقع يظهر في Google ويشتغل 24/7 مجاناً</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#e0205a,#b00040);color:#fff" onclick="wa('الموقع الإلكتروني')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 06 -->
+<div class="cat" id="c06">
+  <div class="ch" style="background:linear-gradient(135deg,#08101a,#0d1828)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(125,216,255,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(125,216,255,0.06)"/></svg></div>
+    <div class="bnum">06</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#7dd8ff">🤖 AI Powered</div>
+      <div class="title" style="color:#7dd8ff">المحتوى الذكي</div>
+      <div class="en">AI Content Creator</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#7dd8ff">2,000<sub> د.م/شهر</sub></div>
+      <div class="pnote">📅 تسليم أسبوعي</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">إنفلوانسرز · براندات · كوتشات</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#7dd8ff"></div>8 ريلز شهرياً</div>
+      <div class="feat"><div class="dot" style="background:#7dd8ff"></div>30 كابشن</div>
+      <div class="feat"><div class="dot" style="background:#7dd8ff"></div>15 ستوري</div>
+      <div class="feat"><div class="dot" style="background:#7dd8ff"></div>أفكار المحتوى</div>
+      <div class="feat"><div class="dot" style="background:#7dd8ff"></div>هوية بصرية</div>
+      <div class="feat"><div class="dot" style="background:#7dd8ff"></div>تحسين الخوارزميات</div>
+    </div>
+    <div class="result" style="background:rgba(125,216,255,0.06);color:#7dd8ff;border-color:#7dd8ff">🔥 ريل واحد = 50,000 مشاهدة في أول أسبوع</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#4ab8e8,#2080b8);color:#fff" onclick="wa('المحتوى الذكي AI')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 07 -->
+<div class="cat" id="c07">
+  <div class="ch" style="background:linear-gradient(135deg,#160800,#2c1400)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(255,140,66,0.15)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(255,140,66,0.08)"/></svg></div>
+    <div class="bnum">07</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#ff8c42">📸 حصري</div>
+      <div class="title" style="color:#ff8c42">التصوير الاحترافي</div>
+      <div class="en">Professional Photo</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#ff8c42">1,200<sub> د.م/جلسة</sub></div>
+      <div class="pnote">📦 تسليم 72h</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">مطاعم · منتجات · فنادق · عيادات</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#ff8c42"></div>جلسة 3-4 ساعات</div>
+      <div class="feat"><div class="dot" style="background:#ff8c42"></div>50+ صورة معالجة</div>
+      <div class="feat"><div class="dot" style="background:#ff8c42"></div>تعديل الألوان</div>
+      <div class="feat"><div class="dot" style="background:#ff8c42"></div>جودة عالية+موبايل</div>
+      <div class="feat"><div class="dot" style="background:#ff8c42"></div>حقوق تجارية</div>
+      <div class="feat"><div class="dot" style="background:#ff8c42"></div>تنقل ميداني</div>
+    </div>
+    <div class="result" style="background:rgba(255,140,66,0.07);color:#ff8c42;border-color:#ff8c42">⭐ صور تبيع بدون أن تتكلم · الدارالبيضاء + الرباط</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#e06830,#b84010);color:#fff" onclick="wa('التصوير الاحترافي')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 08 -->
+<div class="cat" id="c08">
+  <div class="ch" style="background:linear-gradient(135deg,#080808,#141414)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(212,175,55,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(212,175,55,0.06)"/></svg></div>
+    <div class="bnum">08</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#d4af37">🏆 الأكثر نجاحاً</div>
+      <div class="title" style="color:#d4af37">باقة النمو الكاملة</div>
+      <div class="en">Full Growth Pack</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#d4af37">5,500<sub> د.م/شهر</sub></div>
+      <div class="pnote">قيمة فعلية 7,500</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">مقاولات تريد نمو سريع وقابل للقياس</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>إدارة 3 منصات</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>20 منشور+6 ريلز</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>Meta Ads مدارة</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>ستوريات يومية</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>استشارة شهرية</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>مدير مخصص</div>
+    </div>
+    <div class="result" style="background:rgba(212,175,55,0.07);color:#d4af37;border-color:#d4af37">🚀 نمو 7× في المبيعات خلال 3 أشهر · 3 أماكن فقط</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#c8a020,#906800);color:#050505;font-weight:900" onclick="wa('باقة النمو الكاملة')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 09 -->
+<div class="cat" id="c09">
+  <div class="ch" style="background:linear-gradient(135deg,#001810,#003020)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(0,214,138,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(0,214,138,0.06)"/></svg></div>
+    <div class="bnum">09</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#00d68a">🏪 محلي</div>
+      <div class="title" style="color:#00d68a">المقاولة المحلية</div>
+      <div class="en">Local Business Pack</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#00d68a">900<sub> د.م/شهر</sub></div>
+      <div class="pnote">🛡️ ضمان 30 يوم</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">حلاقون · مقاهي · محلات · حرفيون</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#00d68a"></div>Google My Business</div>
+      <div class="feat"><div class="dot" style="background:#00d68a"></div>FB + Instagram</div>
+      <div class="feat"><div class="dot" style="background:#00d68a"></div>10 منشورات/شهر</div>
+      <div class="feat"><div class="dot" style="background:#00d68a"></div>الرد على التقييمات</div>
+      <div class="feat"><div class="dot" style="background:#00d68a"></div>شعار بسيط</div>
+      <div class="feat"><div class="dot" style="background:#00d68a"></div>بطاقة رقمية</div>
+    </div>
+    <div class="result" style="background:rgba(0,214,138,0.06);color:#00d68a;border-color:#00d68a">📍 تظهر في Google عند الزبائن القريبين منك</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#00b870,#008850);color:#050505;font-weight:900" onclick="wa('المقاولة المحلية')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="cat" id="c10">
+  <div class="ch" style="background:linear-gradient(135deg,#180010,#2e0020)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(244,114,182,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(244,114,182,0.06)"/></svg></div>
+    <div class="bnum">10</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#f472b6">🎬 فيرال</div>
+      <div class="title" style="color:#f472b6">مصنع الريلز</div>
+      <div class="en">Viral Reels Machine</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#f472b6">2,800<sub> د.م/شهر</sub></div>
+      <div class="pnote">🔥 نتائج في 2 أسبوع</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">براندات تريد الانتشار على TikTok و IG</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#f472b6"></div>12 ريل/شهر</div>
+      <div class="feat"><div class="dot" style="background:#f472b6"></div>سكريبت+مونتاج</div>
+      <div class="feat"><div class="dot" style="background:#f472b6"></div>موسيقى ترند</div>
+      <div class="feat"><div class="dot" style="background:#f472b6"></div>سبتايتل دارجة</div>
+      <div class="feat"><div class="dot" style="background:#f472b6"></div>نشر في الأوقات المثلى</div>
+      <div class="feat"><div class="dot" style="background:#f472b6"></div>تقرير أسبوعي</div>
+    </div>
+    <div class="result" style="background:rgba(244,114,182,0.06);color:#f472b6;border-color:#f472b6">🎬 80,000+ مشاهدة لكل ريل في أول 3 أيام</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#d050a0,#a02070);color:#fff" onclick="wa('مصنع الريلز')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="cat" id="c11">
+  <div class="ch" style="background:linear-gradient(135deg,#040c18,#081830)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(96,165,250,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(96,165,250,0.06)"/></svg></div>
+    <div class="bnum">11</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#60a5fa">🛒 أونلاين</div>
+      <div class="title" style="color:#60a5fa">المتجر الإلكتروني</div>
+      <div class="en">Online Store</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">ثابت</div>
+      <div class="price" style="color:#60a5fa">5,000<sub> د.م</sub></div>
+      <div class="pnote">⏱️ جاهز في 21 يوم</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">تجار · منتجات مغربية · حرفيون</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#60a5fa"></div>Shopify/WooCommerce</div>
+      <div class="feat"><div class="dot" style="background:#60a5fa"></div>50 منتج</div>
+      <div class="feat"><div class="dot" style="background:#60a5fa"></div>دفع إلكتروني</div>
+      <div class="feat"><div class="dot" style="background:#60a5fa"></div>تتبع الطلبات</div>
+      <div class="feat"><div class="dot" style="background:#60a5fa"></div>SEO المنتجات</div>
+      <div class="feat"><div class="dot" style="background:#60a5fa"></div>تدريب كامل</div>
+    </div>
+    <div class="result" style="background:rgba(96,165,250,0.06);color:#60a5fa;border-color:#60a5fa">🛒 أول بيعة في أقل من أسبوع من الإطلاق</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff" onclick="wa('المتجر الإلكتروني')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 12 -->
+<div class="cat" id="c12">
+  <div class="ch" style="background:linear-gradient(135deg,#180400,#300800)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(251,146,60,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(251,146,60,0.06)"/></svg></div>
+    <div class="bnum">12</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#fb923c">📣 انتشار</div>
+      <div class="title" style="color:#fb923c">PR والإنفلوانسرز</div>
+      <div class="en">PR & Influencer</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#fb923c">4,000<sub> د.م/شهر</sub></div>
+      <div class="pnote">🤝 3 إنفلوانسرز</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">براندات تريد الانتشار عبر أصوات موثوقة</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#fb923c"></div>3 إنفلوانسرز مختارين</div>
+      <div class="feat"><div class="dot" style="background:#fb923c"></div>إدارة الحملة كاملة</div>
+      <div class="feat"><div class="dot" style="background:#fb923c"></div>إنتاج المحتوى</div>
+      <div class="feat"><div class="dot" style="background:#fb923c"></div>مقالات PR</div>
+      <div class="feat"><div class="dot" style="background:#fb923c"></div>تغطية إعلامية</div>
+      <div class="feat"><div class="dot" style="background:#fb923c"></div>تقرير نهائي</div>
+    </div>
+    <div class="result" style="background:rgba(251,146,60,0.06);color:#fb923c;border-color:#fb923c">📣 وصول 500,000+ شخص في شهر واحد</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#ea6820,#c04000);color:#fff" onclick="wa('PR والإنفلوانسرز')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 13 -->
+<div class="cat" id="c13">
+  <div class="ch" style="background:linear-gradient(135deg,#001818,#003030)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(45,212,191,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(45,212,191,0.06)"/></svg></div>
+    <div class="bnum">13</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#2dd4bf">✉️ CRM</div>
+      <div class="title" style="color:#2dd4bf">Email & CRM</div>
+      <div class="en">Email Marketing</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">من</div>
+      <div class="price" style="color:#2dd4bf">1,800<sub> د.م/شهر</sub></div>
+      <div class="pnote">✉️ أول حملة مجانية</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">B2B · مدارس · عيادات · وكالات</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#2dd4bf"></div>CRM كامل</div>
+      <div class="feat"><div class="dot" style="background:#2dd4bf"></div>4 حملات/شهر</div>
+      <div class="feat"><div class="dot" style="background:#2dd4bf"></div>قوالب احترافية</div>
+      <div class="feat"><div class="dot" style="background:#2dd4bf"></div>أتمتة</div>
+      <div class="feat"><div class="dot" style="background:#2dd4bf"></div>WhatsApp Broadcast</div>
+      <div class="feat"><div class="dot" style="background:#2dd4bf"></div>تقرير Conversions</div>
+    </div>
+    <div class="result" style="background:rgba(45,212,191,0.06);color:#2dd4bf;border-color:#2dd4bf">✉️ معدل فتح 45%+ · ضعف المعدل العالمي</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#14b8a6,#0d8a7a);color:#050505;font-weight:900" onclick="wa('Email and CRM')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 14 -->
+<div class="cat" id="c14">
+  <div class="ch" style="background:linear-gradient(135deg,#100020,#200040)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(192,132,252,0.12)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(192,132,252,0.06)"/></svg></div>
+    <div class="bnum">14</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#c084fc">✨ جديد 2026</div>
+      <div class="title" style="color:#c084fc">الاستراتيجية الرقمية</div>
+      <div class="en">Digital Strategy 360°</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">ثابت</div>
+      <div class="price" style="color:#c084fc">3,000<sub> د.م</sub></div>
+      <div class="pnote">🧠 خطة سنة كاملة</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">مقاولات تريد التخطيط قبل التنفيذ</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#c084fc"></div>تحليل المنافسين</div>
+      <div class="feat"><div class="dot" style="background:#c084fc"></div>خريطة الجمهور</div>
+      <div class="feat"><div class="dot" style="background:#c084fc"></div>خطة محتوى 12 شهر</div>
+      <div class="feat"><div class="dot" style="background:#c084fc"></div>استراتيجية إعلانات</div>
+      <div class="feat"><div class="dot" style="background:#c084fc"></div>SWOT رقمي</div>
+      <div class="feat"><div class="dot" style="background:#c084fc"></div>Workshop للفريق</div>
+    </div>
+    <div class="result" style="background:rgba(192,132,252,0.06);color:#c084fc;border-color:#c084fc">🧠 خطة رقمية تعادل 50,000 د.م من الاستشارات</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#9333ea,#6d28d9);color:#fff" onclick="wa('الاستراتيجية الرقمية 360')">💬 احجز الآن</button>
+    </div>
+  </div>
+</div>
+
+<!-- 15 -->
+<div class="cat" id="c15">
+  <div class="ch" style="background:linear-gradient(135deg,#080808,#141414);border-bottom:1px solid rgba(212,175,55,0.1)">
+    <div class="wave"><svg viewBox="0 0 380 40" preserveAspectRatio="none"><path d="M0 22 Q95 8,190 22 Q285 36,380 18 L380 40 L0 40Z" fill="rgba(212,175,55,0.1)"/><path d="M0 30 Q95 16,190 30 Q285 44,380 26 L380 40 L0 40Z" fill="rgba(212,175,55,0.05)"/></svg></div>
+    <div class="bnum">15</div>
+    <div class="ch-left">
+      <div class="badge" style="color:#d4af37">👑 ELITE VIP</div>
+      <div class="title" style="color:#d4af37">الباقة الاستثنائية</div>
+      <div class="en">Elite 360° Partnership</div>
+    </div>
+    <div class="ch-right">
+      <div class="plabel">السعر</div>
+      <div class="price" style="color:#d4af37;font-size:1.1rem">بالتشاور</div>
+      <div class="pnote">💎 VIP · سنوي</div>
+    </div>
+  </div>
+  <div class="cb">
+    <div class="for">شركات · سلاسل · علامات تجارية كبرى</div>
+    <div class="feats">
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>كل الباقات السابقة</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>مدير VIP 24/7</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>استراتيجية سنوية</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>تصوير شهري</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>موقع+متجر+تطبيق</div>
+      <div class="feat"><div class="dot" style="background:#d4af37"></div>إعلانات غير محدودة</div>
+    </div>
+    <div class="result" style="background:rgba(212,175,55,0.06);color:#d4af37;border-color:#d4af37">👑 3 عملاء Elite فقط في نفس الوقت · حصري تماماً</div>
+    <div class="actions">
+      <button class="btn-info">ℹ️ التفاصيل</button>
+      <button class="btn-wa" style="background:linear-gradient(135deg,#d4af37,#8B6030);color:#050505;font-weight:900" onclick="wa('Elite VIP')">👑 تواصل VIP</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- grid -->
+
+<div class="footer">
+  MAWJA · موجة · Digital Agency Morocco · 2026<br>
+  +212 702 648 233 · mawja.agency
+</div>
 
 <script>
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  window.scrollTo(0, 0);
+function wa(service) {
+  var msg = 'السلام عليكم، أنا مهتم بـ: ' + service;
+  window.open('https://wa.me/212702648233?text=' + encodeURIComponent(msg), '_blank');
 }
-
-function scrollTo(id) {
-  const el = document.querySelector(id);
-  if(el) el.scrollIntoView({behavior:'smooth'});
-}
-
-function submitForm(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.f-btn');
-  btn.textContent = '✅ تم الإرسال — سنتواصل معك قريباً!';
-  btn.style.background = '#1A7340';
-  setTimeout(() => {
-    window.open('https://wa.me/212702648233?text=السلام عليكم، بغيت استشارة مجانية مع MAWJA موجة', '_blank');
-  }, 800);
-}
-
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+document.querySelectorAll('.btn-info').forEach(function(btn) {
+  btn.onclick = function() {
+    var title = this.closest('.cat').querySelector('.title').textContent;
+    var msg = 'السلام عليكم، بغيت معلومات أكثر على: ' + title;
+    window.open('https://wa.me/212702648233?text=' + encodeURIComponent(msg), '_blank');
+  };
 });
-
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold: 0.1});
-document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 </script>
-
+</body>
 </html>
-
-<!-- ===== PRICE CALCULATOR ===== -->
-<section style="background:linear-gradient(135deg,#0d0d1a,#12121e);border-top:1px solid rgba(201,168,76,0.15);padding:90px 0;" id="calculator">
-<div style="max-width:900px;margin:0 auto;padding:0 40px;">
-
-  <span style="font-size:10px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;display:block;">✦ احسب سعرك</span>
-  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:#FAFAF5;margin-bottom:10px;line-height:1.3;">كم غيكلفك <span style="color:#C9A84C">مشروعك؟</span></h2>
-  <p style="font-family:'Amiri',serif;font-size:18px;color:#777788;margin-bottom:50px;">اختار الخدمات اللي تحتاجها وشوف السعر لحظة بلحظة 👇</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;">
-    <!-- OPTIONS -->
-    <div style="display:flex;flex-direction:column;gap:14px;">
-
-      <div class="calc-item" onclick="toggleCalc(this,1500)" data-price="1500">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#FAFAF5;letter-spacing:1px;">📱 إدارة إنستغرام</div>
-            <div style="font-size:12px;color:#777788;margin-top:4px;font-family:'Amiri',serif;">8 منشورات + ريلز + تفاعل</div>
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#C9A84C;">1,500 د</div>
-        </div>
-      </div>
-
-      <div class="calc-item" onclick="toggleCalc(this,1200)" data-price="1200">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#FAFAF5;letter-spacing:1px;">🎨 هوية بصرية + لوغو</div>
-            <div style="font-size:12px;color:#777788;margin-top:4px;font-family:'Amiri',serif;">لوغو + ألوان + خطوط + بطاقة</div>
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#C9A84C;">1,200 د</div>
-        </div>
-      </div>
-
-      <div class="calc-item" onclick="toggleCalc(this,2500)" data-price="2500">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#FAFAF5;letter-spacing:1px;">🌐 موقع ويب احترافي</div>
-            <div style="font-size:12px;color:#777788;margin-top:4px;font-family:'Amiri',serif;">تصميم + SEO + نشر</div>
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#C9A84C;">2,500 د</div>
-        </div>
-      </div>
-
-      <div class="calc-item" onclick="toggleCalc(this,1500)" data-price="1500">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#FAFAF5;letter-spacing:1px;">📢 إعلانات Meta Ads</div>
-            <div style="font-size:12px;color:#777788;margin-top:4px;font-family:'Amiri',serif;">إدارة كاملة + تقارير شهرية</div>
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#C9A84C;">1,500 د</div>
-        </div>
-      </div>
-
-      <div class="calc-item" onclick="toggleCalc(this,800)" data-price="800">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#FAFAF5;letter-spacing:1px;">📸 تصوير احترافي</div>
-            <div style="font-size:12px;color:#777788;margin-top:4px;font-family:'Amiri',serif;">جلسة تصوير كاملة</div>
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#C9A84C;">800 د</div>
-        </div>
-      </div>
-
-      <div class="calc-item" onclick="toggleCalc(this,1000)" data-price="1000">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#FAFAF5;letter-spacing:1px;">🤖 محتوى AI بالدارجة</div>
-            <div style="font-size:12px;color:#777788;margin-top:4px;font-family:'Amiri',serif;">نصوص + كبشنات + ريلز</div>
-          </div>
-          <div style="font-size:13px;font-weight:700;color:#C9A84C;">1,000 د</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- RESULT -->
-    <div style="position:sticky;top:100px;">
-      <div style="background:#0A0A0F;border:1px solid rgba(201,168,76,0.25);padding:36px;text-align:center;">
-        <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#777788;margin-bottom:16px;">السعر التقديري</div>
-
-        <div id="calc-total" style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:#E8C97A;line-height:1;margin-bottom:8px;">0</div>
-        <div style="font-size:13px;color:#C9A84C;letter-spacing:2px;margin-bottom:30px;">درهم / شهر</div>
-
-        <div id="calc-services" style="font-family:'Amiri',serif;font-size:15px;color:#555;min-height:60px;margin-bottom:24px;line-height:2;direction:rtl;">
-          اختار خدماتك من اليسار 👆
-        </div>
-
-        <div id="calc-discount" style="background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);padding:12px;margin-bottom:20px;display:none;">
-          <div style="font-size:11px;letter-spacing:2px;color:#C9A84C;font-weight:700;">🎉 خصم الباقة المتكاملة</div>
-          <div id="calc-discount-val" style="font-family:'Playfair Display',serif;font-size:28px;color:#E8C97A;font-weight:900;margin-top:4px;"></div>
-        </div>
-
-        <a id="calc-wa-btn" href="https://wa.me/212702648233?text=السلام عليكم، بغيت استشارة مع MAWJA" target="_blank"
-          style="display:block;background:#25D366;color:white;padding:16px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all 0.3s;text-decoration:none;">
-          💬 احجز استشارة مجانية
-        </a>
-
-        <div style="font-size:11px;color:#444;margin-top:14px;letter-spacing:1px;">الاستشارة الأولى مجانية دائماً ✦</div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ===== RESULTS / SOCIAL PROOF ===== -->
-<section style="background:#111118;border-top:1px solid rgba(201,168,76,0.1);padding:90px 0;">
-<div style="max-width:1100px;margin:0 auto;padding:0 40px;">
-  <span style="font-size:10px;font-weight:700;letter-spacing:6px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;display:block;">✦ نتائج حقيقية</span>
-  <h2 style="font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,42px);font-weight:700;color:#FAFAF5;margin-bottom:50px;line-height:1.3;">أرقام لا <span style="color:#C9A84C">وعود</span></h2>
-
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:rgba(201,168,76,0.06);">
-
-    <div style="background:#111118;padding:40px;transition:background 0.3s;" onmouseover="this.style.background='#1A1A28'" onmouseout="this.style.background='#111118'">
-      <div style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;text-transform:uppercase;margin-bottom:16px;">🍽️ مطعم — الدارالبيضاء</div>
-      <div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#E8C97A;line-height:1;">+847</div>
-      <div style="font-size:13px;color:#777788;margin-top:8px;letter-spacing:2px;">متابع في 30 يوم</div>
-      <div style="font-family:'Amiri',serif;font-size:16px;color:rgba(250,250,245,0.5);margin-top:16px;line-height:1.8;direction:rtl;">من 200 متابع إلى 1,047 — وزاد الدخل 35٪ من السوشيال ميديا</div>
-    </div>
-
-    <div style="background:#111118;padding:40px;transition:background 0.3s;" onmouseover="this.style.background='#1A1A28'" onmouseout="this.style.background='#111118'">
-      <div style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;text-transform:uppercase;margin-bottom:16px;">👗 محل ملابس — الرباط</div>
-      <div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#E8C97A;line-height:1;">7×</div>
-      <div style="font-size:13px;color:#777788;margin-top:8px;letter-spacing:2px;">نمو المبيعات في 3 أشهر</div>
-      <div style="font-family:'Amiri',serif;font-size:16px;color:rgba(250,250,245,0.5);margin-top:16px;line-height:1.8;direction:rtl;">من 8,000 إلى 56,000 درهم/شهر بفضل إعلانات Meta المستهدفة</div>
-    </div>
-
-    <div style="background:#111118;padding:40px;transition:background 0.3s;" onmouseover="this.style.background='#1A1A28'" onmouseout="this.style.background='#111118'">
-      <div style="font-size:11px;letter-spacing:3px;color:#C9A84C;font-weight:700;text-transform:uppercase;margin-bottom:16px;">💪 كواش رياضي — مراكش</div>
-      <div style="font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:#E8C97A;line-height:1;">+23</div>
-      <div style="font-size:13px;color:#777788;margin-top:8px;letter-spacing:2px;">عميل جديد في شهر واحد</div>
-      <div style="font-family:'Amiri',serif;font-size:16px;color:rgba(250,250,245,0.5);margin-top:16px;line-height:1.8;direction:rtl;">من 3 حصص أسبوعياً إلى قائمة انتظار كاملة — بدون إعلانات ممولة</div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<!-- ===== CALCULATOR STYLES + LOGIC ===== -->
-<style>
-.calc-item{
-  background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);
-  padding:18px 20px;cursor:pointer;transition:all 0.3s;user-select:none;
-}
-.calc-item:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04);}
-.calc-item.selected{border-color:#C9A84C;background:rgba(201,168,76,0.08);}
-.calc-item.selected::before{content:'✓ ';color:#C9A84C;font-weight:900;}
-</style>
-
-<script>
-let selectedServices = {};
-let selectedNames = {};
-
-function toggleCalc(el, price) {
-  const key = price + '_' + el.querySelector('div div div').textContent;
-  const name = el.querySelector('div div div').textContent.trim();
-
-  if(el.classList.contains('selected')) {
-    el.classList.remove('selected');
-    delete selectedServices[key];
-    delete selectedNames[key];
-  } else {
-    el.classList.add('selected');
-    selectedServices[key] = price;
-    selectedNames[key] = name;
-  }
-
-  updateCalc();
-}
-
-function updateCalc() {
-  const total = Object.values(selectedServices).reduce((a,b) => a+b, 0);
-  const count = Object.keys(selectedServices).length;
-  const names = Object.values(selectedNames);
-
-  // Animate counter
-  animateNumber('calc-total', total);
-
-  // Services list
-  const svcEl = document.getElementById('calc-services');
-  if(names.length === 0) {
-    svcEl.textContent = 'اختار خدماتك من اليسار 👆';
-    svcEl.style.color = '#555';
-  } else {
-    svcEl.innerHTML = names.map(n => '✦ ' + n).join('<br>');
-    svcEl.style.color = 'rgba(250,250,245,0.7)';
-  }
-
-  // Discount for 3+ services
-  const discEl = document.getElementById('calc-discount');
-  const discVal = document.getElementById('calc-discount-val');
-  if(count >= 3) {
-    const discount = Math.round(total * 0.15);
-    const final = total - discount;
-    discEl.style.display = 'block';
-    discVal.textContent = final.toLocaleString() + ' د (توفرت ' + discount.toLocaleString() + ' د)';
-    // Update WA message
-    document.getElementById('calc-wa-btn').href =
-      'https://wa.me/212702648233?text=السلام عليكم، بغيت باقة MAWJA: ' + names.join(' + ') + ' — ميزانية ' + final.toLocaleString() + ' درهم';
-  } else {
-    discEl.style.display = 'none';
-    if(total > 0) {
-      document.getElementById('calc-wa-btn').href =
-        'https://wa.me/212702648233?text=السلام عليكم، بغيت: ' + names.join(' + ') + ' من MAWJA';
-    }
-  }
-}
-
-function animateNumber(id, target) {
-  const el = document.getElementById(id);
-  const current = parseInt(el.textContent.replace(/,/g,'')) || 0;
-  const diff = target - current;
-  const steps = 20;
-  const step = diff / steps;
-  let i = 0;
-  const timer = setInterval(() => {
-    i++;
-    const val = Math.round(current + step * i);
-    el.textContent = val.toLocaleString();
-    if(i >= steps) { el.textContent = target.toLocaleString(); clearInterval(timer); }
-  }, 20);
-}
-</script>
-</div>
-
-
-
-</body></html>
