@@ -775,6 +775,24 @@ function animateNumber(id, target) {
 </script>
 </div>
 
+<script>
+let pwaPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  pwaPrompt = e;
+  document.getElementById('pwa-btn').style.display = 'block';
+});
+function installApp() {
+  if (pwaPrompt) {
+    pwaPrompt.prompt();
+  } else {
+    alert('📱 iPhone: Share ثم Add to Home Screen\nAndroid: القائمة ثم Install App');
+  }
+}
+</script>
 
+<div id="pwa-btn" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;background:linear-gradient(135deg,#F0D882,#C9A84C);color:#080600;font-family:Arial;font-size:15px;font-weight:900;padding:16px 36px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(201,168,76,0.4);letter-spacing:1px" onclick="installApp()">
+  📲 &nbsp; حمّل التطبيق مجاناً
+</div>
 
 </body></html>
