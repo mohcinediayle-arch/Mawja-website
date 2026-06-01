@@ -1,0 +1,1542 @@
+import { useState, useEffect, useRef } from "react";
+
+// ═══════════════════════════════════════════════════════
+//  MAWJA — موجة  |  Digital Agency App  |  2026
+//  First Arabic Digital Agency App — World Premiere
+//  Dark + Neon Gold + Electric Blue  |  RTL  |  React
+// ═══════════════════════════════════════════════════════
+
+const COLORS = {
+  bg:      "#05040A",
+  bgCard:  "#0A0912",
+  bgCard2: "#0E0D18",
+  gold:    "#C9A84C",
+  goldL:   "#F0D882",
+  goldD:   "#8B6914",
+  neon:    "#00E5FF",
+  neonD:   "#0099BB",
+  neonG:   "#00FF9D",
+  purple:  "#8B5CF6",
+  white:   "#F0EAD6",
+  dim:     "#6B6560",
+  dim2:    "#3A3530",
+};
+
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Tajawal:wght@300;400;700;900&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  body {
+    background: #030208;
+    font-family: 'Tajawal', sans-serif;
+    direction: rtl;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  :root {
+    --gold: #C9A84C;
+    --goldL: #F0D882;
+    --neon: #00E5FF;
+    --neonG: #00FF9D;
+    --purple: #8B5CF6;
+    --bg: #05040A;
+    --white: #F0EAD6;
+  }
+
+  /* ── Scanline texture ── */
+  .scanlines::after {
+    content:'';
+    position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,229,255,0.012) 3px,rgba(0,229,255,0.012) 4px);
+    pointer-events:none;z-index:20;border-radius:inherit;
+  }
+
+  /* ── Neon glow effects ── */
+  .glow-gold { text-shadow: 0 0 20px rgba(201,168,76,0.6), 0 0 40px rgba(201,168,76,0.3); }
+  .glow-neon { text-shadow: 0 0 20px rgba(0,229,255,0.8), 0 0 40px rgba(0,229,255,0.4); }
+  .glow-green { text-shadow: 0 0 20px rgba(0,255,157,0.8), 0 0 40px rgba(0,255,157,0.4); }
+
+  /* ── Animations ── */
+  @keyframes pulse-neon {
+    0%,100% { opacity:1; box-shadow:0 0 8px rgba(0,229,255,0.4),0 0 20px rgba(0,229,255,0.2); }
+    50% { opacity:.85; box-shadow:0 0 16px rgba(0,229,255,0.7),0 0 40px rgba(0,229,255,0.35); }
+  }
+  @keyframes pulse-gold {
+    0%,100% { box-shadow:0 0 8px rgba(201,168,76,0.3),0 0 20px rgba(201,168,76,0.15); }
+    50% { box-shadow:0 0 20px rgba(201,168,76,0.6),0 0 40px rgba(201,168,76,0.3); }
+  }
+  @keyframes float {
+    0%,100% { transform:translateY(0px); }
+    50% { transform:translateY(-6px); }
+  }
+  @keyframes wave-move {
+    0% { transform:translateX(0); }
+    100% { transform:translateX(-50%); }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity:0; transform:translateY(24px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  @keyframes fadeSlideRight {
+    from { opacity:0; transform:translateX(-20px); }
+    to { opacity:1; transform:translateX(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position:200% center; }
+    100% { background-position:-200% center; }
+  }
+  @keyframes rotate-slow {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(360deg); }
+  }
+  @keyframes blink {
+    0%,100% { opacity:1; } 50% { opacity:0; }
+  }
+  @keyframes counter-up {
+    from { opacity:0; transform:translateY(10px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  .fade-up { animation: fadeSlideUp .5s ease both; }
+  .fade-up-1 { animation: fadeSlideUp .5s .1s ease both; }
+  .fade-up-2 { animation: fadeSlideUp .5s .2s ease both; }
+  .fade-up-3 { animation: fadeSlideUp .5s .3s ease both; }
+  .fade-up-4 { animation: fadeSlideUp .5s .4s ease both; }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width:2px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:rgba(201,168,76,0.3); border-radius:2px; }
+
+  /* ── App Shell ── */
+  .app-shell {
+    width: 390px;
+    height: 844px;
+    background: #05040A;
+    border-radius: 44px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(201,168,76,0.2);
+    box-shadow:
+      0 0 0 8px rgba(201,168,76,0.05),
+      0 0 80px rgba(0,229,255,0.08),
+      0 40px 120px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* ── Status Bar ── */
+  .status-bar {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    position: relative;
+    z-index: 50;
+    flex-shrink: 0;
+  }
+  .status-time {
+    font-family:'Bebas Neue',sans-serif;
+    font-size: 16px;
+    color: rgba(240,234,214,0.9);
+    letter-spacing: 1px;
+  }
+  .status-icons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--neon);
+    animation: pulse-neon 2s infinite;
+  }
+
+  /* ── Notch ── */
+  .notch {
+    width: 120px; height: 28px;
+    background: #000;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .notch-cam {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+  }
+  .notch-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(0,229,255,0.4);
+  }
+
+  /* ── Screen ── */
+  .screen {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .screen-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .screen-scroll::-webkit-scrollbar { display:none; }
+
+  /* ── Bottom Nav ── */
+  .bottom-nav {
+    height: 76px;
+    background: rgba(10,9,18,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px 12px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 40;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 16px;
+    transition: all .25s;
+    min-width: 56px;
+  }
+  .nav-item.active {
+    background: rgba(201,168,76,0.08);
+  }
+  .nav-icon {
+    font-size: 20px;
+    line-height: 1;
+  }
+  .nav-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    transition: color .25s;
+  }
+  .nav-item.active .nav-label { color: var(--gold); }
+  .nav-item:not(.active) .nav-label { color: rgba(107,101,96,0.7); }
+  .nav-active-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 8px var(--gold);
+    animation: pulse-gold 2s infinite;
+  }
+
+  /* ════════════════════════════
+     SPLASH SCREEN
+  ════════════════════════════ */
+  .splash {
+    background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(0,229,255,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse 80% 100% at 100% 100%, rgba(139,92,246,0.05) 0%, transparent 50%),
+                #05040A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .splash-grid {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,229,255,0.04) 59px,rgba(0,229,255,0.04) 60px),
+      repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,229,255,0.03) 59px,rgba(0,229,255,0.03) 60px);
+  }
+
+  .splash-wave-bg {
+    position: absolute;
+    bottom: 0; left: -100%;
+    width: 200%;
+    height: 200px;
+    overflow: hidden;
+    opacity: 0.15;
+  }
+  .splash-wave-svg {
+    animation: wave-move 8s linear infinite;
+    width: 200%;
+  }
+
+  .splash-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .splash-orb-1 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%);
+    top: -100px; right: -100px;
+  }
+  .splash-orb-2 {
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+    bottom: 50px; left: -80px;
+  }
+
+  .splash-logo-area {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .splash-icon-ring {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    animation: pulse-neon 3s infinite;
+    margin-bottom: 8px;
+  }
+  .splash-icon-ring::before {
+    content:'';
+    position: absolute; inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .splash-icon-ring::after {
+    content:'';
+    position: absolute; inset: -8px;
+    border-radius: 50%;
+    border: 0.5px solid rgba(0,229,255,0.1);
+    animation: rotate-slow 12s linear infinite;
+    border-top-color: rgba(0,229,255,0.4);
+  }
+
+  .splash-wave-icon {
+    font-size: 44px;
+    line-height: 1;
+    filter: drop-shadow(0 0 12px rgba(0,229,255,0.5));
+  }
+
+  .splash-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 10px;
+    line-height: 1;
+    background: linear-gradient(135deg, #FFFFFF 0%, #F0D882 30%, #C9A84C 60%, #00E5FF 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+    text-align: center;
+  }
+
+  .splash-ar {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 10px;
+    color: rgba(0,229,255,0.4);
+    text-align: center;
+  }
+
+  .splash-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(240,234,214,0.3);
+    letter-spacing: 2px;
+    text-align: center;
+    margin-top: 32px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .splash-cta {
+    margin-top: 48px;
+    background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(201,168,76,0.1));
+    border: 1px solid rgba(0,229,255,0.3);
+    color: var(--neon);
+    font-family: 'Tajawal', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    padding: 16px 48px;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+    animation: pulse-neon 2s infinite;
+    transition: all .3s;
+  }
+  .splash-cta:hover {
+    background: linear-gradient(135deg,rgba(0,229,255,0.25),rgba(201,168,76,0.2));
+    transform: translateY(-2px);
+  }
+
+  .splash-version {
+    position: absolute;
+    bottom: 28px;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: rgba(201,168,76,0.2);
+    text-transform: uppercase;
+    z-index: 10;
+  }
+
+  /* ════════════════════════════
+     HOME SCREEN
+  ════════════════════════════ */
+  .home-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% -10%, rgba(0,229,255,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 60% at 100% 80%, rgba(139,92,246,0.04) 0%, transparent 50%),
+      #05040A;
+  }
+
+  .home-header {
+    padding: 0 24px 20px;
+    position: relative; z-index: 10;
+    flex-shrink: 0;
+  }
+
+  .home-greeting {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(0,229,255,0.5);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .home-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, #F0EAD6, #C9A84C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .home-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(107,101,96,0.8);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Notification bell */
+  .home-notif {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    position: relative;
+    background: rgba(201,168,76,0.04);
+  }
+  .notif-badge {
+    position: absolute; top: -4px; right: -4px;
+    width: 14px; height: 14px;
+    background: #FF4444;
+    border-radius: 50%;
+    font-size: 8px;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    border: 2px solid #05040A;
+  }
+
+  /* Hero Banner */
+  .hero-banner {
+    margin: 0 20px 24px;
+    border-radius: 20px;
+    height: 176px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #070614 0%, #0D0B1F 100%);
+    border: 1px solid rgba(0,229,255,0.15);
+    flex-shrink: 0;
+  }
+  .hero-banner-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 80% at 20% 50%, rgba(0,229,255,0.1) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 60% at 90% 20%, rgba(139,92,246,0.08) 0%, transparent 50%);
+  }
+  .hero-grid-lines {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(0,229,255,0.05) 39px,rgba(0,229,255,0.05) 40px),
+      repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(0,229,255,0.03) 39px,rgba(0,229,255,0.03) 40px);
+  }
+  .hero-content {
+    position: absolute; inset: 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-tag {
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: rgba(0,229,255,0.6);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-tag-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--neon);
+    animation: blink 1.5s infinite;
+  }
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: #fff;
+    line-height: 1;
+  }
+  .hero-headline span {
+    background: linear-gradient(135deg, var(--goldL), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-ar {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(240,234,214,0.5);
+  }
+  .hero-btn {
+    background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(201,168,76,0.1));
+    border: 1px solid rgba(0,229,255,0.4);
+    color: var(--neon);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: fit-content;
+    cursor: pointer;
+  }
+  .hero-wave-deco {
+    position: absolute;
+    right: -10px; bottom: -20px;
+    font-size: 100px;
+    opacity: 0.04;
+    color: var(--neon);
+    font-family: 'Bebas Neue', sans-serif;
+    line-height: 1;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px 24px;
+    flex-shrink: 0;
+  }
+  .stat-card {
+    flex: 1;
+    background: rgba(10,9,18,0.9);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 16px;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon), transparent);
+    opacity: 0.5;
+  }
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 1px;
+    line-height: 1;
+    color: var(--neon);
+    text-shadow: 0 0 12px rgba(0,229,255,0.4);
+  }
+  .stat-val.gold { color: var(--goldL); text-shadow: 0 0 12px rgba(240,216,130,0.4); }
+  .stat-val.green { color: var(--neonG); text-shadow: 0 0 12px rgba(0,255,157,0.4); }
+  .stat-label {
+    font-size: 9px;
+    color: rgba(107,101,96,0.8);
+    letter-spacing: 1px;
+    font-weight: 400;
+  }
+
+  /* Section header */
+  .sec-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 16px;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.9);
+  }
+  .sec-all {
+    font-size: 11px;
+    color: var(--neon);
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* Services scroll */
+  .services-scroll {
+    display: flex;
+    gap: 14px;
+    padding: 0 20px 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+  .service-chip {
+    flex-shrink: 0;
+    width: 130px;
+    height: 150px;
+    border-radius: 18px;
+    background: rgba(10,9,18,0.95);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-chip::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .service-chip:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.3); }
+  .service-chip:hover::before { opacity: 1; }
+  .service-chip.c-neon::before { background: linear-gradient(90deg,transparent,var(--neon),transparent); }
+  .service-chip.c-gold::before { background: linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .service-chip.c-green::before { background: linear-gradient(90deg,transparent,var(--neonG),transparent); }
+  .service-chip.c-purple::before { background: linear-gradient(90deg,transparent,var(--purple),transparent); }
+
+  .chip-icon { font-size: 28px; }
+  .chip-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.85);
+    line-height: 1.3;
+  }
+  .chip-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  .chip-price.neon { color: var(--neon); }
+  .chip-price.gold { color: var(--goldL); }
+  .chip-price.green { color: var(--neonG); }
+  .chip-price.purple { color: var(--purple); }
+
+  /* Portfolio preview */
+  .portfolio-scroll {
+    display: flex;
+    gap: 14px;
+    padding: 0 20px 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+  .port-card {
+    flex-shrink: 0;
+    width: 200px;
+    height: 130px;
+    border-radius: 14px;
+    border: 1px solid rgba(201,168,76,0.1);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .port-card-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 60px;
+    opacity: 0.12;
+  }
+  .port-card-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 12px;
+    background: linear-gradient(0deg, rgba(5,4,10,0.95) 0%, transparent 100%);
+  }
+  .port-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.9);
+  }
+  .port-type {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: rgba(0,229,255,0.5);
+    margin-top: 2px;
+  }
+
+  /* ════════════════════════════
+     SERVICES SCREEN
+  ════════════════════════════ */
+  .services-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 100% 0%, rgba(139,92,246,0.06) 0%, transparent 50%),
+      #05040A;
+  }
+
+  .services-header {
+    padding: 0 24px 24px;
+    position: relative; z-index: 5;
+  }
+  .services-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 4px;
+    color: rgba(240,234,214,0.9);
+    line-height: 1;
+  }
+  .services-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(0,229,255,0.4);
+    letter-spacing: 2px;
+    margin-top: 4px;
+  }
+
+  .service-card-full {
+    margin: 0 20px 16px;
+    border-radius: 20px;
+    background: rgba(10,9,18,0.95);
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .3s;
+    flex-shrink: 0;
+  }
+  .service-card-full:hover {
+    border-color: rgba(0,229,255,0.25);
+    transform: translateX(-2px);
+  }
+  .service-card-full::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 3px;
+    border-radius: 0 20px 20px 0;
+  }
+  .service-card-full.s-neon::after { background: linear-gradient(180deg,transparent,var(--neon),transparent); }
+  .service-card-full.s-gold::after { background: linear-gradient(180deg,transparent,var(--gold),transparent); }
+  .service-card-full.s-green::after { background: linear-gradient(180deg,transparent,var(--neonG),transparent); }
+  .service-card-full.s-purple::after { background: linear-gradient(180deg,transparent,var(--purple),transparent); }
+
+  .sc-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .sc-icon-wrap {
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .sc-price-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .sc-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.9);
+    margin-bottom: 6px;
+  }
+  .sc-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(107,101,96,0.9);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .sc-feats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .sc-feat-tag {
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    border: 1px solid;
+  }
+
+  /* ════════════════════════════
+     PORTFOLIO SCREEN
+  ════════════════════════════ */
+  .port-filter-row {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+  .filter-chip {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .3s;
+    border: 1px solid rgba(107,101,96,0.3);
+    color: rgba(107,101,96,0.8);
+    background: transparent;
+  }
+  .filter-chip.active {
+    background: rgba(0,229,255,0.1);
+    border-color: rgba(0,229,255,0.4);
+    color: var(--neon);
+  }
+
+  .port-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 20px 24px;
+  }
+  .port-item {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.1);
+    cursor: pointer;
+    transition: all .3s;
+    position: relative;
+  }
+  .port-item:hover { transform: scale(.98); border-color: rgba(0,229,255,0.2); }
+  .port-item.tall { grid-row: span 2; }
+  .port-item-inner {
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 50px;
+    background: rgba(10,9,18,0.95);
+    position: relative;
+    overflow: hidden;
+  }
+  .port-item.tall .port-item-inner { height: 250px; }
+  .port-item-glow {
+    position: absolute; inset: 0;
+    opacity: 0.1;
+  }
+  .port-item-info {
+    padding: 10px 12px;
+    background: rgba(10,9,18,0.98);
+    border-top: 1px solid rgba(201,168,76,0.06);
+  }
+  .port-item-name {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.85);
+  }
+  .port-item-cat {
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* ════════════════════════════
+     CONTACT SCREEN
+  ════════════════════════════ */
+  .contact-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 100% 60% at 50% 100%, rgba(0,229,255,0.05) 0%, transparent 55%),
+      #05040A;
+  }
+
+  .contact-hero {
+    margin: 0 20px 24px;
+    border-radius: 20px;
+    padding: 28px 24px;
+    background: linear-gradient(135deg,rgba(0,229,255,0.06) 0%,rgba(139,92,246,0.04) 100%);
+    border: 1px solid rgba(0,229,255,0.12);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .contact-hero-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .contact-hero-title {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: rgba(240,234,214,0.9);
+    margin-bottom: 8px;
+  }
+  .contact-hero-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(107,101,96,0.8);
+    line-height: 1.6;
+  }
+  .contact-hero-badge {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--neonG);
+    border: 1px solid rgba(0,255,157,0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: rgba(0,255,157,0.06);
+  }
+
+  .contact-methods {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .contact-method {
+    border-radius: 16px;
+    border: 1px solid rgba(201,168,76,0.1);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all .3s;
+    background: rgba(10,9,18,0.9);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-method:hover { border-color: rgba(0,229,255,0.25); transform: translateX(-3px); }
+  .contact-method::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 3px;
+    border-radius: 0 16px 16px 0;
+  }
+  .contact-method.wa::before { background: linear-gradient(180deg,transparent,#25D366,transparent); }
+  .contact-method.ig::before { background: linear-gradient(180deg,transparent,#E1306C,transparent); }
+  .contact-method.em::before { background: linear-gradient(180deg,transparent,var(--neon),transparent); }
+  .contact-method.wb::before { background: linear-gradient(180deg,transparent,var(--goldL),transparent); }
+
+  .method-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.04);
+  }
+  .method-info { flex: 1; }
+  .method-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.9);
+    margin-bottom: 2px;
+  }
+  .method-val {
+    font-size: 11px;
+    color: rgba(107,101,96,0.8);
+    letter-spacing: 0.5px;
+  }
+  .method-arrow {
+    font-size: 16px;
+    color: rgba(107,101,96,0.4);
+  }
+
+  /* ════════════════════════════
+     BLOG SCREEN
+  ════════════════════════════ */
+  .blog-featured {
+    margin: 0 20px 20px;
+    border-radius: 20px;
+    background: rgba(10,9,18,0.95);
+    border: 1px solid rgba(201,168,76,0.12);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .blog-feat-img {
+    height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 70px;
+    background: linear-gradient(135deg,rgba(0,229,255,0.06),rgba(139,92,246,0.06));
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-feat-tag {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--neon);
+    border: 1px solid rgba(0,229,255,0.3);
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(0,229,255,0.08);
+  }
+  .blog-feat-content { padding: 16px 18px; }
+  .blog-feat-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.9);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .blog-feat-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    color: rgba(107,101,96,0.7);
+    letter-spacing: 1px;
+  }
+
+  .blog-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .blog-item {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    border-radius: 14px;
+    padding: 14px;
+    background: rgba(10,9,18,0.9);
+    border: 1px solid rgba(201,168,76,0.06);
+    cursor: pointer;
+    transition: all .3s;
+  }
+  .blog-item:hover { border-color: rgba(0,229,255,0.15); }
+  .blog-item-thumb {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    background: rgba(255,255,255,0.04);
+  }
+  .blog-item-content { flex: 1; }
+  .blog-item-cat {
+    font-size: 9px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .blog-item-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(240,234,214,0.85);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .blog-item-date {
+    font-size: 9px;
+    color: rgba(107,101,96,0.6);
+    letter-spacing: 1px;
+  }
+`;
+
+// ── Services data ──
+const SERVICES = [
+  { id:1, icon:"📱", name:"إدارة السوشيال ميديا", desc:"إنستغرام · فيسبوك · تيك توك — محتوى يبني جمهورك ويجلب عملاء حقيقيين.", price:"1,500", unit:"د.م/شهر", color:"neon", features:["8+ منشورات","ريلز شهرية","تقرير أداء","3 منصات"] },
+  { id:2, icon:"🎨", name:"الهوية البصرية", desc:"لوغو احترافي + دليل هوية متكامل يجعل علامتك لا تُنسى.", price:"2,500", unit:"د.م ثابت", color:"gold", features:["3 مقترحات","دليل الهوية","بطاقة عمل","ضمان الرضا"] },
+  { id:3, icon:"🌐", name:"تصميم المواقع", desc:"مواقع سريعة ومحسّنة لـ SEO تحوّل الزوار إلى عملاء.", price:"3,500", unit:"د.م ثابت", color:"green", features:["5 صفحات","SEO كامل","متجاوب","استضافة مجانية"] },
+  { id:4, icon:"📢", name:"الإعلانات الممولة", desc:"Meta Ads + Google Ads بعائد استثمار 400% مضمون.", price:"1,500", unit:"د.م/شهر", color:"purple", features:["Meta+Google","A/B Testing","ROI 400%","تقارير شهرية"] },
+  { id:5, icon:"📸", name:"التصوير الاحترافي", desc:"جلسات تصوير للمنتجات والفضاءات — صور تبيع.", price:"1,200", unit:"د.م/جلسة", color:"neon", features:["50+ صورة","تسليم 72h","جاهز للنشر","إضاءة احترافية"] },
+  { id:6, icon:"🤖", name:"محتوى بالذكاء الاصطناعي", desc:"8 ريلز + 30 كابشن شهرياً — محتوى يصل 50K+ مشاهدة.", price:"2,000", unit:"د.م/شهر", color:"gold", features:["8 ريلز","30 كابشن","دارجة/عربية","تسليم أسبوعي"] },
+];
+
+const PORTFOLIO = [
+  { id:1, emoji:"🍕", name:"Pizza Bladi", cat:"سوشيال ميديا", color:"#FF6B35", tall:true },
+  { id:2, emoji:"💄", name:"Nour Beauty", cat:"هوية بصرية", color:"#E91E8C" },
+  { id:3, emoji:"🏗️", name:"Atlas Build", cat:"تصميم موقع", color:"#00BCD4" },
+  { id:4, emoji:"☕", name:"Qahwa Café", cat:"تصوير", color:"#795548" },
+  { id:5, emoji:"👗", name:"Souk Mode", cat:"إعلانات", color:"#9C27B0" },
+];
+
+const BLOGS = [
+  { id:1, emoji:"📈", cat:"تسويق رقمي", catColor:"var(--neon)", title:"كيف تبني صفحة إنستغرام من الصفر وتوصل لـ 10,000 متابع في 6 أشهر", date:"ماي 2026", featured:true },
+  { id:2, emoji:"💰", cat:"إعلانات", catColor:"var(--goldL)", title:"Meta Ads في المغرب: كيف تصل لعملائك بـ 200 درهم", date:"ماي 2026" },
+  { id:3, emoji:"🎨", cat:"هوية بصرية", catColor:"var(--neonG)", title:"لماذا اللوغو وحده لا يكفي — الهوية الكاملة التي تجعلك لا تُنسى", date:"أبريل 2026" },
+];
+
+// ── NAV config ──
+const NAV = [
+  { id:"home",      icon:"🏠", label:"الرئيسية" },
+  { id:"services",  icon:"⚡", label:"الخدمات"  },
+  { id:"portfolio", icon:"✦",  label:"أعمالنا"  },
+  { id:"blog",      icon:"📖", label:"المدونة"  },
+  { id:"contact",   icon:"💬", label:"تواصل"    },
+];
+
+export default function MawjaApp() {
+  const [screen, setScreen] = useState("splash");
+  const [activeFilter, setActiveFilter] = useState("الكل");
+  const [installPrompt, setInstallPrompt] = useState(null);
+  const [installed, setInstalled] = useState(false);
+
+  // ── PWA Install Prompt ──
+  useEffect(() => {
+    const handler = (e) => { e.preventDefault(); setInstallPrompt(e); };
+    window.addEventListener("beforeinstallprompt", handler);
+    window.addEventListener("appinstalled", () => setInstalled(true));
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (installPrompt) {
+      installPrompt.prompt();
+      const { outcome } = await installPrompt.userChoice;
+      if (outcome === "accepted") setInstalled(true);
+      setInstallPrompt(null);
+    } else {
+      // iOS fallback
+      alert("📱 باش تنزل التطبيق:\n\niPhone: اضغط Share ثم \"Add to Home Screen\"\n\nAndroid: القائمة (⋮) ثم \"Install App\"");
+    }
+  };
+
+  const goHome = () => setScreen("home");
+
+  return (
+    <>
+      <style>{css}</style>
+
+      {/* ── Outer phone frame ── */}
+      <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:"32px" }}>
+
+        {/* Showcase label */}
+        <div style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:"11px", letterSpacing:"6px", color:"rgba(201,168,76,0.4)", textTransform:"uppercase" }}>
+          ✦ &nbsp; MAWJA APP UI · WORLD PREMIERE · 2026 &nbsp; ✦
+        </div>
+
+        <div className="app-shell scanlines">
+
+          {/* Notch */}
+          <div className="notch">
+            <div className="notch-cam" />
+            <div className="notch-dot" />
+          </div>
+
+          {/* ════ SPLASH ════ */}
+          {screen === "splash" && (
+            <div className="splash">
+              <div className="splash-grid" />
+              <div className="splash-orb splash-orb-1" />
+              <div className="splash-orb splash-orb-2" />
+              <div className="splash-wave-bg">
+                <svg className="splash-wave-svg" viewBox="0 0 800 200" fill="none">
+                  <path d="M0,100 Q100,20 200,100 Q300,180 400,100 Q500,20 600,100 Q700,180 800,100 Q900,20 1000,100 Q1100,180 1200,100 Q1300,20 1400,100 Q1500,180 1600,100" stroke="#00E5FF" strokeWidth="2" fill="none"/>
+                  <path d="M0,120 Q100,40 200,120 Q300,200 400,120 Q500,40 600,120 Q700,200 800,120 Q900,40 1000,120 Q1100,200 1200,120 Q1300,40 1400,120 Q1500,200 1600,120" stroke="#C9A84C" strokeWidth="1" fill="none" opacity="0.5"/>
+                </svg>
+              </div>
+
+              <div className="splash-logo-area">
+                <div className="splash-icon-ring">
+                  <div className="splash-wave-icon">🌊</div>
+                </div>
+                <div className="splash-name">MAWJA</div>
+                <div className="splash-ar">م &nbsp;·&nbsp; و &nbsp;·&nbsp; ج &nbsp;·&nbsp; ة</div>
+              </div>
+
+              <div className="splash-tagline">
+                نحن لا نتبع الترند — نصنع الموجة
+              </div>
+
+              <button className="splash-cta" onClick={goHome}>
+                ابدأ الآن
+              </button>
+
+              <div className="splash-version">MAWJA v1.0 · MOROCCO 2026</div>
+            </div>
+          )}
+
+          {/* ════ MAIN SCREENS ════ */}
+          {screen !== "splash" && (
+            <div className="screen">
+
+              {/* Status Bar */}
+              <div className="status-bar">
+                <div className="status-time">09:41</div>
+                <div className="status-icons">
+                  <div className="status-dot" />
+                  <span style={{fontSize:"12px",color:"rgba(240,234,214,0.7)"}}>●●●●</span>
+                  <span style={{fontSize:"12px",color:"rgba(240,234,214,0.7)"}}>WiFi</span>
+                  <span style={{fontSize:"12px",color:"rgba(240,234,214,0.7)"}}>🔋</span>
+                </div>
+              </div>
+
+              {/* Screen Content */}
+              <div className="screen-scroll">
+
+                {/* ── HOME ── */}
+                {screen === "home" && (
+                  <div style={{position:"relative"}}>
+                    <div className="home-bg" />
+
+                    {/* Header */}
+                    <div className="home-header">
+                      <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginTop:"8px"}}>
+                        <div>
+                          <div className="home-greeting">✦ &nbsp; أهلاً وسهلاً</div>
+                          <div className="home-title">MAWJA</div>
+                          <div className="home-sub">وكالة رقمية · المغرب والعالم العربي</div>
+                        </div>
+                        <div className="home-notif">
+                          🔔
+                          <div className="notif-badge">3</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Hero Banner */}
+                    <div className="hero-banner fade-up">
+                      <div className="hero-banner-bg" />
+                      <div className="hero-grid-lines" />
+                      <div className="hero-wave-deco">~</div>
+                      <div className="hero-content">
+                        <div className="hero-tag">
+                          <div className="hero-tag-dot" />
+                          عرض حصري · مايو 2026
+                        </div>
+                        <div>
+                          <div className="hero-headline">
+                            نحوّل علامتك<br/>إلى <span>موجة</span>
+                          </div>
+                          <div className="hero-ar">استشارة أولى مجانية دائماً</div>
+                        </div>
+                        <div className="hero-btn">ابدأ الآن ←</div>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="stats-row fade-up-1">
+                      <div className="stat-card">
+                        <div className="stat-val">7×</div>
+                        <div className="stat-label">نمو المبيعات</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-val gold">95%</div>
+                        <div className="stat-label">رضا العملاء</div>
+                      </div>
+                      <div className="stat-card">
+                        <div className="stat-val green">22B</div>
+                        <div className="stat-label">حجم السوق</div>
+                      </div>
+                    </div>
+
+                    {/* Services */}
+                    <div className="sec-header fade-up-2">
+                      <div className="sec-title">خدماتنا</div>
+                      <div className="sec-all" onClick={() => setScreen("services")}>الكل ←</div>
+                    </div>
+                    <div className="services-scroll fade-up-2">
+                      {SERVICES.slice(0,5).map(s => (
+                        <div key={s.id} className={`service-chip c-${s.color}`}>
+                          <div className="chip-icon">{s.icon}</div>
+                          <div>
+                            <div className="chip-name">{s.name}</div>
+                            <div className={`chip-price ${s.color}`}>من {s.price}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Portfolio */}
+                    <div className="sec-header fade-up-3">
+                      <div className="sec-title">آخر أعمالنا</div>
+                      <div className="sec-all" onClick={() => setScreen("portfolio")}>الكل ←</div>
+                    </div>
+                    <div className="portfolio-scroll fade-up-3">
+                      {PORTFOLIO.map(p => (
+                        <div key={p.id} className="port-card" style={{background:`linear-gradient(135deg,rgba(10,9,18,0.98),rgba(10,9,18,0.95))`}}>
+                          <div className="port-card-bg" style={{color:p.color}}>{p.emoji}</div>
+                          <div className="port-card-overlay">
+                            <div className="port-name">{p.name}</div>
+                            <div className="port-type">{p.cat}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div style={{height:"16px"}} />
+                  </div>
+                )}
+
+                {/* ── SERVICES ── */}
+                {screen === "services" && (
+                  <div style={{position:"relative", paddingTop:"8px"}}>
+                    <div className="services-bg" />
+                    <div className="services-header">
+                      <div style={{fontSize:"10px",letterSpacing:"5px",color:"rgba(0,229,255,0.4)",marginBottom:"6px",textTransform:"uppercase"}}>✦ &nbsp; ما نقدمه لك</div>
+                      <div className="services-title">خدماتنا</div>
+                      <div className="services-sub">Social · Branding · Web · Ads · Photo · AI</div>
+                    </div>
+                    {SERVICES.map((s,i) => (
+                      <div key={s.id} className={`service-card-full s-${s.color} fade-up`} style={{animationDelay:`${i*0.08}s`}}>
+                        <div className="sc-top">
+                          <div className="sc-icon-wrap">{s.icon}</div>
+                          <div className={`sc-price-tag`} style={{color: s.color==="neon"?COLORS.neon : s.color==="gold"?COLORS.goldL : s.color==="green"?COLORS.neonG : COLORS.purple}}>
+                            من {s.price} <span style={{fontSize:"13px",opacity:.6}}>{s.unit}</span>
+                          </div>
+                        </div>
+                        <div className="sc-name">{s.name}</div>
+                        <div className="sc-desc">{s.desc}</div>
+                        <div className="sc-feats">
+                          {s.features.map(f => (
+                            <span key={f} className="sc-feat-tag" style={{
+                              color: s.color==="neon"?COLORS.neon : s.color==="gold"?COLORS.goldL : s.color==="green"?COLORS.neonG : COLORS.purple,
+                              borderColor: s.color==="neon"?"rgba(0,229,255,0.2)" : s.color==="gold"?"rgba(240,216,130,0.2)" : s.color==="green"?"rgba(0,255,157,0.2)" : "rgba(139,92,246,0.2)",
+                              background: s.color==="neon"?"rgba(0,229,255,0.05)" : s.color==="gold"?"rgba(240,216,130,0.05)" : s.color==="green"?"rgba(0,255,157,0.05)" : "rgba(139,92,246,0.05)",
+                            }}>{f}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{height:"16px"}} />
+                  </div>
+                )}
+
+                {/* ── PORTFOLIO ── */}
+                {screen === "portfolio" && (
+                  <div style={{paddingTop:"8px"}}>
+                    <div className="services-header">
+                      <div style={{fontSize:"10px",letterSpacing:"5px",color:"rgba(0,229,255,0.4)",marginBottom:"6px",textTransform:"uppercase"}}>✦ &nbsp; نتائج حقيقية</div>
+                      <div className="services-title">أعمالنا</div>
+                      <div className="services-sub">Portfolio · نماذج من عملائنا</div>
+                    </div>
+                    <div className="port-filter-row">
+                      {["الكل","سوشيال","هوية","مواقع","تصوير"].map(f => (
+                        <div key={f} className={`filter-chip ${activeFilter===f?"active":""}`} onClick={() => setActiveFilter(f)}>{f}</div>
+                      ))}
+                    </div>
+                    <div className="port-grid">
+                      {PORTFOLIO.map((p,i) => (
+                        <div key={p.id} className={`port-item ${p.tall?"tall":""} fade-up`} style={{animationDelay:`${i*0.08}s`}}>
+                          <div className="port-item-inner">
+                            <div className="port-item-glow" style={{background:`radial-gradient(circle,${p.color}22 0%,transparent 70%)`}} />
+                            <span style={{fontSize: p.tall?"70px":"50px"}}>{p.emoji}</span>
+                          </div>
+                          <div className="port-item-info">
+                            <div className="port-item-name">{p.name}</div>
+                            <div className="port-item-cat" style={{color:p.color}}>{p.cat}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{height:"16px"}} />
+                  </div>
+                )}
+
+                {/* ── BLOG ── */}
+                {screen === "blog" && (
+                  <div style={{paddingTop:"8px"}}>
+                    <div className="services-header">
+                      <div style={{fontSize:"10px",letterSpacing:"5px",color:"rgba(0,229,255,0.4)",marginBottom:"6px",textTransform:"uppercase"}}>✦ &nbsp; معرفة مجانية</div>
+                      <div className="services-title">المدونة</div>
+                      <div className="services-sub">نصائح عملية لنمو مشروعك الرقمي</div>
+                    </div>
+                    {/* Featured */}
+                    <div className="blog-featured fade-up">
+                      <div className="blog-feat-img">
+                        <span>📈</span>
+                        <div className="blog-feat-tag">مميز ✦</div>
+                      </div>
+                      <div className="blog-feat-content">
+                        <div className="blog-feat-title">{BLOGS[0].title}</div>
+                        <div className="blog-feat-meta">
+                          <span style={{color:COLORS.neon}}>تسويق رقمي</span>
+                          <span>ماي 2026</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="sec-header">
+                      <div className="sec-title">مقالات أخرى</div>
+                    </div>
+                    <div className="blog-list">
+                      {BLOGS.slice(1).map((b,i) => (
+                        <div key={b.id} className={`blog-item fade-up`} style={{animationDelay:`${i*0.1}s`}}>
+                          <div className="blog-item-thumb">{b.emoji}</div>
+                          <div className="blog-item-content">
+                            <div className="blog-item-cat" style={{color:b.catColor}}>{b.cat}</div>
+                            <div className="blog-item-title">{b.title}</div>
+                            <div className="blog-item-date">{b.date}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{height:"16px"}} />
+                  </div>
+                )}
+
+                {/* ── CONTACT ── */}
+                {screen === "contact" && (
+                  <div style={{position:"relative",paddingTop:"8px"}}>
+                    <div className="contact-bg" />
+                    <div className="services-header">
+                      <div style={{fontSize:"10px",letterSpacing:"5px",color:"rgba(0,229,255,0.4)",marginBottom:"6px",textTransform:"uppercase"}}>✦ &nbsp; نحن هنا لك</div>
+                      <div className="services-title">تواصل معنا</div>
+                    </div>
+                    <div className="contact-hero fade-up">
+                      <div className="contact-hero-icon">🌊</div>
+                      <div className="contact-hero-title">موجتك تبدأ بكلمة</div>
+                      <div className="contact-hero-sub">الاستشارة الأولى مجانية دائماً — بدون أي التزام</div>
+                      <div className="contact-hero-badge">✦ رد في أقل من ساعة ✦</div>
+                    </div>
+                    <div className="contact-methods">
+                      {[
+                        { cls:"wa", icon:"💬", name:"WhatsApp", val:"+212 702 648 233" },
+                        { cls:"ig", icon:"📸", name:"Instagram", val:"@mawja_digital" },
+                        { cls:"em", icon:"✉️", name:"Email", val:"contact@mawja.agency" },
+                        { cls:"wb", icon:"🌐", name:"الموقع", val:"mawja.agency" },
+                      ].map((m,i) => (
+                        <div key={m.cls} className={`contact-method ${m.cls} fade-up`} style={{animationDelay:`${i*0.08}s`}}>
+                          <div className="method-icon-wrap">{m.icon}</div>
+                          <div className="method-info">
+                            <div className="method-name">{m.name}</div>
+                            <div className="method-val">{m.val}</div>
+                          </div>
+                          <div className="method-arrow">←</div>
+                        </div>
+                      ))}
+                    </div>
+                    {/* Map-style placeholder */}
+                    <div style={{margin:"20px 20px 0",borderRadius:"16px",height:"100px",background:"rgba(10,9,18,0.9)",border:"1px solid rgba(201,168,76,0.08)",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px",color:"rgba(107,101,96,0.5)",fontSize:"13px"}}>
+                      <span>📍</span> الدارالبيضاء · المغرب
+                    </div>
+
+                    {/* PWA Install Button */}
+                    {!installed ? (
+                      <div style={{margin:"20px 20px 0",position:"relative"}}>
+                        <div style={{position:"absolute",inset:0,borderRadius:"18px",background:"radial-gradient(ellipse 80% 80% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%)",pointerEvents:"none"}} />
+                        <div style={{borderRadius:"18px",border:"1px solid rgba(201,168,76,0.25)",padding:"20px",background:"rgba(10,9,18,0.95)",textAlign:"center",position:"relative"}}>
+                          <div style={{position:"absolute",top:0,left:"20%",right:"20%",height:"1px",background:"linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent)"}} />
+                          <div style={{fontSize:"32px",marginBottom:"10px"}}>📲</div>
+                          <div style={{fontSize:"15px",fontWeight:700,color:"rgba(240,234,214,0.92)",marginBottom:"6px"}}>حمّل تطبيق MAWJA</div>
+                          <div style={{fontSize:"11px",fontWeight:300,color:"rgba(107,101,96,0.8)",marginBottom:"18px",lineHeight:1.6}}>
+                            مجاناً على هاتفك — بدون متجر تطبيقات<br/>يشتغل حتى بدون إنترنت
+                          </div>
+                          <button onClick={handleInstall} style={{width:"100%",background:"linear-gradient(135deg,#F0D882,#E8C264,#C9A84C,#A07830)",border:"none",borderRadius:"10px",padding:"14px",color:"#080600",fontFamily:"'Tajawal',sans-serif",fontSize:"14px",fontWeight:900,letterSpacing:"2px",cursor:"pointer",boxShadow:"0 4px 20px rgba(201,168,76,0.3)"}}>
+                            ⬇ &nbsp; تنزيل التطبيق مجاناً
+                          </button>
+                          <div style={{fontSize:"9px",letterSpacing:"2px",color:"rgba(201,168,76,0.3)",marginTop:"10px"}}>✦ Android · iPhone · متوافق مع كل الهواتف ✦</div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{margin:"20px 20px 0",borderRadius:"18px",border:"1px solid rgba(0,255,157,0.25)",padding:"20px",background:"rgba(0,255,157,0.04)",textAlign:"center"}}>
+                        <div style={{fontSize:"28px",marginBottom:"8px"}}>✅</div>
+                        <div style={{fontSize:"14px",fontWeight:700,color:"rgba(0,255,157,0.9)"}}>تم تنزيل التطبيق!</div>
+                        <div style={{fontSize:"11px",color:"rgba(107,101,96,0.7)",marginTop:"4px"}}>ابحث عن MAWJA في شاشتك الرئيسية</div>
+                      </div>
+                    )}
+
+                    <div style={{height:"20px"}} />
+                  </div>
+                )}
+
+              </div>{/* end screen-scroll */}
+
+              {/* Bottom Nav */}
+              <div className="bottom-nav">
+                {NAV.map(n => (
+                  <div key={n.id} className={`nav-item ${screen===n.id?"active":""}`} onClick={() => setScreen(n.id)}>
+                    <div className="nav-icon">{n.icon}</div>
+                    {screen===n.id && <div className="nav-active-dot" />}
+                    <div className="nav-label">{n.label}</div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          )}
+
+        </div>{/* end app-shell */}
+
+        {/* Instruction */}
+        <div style={{textAlign:"center",maxWidth:"390px"}}>
+          <div style={{fontFamily:"'Tajawal',sans-serif",fontSize:"11px",letterSpacing:"2px",color:"rgba(201,168,76,0.35)",marginBottom:"6px"}}>
+            ✦ اضغط "ابدأ الآن" للدخول · تصفح كل الشاشات من الـ Navigation ✦
+          </div>
+          <div style={{fontSize:"10px",letterSpacing:"1px",color:"rgba(107,101,96,0.4)"}}>
+            Splash · Home · Services · Portfolio · Blog · Contact
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
+}
