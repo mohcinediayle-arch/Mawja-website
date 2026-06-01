@@ -796,4 +796,18 @@ function installApp() {
   📲 &nbsp; حمّل التطبيق مجاناً
 </div>
 
+<script>
+let pwaPrompt=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();pwaPrompt=e;
+  document.getElementById('pwa-fab').style.display='flex';
+});
+window.addEventListener('appinstalled',function(){
+  document.getElementById('pwa-fab').style.display='none';
+});
+</script>
+
+<div id="pwa-fab" onclick="pwaPrompt?pwaPrompt.prompt():alert('افتح من Chrome\nاضغط القائمة ← Add to Home Screen')" style="display:none;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;background:linear-gradient(135deg,#F0D882,#C9A84C);color:#080600;font-family:Arial,sans-serif;font-size:15px;font-weight:900;padding:16px 40px;border-radius:50px;box-shadow:0 6px 28px rgba(201,168,76,0.5);cursor:pointer;align-items:center;gap:10px;white-space:nowrap">
+  📲 &nbsp; حمّل التطبيق مجاناً
+</div>
 </body></html>
