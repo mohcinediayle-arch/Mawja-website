@@ -810,4 +810,327 @@ window.addEventListener('appinstalled',function(){
 <div id="pwa-fab" onclick="pwaPrompt?pwaPrompt.prompt():alert('افتح من Chrome\nاضغط القائمة ← Add to Home Screen')" style="display:none;position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:9999;background:linear-gradient(135deg,#F0D882,#C9A84C);color:#080600;font-family:Arial,sans-serif;font-size:15px;font-weight:900;padding:16px 40px;border-radius:50px;box-shadow:0 6px 28px rgba(201,168,76,0.5);cursor:pointer;align-items:center;gap:10px;white-space:nowrap">
   📲 &nbsp; حمّل التطبيق مجاناً
 </div>
+<!-- ============================================================
+  MAWJA — 3 FEATURES عالمية
+  انسخ هذا الكود كامل وحطه قبل </body> في index.html
+  ============================================================ -->
+
+
+<!-- ══════════════════════════════════════════
+  1. LIVE RESULTS COUNTER
+  عداد حي يظهر في أسفل الصفحة
+  ══════════════════════════════════════════ -->
+<div id="mawja-counter" style="
+  background: linear-gradient(135deg, rgba(10,8,0,0.97), rgba(15,12,3,0.97));
+  border-top: 1px solid rgba(201,168,76,0.25);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 32px 20px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- Gold line top -->
+  <div style="position:absolute;top:0;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,#C9A84C,#F0D882,#C9A84C,transparent)"></div>
+
+  <div style="font-size:11px;letter-spacing:5px;color:rgba(201,168,76,0.5);margin-bottom:24px;font-family:sans-serif;text-transform:uppercase">
+    ✦ &nbsp; نتائج حقيقية · لحظة بلحظة &nbsp; ✦
+  </div>
+
+  <div style="display:flex;justify-content:center;gap:0;flex-wrap:wrap;max-width:700px;margin:0 auto">
+
+    <div style="flex:1;min-width:140px;padding:16px 12px;border-left:1px solid rgba(201,168,76,0.12)">
+      <div id="cnt-clients" style="font-size:42px;font-weight:700;background:linear-gradient(135deg,#F5E098,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">0</div>
+      <div style="font-size:11px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-top:6px;font-family:sans-serif">عميل راضٍ</div>
+    </div>
+
+    <div style="flex:1;min-width:140px;padding:16px 12px;border-left:1px solid rgba(201,168,76,0.12)">
+      <div id="cnt-followers" style="font-size:42px;font-weight:700;background:linear-gradient(135deg,#F5E098,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">0</div>
+      <div style="font-size:11px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-top:6px;font-family:sans-serif">متابع أنشأناهم</div>
+    </div>
+
+    <div style="flex:1;min-width:140px;padding:16px 12px;border-left:1px solid rgba(201,168,76,0.12)">
+      <div id="cnt-roi" style="font-size:42px;font-weight:700;background:linear-gradient(135deg,#F5E098,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">0</div>
+      <div style="font-size:11px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-top:6px;font-family:sans-serif">متوسط العائد %</div>
+    </div>
+
+    <div style="flex:1;min-width:140px;padding:16px 12px">
+      <div id="cnt-rating" style="font-size:42px;font-weight:700;background:linear-gradient(135deg,#F5E098,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">0</div>
+      <div style="font-size:11px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-top:6px;font-family:sans-serif">رضا العملاء %</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Counter animation — triggers when element enters viewport
+(function(){
+  var targets = [
+    {id:'cnt-clients',   end:22,   suffix:'',  duration:2000},
+    {id:'cnt-followers', end:8200, suffix:'',  duration:2500},
+    {id:'cnt-roi',       end:400,  suffix:'',  duration:2200},
+    {id:'cnt-rating',    end:97,   suffix:'',  duration:1800},
+  ];
+
+  function animateCounter(el, end, duration) {
+    var start = 0;
+    var step = end / (duration / 16);
+    var timer = setInterval(function(){
+      start += step;
+      if(start >= end){ start = end; clearInterval(timer); }
+      el.textContent = (end >= 1000)
+        ? (start >= 1000 ? '+' + Math.floor(start/1000) + 'K' : Math.floor(start))
+        : (end >= 100 ? Math.floor(start) + '%' : '+' + Math.floor(start));
+    }, 16);
+  }
+
+  var done = false;
+  var observer = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting && !done){
+      done = true;
+      targets.forEach(function(t){
+        var el = document.getElementById(t.id);
+        if(el) animateCounter(el, t.end, t.duration);
+      });
+    }
+  }, {threshold: 0.3});
+
+  var section = document.getElementById('mawja-counter');
+  if(section) observer.observe(section);
+})();
+</script>
+
+
+<!-- ══════════════════════════════════════════
+  2. ROI CALCULATOR
+  حاسبة العائد على الاستثمار — الأولى في المغرب
+  ══════════════════════════════════════════ -->
+<div id="mawja-roi-calc" style="
+  background: linear-gradient(135deg, #080600, #0D0A02, #080600);
+  padding: 56px 20px;
+  text-align: center;
+  font-family: 'Tajawal', sans-serif;
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+">
+  <!-- BG pattern -->
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(201,168,76,0.015) 60px,rgba(201,168,76,0.015) 61px);pointer-events:none"></div>
+
+  <!-- Glow -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(201,168,76,0.06) 0%,transparent 70%);pointer-events:none"></div>
+
+  <div style="position:relative;z-index:2;max-width:580px;margin:0 auto">
+
+    <div style="font-size:10px;letter-spacing:6px;color:rgba(201,168,76,0.45);margin-bottom:12px;text-transform:uppercase">✦ &nbsp; أداة حصرية &nbsp; ✦</div>
+    <h2 style="font-size:28px;font-weight:900;color:#F0EAD6;margin-bottom:8px;line-height:1.2">احسب عائدك قبل ما تقرر</h2>
+    <p style="font-size:14px;font-weight:300;color:rgba(201,168,76,0.45);margin-bottom:36px;letter-spacing:1px">أدخل ميزانيتك — نحسب ليك الربح المتوقع</p>
+
+    <!-- Budget slider -->
+    <div style="margin-bottom:28px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <span style="font-size:13px;color:rgba(201,168,76,0.5)">ميزانية التسويق الشهرية</span>
+        <span id="roi-budget-display" style="font-size:16px;font-weight:700;color:#E8C264">1,500 درهم</span>
+      </div>
+      <input type="range" id="roi-budget" min="500" max="20000" step="500" value="1500"
+        style="width:100%;height:4px;-webkit-appearance:none;background:linear-gradient(90deg,#C9A84C 0%,rgba(201,168,76,0.2) 0%);border-radius:2px;outline:none;cursor:pointer"
+        oninput="calcROI(this.value)">
+      <div style="display:flex;justify-content:space-between;margin-top:6px">
+        <span style="font-size:10px;color:rgba(201,168,76,0.3)">500 درهم</span>
+        <span style="font-size:10px;color:rgba(201,168,76,0.3)">20,000 درهم</span>
+      </div>
+    </div>
+
+    <!-- Service selector -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:28px" id="roi-services">
+      <button onclick="setROIService(this,'social',3.5)" class="roi-btn roi-active" style="font-size:11px;font-weight:700;letter-spacing:1px;padding:9px 16px;border-radius:8px;cursor:pointer;border:1px solid rgba(201,168,76,0.4);background:rgba(201,168,76,0.12);color:#E8C264;transition:all .3s">📱 سوشيال</button>
+      <button onclick="setROIService(this,'ads',4.5)" class="roi-btn" style="font-size:11px;font-weight:700;letter-spacing:1px;padding:9px 16px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:transparent;color:rgba(255,255,255,0.4);transition:all .3s">📢 إعلانات</button>
+      <button onclick="setROIService(this,'full',6)" class="roi-btn" style="font-size:11px;font-weight:700;letter-spacing:1px;padding:9px 16px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:transparent;color:rgba(255,255,255,0.4);transition:all .3s">🚀 الباقة الكاملة</button>
+    </div>
+
+    <!-- Results box -->
+    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);border-radius:16px;padding:24px;margin-bottom:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C9A84C,transparent)"></div>
+
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <div style="text-align:center;flex:1;min-width:100px">
+          <div style="font-size:10px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-bottom:8px">العائد المتوقع</div>
+          <div id="roi-result" style="font-size:36px;font-weight:700;background:linear-gradient(135deg,#F5E098,#C9A84C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1">5,250</div>
+          <div style="font-size:11px;color:rgba(201,168,76,0.3);margin-top:4px">درهم/شهر</div>
+        </div>
+        <div style="width:1px;background:rgba(201,168,76,0.1);flex-shrink:0"></div>
+        <div style="text-align:center;flex:1;min-width:100px">
+          <div style="font-size:10px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-bottom:8px">صافي الربح</div>
+          <div id="roi-profit" style="font-size:36px;font-weight:700;color:#00D68A;line-height:1">3,750</div>
+          <div style="font-size:11px;color:rgba(0,214,138,0.3);margin-top:4px">درهم/شهر</div>
+        </div>
+        <div style="width:1px;background:rgba(201,168,76,0.1);flex-shrink:0"></div>
+        <div style="text-align:center;flex:1;min-width:100px">
+          <div style="font-size:10px;color:rgba(201,168,76,0.4);letter-spacing:2px;margin-bottom:8px">نسبة العائد</div>
+          <div id="roi-percent" style="font-size:36px;font-weight:700;color:#00E5FF;line-height:1">250%</div>
+          <div style="font-size:11px;color:rgba(0,229,255,0.3);margin-top:4px">ROI</div>
+        </div>
+      </div>
+
+      <div id="roi-msg" style="margin-top:16px;font-size:13px;color:rgba(240,234,214,0.6);line-height:1.6;border-top:1px solid rgba(201,168,76,0.08);padding-top:14px">
+        بميزانية 1,500 درهم في السوشيال ميديا، يمكن توقع عائد يصل 5,250 درهم شهرياً 🌊
+      </div>
+    </div>
+
+    <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت نعرف أكثر على العائد المتوقع لمشروعي"
+      style="display:inline-block;background:linear-gradient(135deg,#F5E098,#E8C264,#C9A84C,#8B6914);color:#080600;font-size:14px;font-weight:900;letter-spacing:2px;padding:16px 40px;border-radius:4px;text-decoration:none;box-shadow:0 4px 24px rgba(201,168,76,0.3)">
+      احصل على خطة مخصصة لك ✦
+    </a>
+
+    <div style="font-size:10px;color:rgba(201,168,76,0.2);margin-top:12px;letter-spacing:2px">
+      * الأرقام تقديرية بناءً على نتائج عملائنا الحقيقيين
+    </div>
+  </div>
+</div>
+
+<style>
+#roi-budget::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#F5E098,#C9A84C);cursor:pointer;box-shadow:0 0 12px rgba(201,168,76,0.5)}
+</style>
+
+<script>
+var roiMultiplier = 3.5;
+
+function calcROI(budget) {
+  budget = parseInt(budget);
+  // Update slider gradient
+  var pct = ((budget - 500) / (20000 - 500)) * 100;
+  document.getElementById('roi-budget').style.background =
+    'linear-gradient(90deg, #C9A84C ' + pct + '%, rgba(201,168,76,0.15) ' + pct + '%)';
+
+  // Format budget
+  document.getElementById('roi-budget-display').textContent =
+    budget.toLocaleString('ar-MA') + ' درهم';
+
+  var expected = Math.round(budget * roiMultiplier);
+  var profit   = expected - budget;
+  var roiPct   = Math.round(((expected - budget) / budget) * 100);
+
+  // Animate numbers
+  animNum('roi-result',  expected, '');
+  animNum('roi-profit',  profit,   '');
+  animNum('roi-percent', roiPct,   '%');
+
+  // Message
+  var serviceNames = {social:'السوشيال ميديا', ads:'الإعلانات الممولة', full:'الباقة الكاملة'};
+  document.getElementById('roi-msg').textContent =
+    'بميزانية ' + budget.toLocaleString('ar-MA') + ' درهم في ' +
+    (window.currentService ? serviceNames[window.currentService] : 'السوشيال ميديا') +
+    '، يمكن توقع عائد يصل ' + expected.toLocaleString('ar-MA') + ' درهم شهرياً 🌊';
+}
+
+function animNum(id, val, suffix) {
+  var el = document.getElementById(id);
+  if(!el) return;
+  var start = parseInt(el.textContent) || 0;
+  var diff = val - start;
+  var steps = 20;
+  var i = 0;
+  var t = setInterval(function(){
+    i++;
+    var current = Math.round(start + diff * (i/steps));
+    el.textContent = current.toLocaleString('ar-MA') + suffix;
+    if(i >= steps) clearInterval(t);
+  }, 20);
+}
+
+function setROIService(btn, service, mult) {
+  window.currentService = service;
+  roiMultiplier = mult;
+  // Reset all buttons
+  document.querySelectorAll('.roi-btn').forEach(function(b){
+    b.style.background = 'transparent';
+    b.style.borderColor = 'rgba(255,255,255,0.08)';
+    b.style.color = 'rgba(255,255,255,0.4)';
+  });
+  btn.style.background = 'rgba(201,168,76,0.12)';
+  btn.style.borderColor = 'rgba(201,168,76,0.4)';
+  btn.style.color = '#E8C264';
+  calcROI(document.getElementById('roi-budget').value);
+}
+
+// Init
+window.currentService = 'social';
+calcROI(1500);
+</script>
+
+
+<!-- ══════════════════════════════════════════
+  3. WHATSAPP FLOATING BUTTON
+  زر واتساب ثابت + زر تنزيل التطبيق
+  ══════════════════════════════════════════ -->
+<div id="mawja-float" style="position:fixed;bottom:24px;left:20px;z-index:9999;display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/212702648233?text=السلام عليكم، بغيت استشارة مجانية مع MAWJA 🌊"
+    id="wa-float"
+    style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:13px 20px;border-radius:50px;text-decoration:none;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:800;box-shadow:0 6px 24px rgba(37,211,102,0.4),0 2px 8px rgba(0,0,0,0.3);letter-spacing:0.5px;transition:transform .2s,box-shadow .2s;white-space:nowrap"
+    onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 8px 32px rgba(37,211,102,0.55)'"
+    onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.4)'"
+    ontouchstart="this.style.transform='scale(0.97)'"
+    ontouchend="this.style.transform='scale(1)'">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span>واتساب مباشر</span>
+  </a>
+
+  <!-- PWA Install -->
+  <div id="pwa-install-float"
+    style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#F5E098,#E8C264,#C9A84C,#A07830);color:#080600;padding:13px 20px;border-radius:50px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:900;box-shadow:0 6px 24px rgba(201,168,76,0.45);cursor:pointer;letter-spacing:0.5px;white-space:nowrap;transition:transform .2s"
+    onclick="doInstall()"
+    onmouseover="this.style.transform='scale(1.05)'"
+    onmouseout="this.style.transform='scale(1)'">
+    📲 <span>حمّل التطبيق</span>
+  </div>
+
+</div>
+
+<!-- Pulse animation on WA button -->
+<style>
+@keyframes wa-pulse {
+  0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0.4); }
+  50%      { box-shadow: 0 6px 24px rgba(37,211,102,0.5), 0 0 0 8px rgba(37,211,102,0); }
+}
+#wa-float { animation: wa-pulse 2.5s ease-in-out infinite; }
+</style>
+
+<script>
+// PWA install logic
+var mawjaPWAPrompt = null;
+
+window.addEventListener('beforeinstallprompt', function(e) {
+  e.preventDefault();
+  mawjaPWAPrompt = e;
+  document.getElementById('pwa-install-float').style.display = 'flex';
+});
+
+window.addEventListener('appinstalled', function() {
+  document.getElementById('pwa-install-float').style.display = 'none';
+});
+
+function doInstall() {
+  if (mawjaPWAPrompt) {
+    mawjaPWAPrompt.prompt();
+    mawjaPWAPrompt.userChoice.then(function(r){
+      if(r.outcome === 'accepted') {
+        document.getElementById('pwa-install-float').style.display = 'none';
+      }
+      mawjaPWAPrompt = null;
+    });
+  } else {
+    alert('📱 باش تنزل التطبيق:\n\n• Android: القائمة (⋮) ← Install App\n• iPhone: Share ← Add to Home Screen');
+  }
+}
+</script>
+
+<!-- ============================================================
+  END — MAWJA FEATURES
+  ============================================================ -->
+
 </body></html>
