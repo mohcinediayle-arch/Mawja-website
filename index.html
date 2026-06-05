@@ -1132,5 +1132,11 @@ function doInstall() {
 <!-- ============================================================
   END — MAWJA FEATURES
   ============================================================ -->
+<script>
+var _p=null;
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();_p=e;document.getElementById('install-btn').style.display='inline-block';});
+function installPWA(){if(_p){_p.prompt();}else{alert('iPhone: Share ← Add to Home Screen\nAndroid: القائمة ← Install App');}}
+if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js');
+</script>
 
 </body></html>
