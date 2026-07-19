@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAWJA | لوحة التحكم</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600;700&family=Amiri:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;600;700&family=Amiri:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root{
@@ -23,15 +23,20 @@ input,select{font-family:inherit;}
 
 /* ===== Onboarding ===== */
 #onboard{position:fixed;inset:0;background:radial-gradient(circle at 50% 20%,#161622,var(--dark) 70%);display:flex;align-items:center;justify-content:center;z-index:200;padding:24px;}
-.ob-card{width:100%;max-width:420px;background:var(--dark2);border:1px solid rgba(201,168,76,.25);border-radius:18px;padding:36px 28px;position:relative;overflow:hidden;}
-.ob-card::before{content:"";position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(201,168,76,.15),transparent 70%);}
-.ob-logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;letter-spacing:6px;background:linear-gradient(135deg,#fff,var(--gold-l),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:6px;}
-.ob-sub{text-align:center;color:var(--gray);font-size:13px;margin-bottom:28px;}
-.field{margin-bottom:16px;}
-.field label{display:block;font-size:13px;color:var(--gold-l);margin-bottom:6px;}
-.field input,.field select{width:100%;background:var(--dark3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;color:var(--white);font-size:15px;outline:none;transition:border .2s;}
-.field input:focus,.field select:focus{border-color:var(--gold);}
-.btn-primary{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--dark);font-weight:700;padding:14px;border-radius:10px;font-size:15px;margin-top:8px;transition:transform .15s;}
+.ob-card{width:100%;max-width:420px;background:rgba(14,14,22,.7);backdrop-filter:blur(16px);border:1px solid rgba(0,191,255,.22);border-radius:14px;padding:34px 26px;position:relative;overflow:hidden;box-shadow:0 0 0 1px rgba(201,168,76,.06) inset, 0 20px 60px rgba(0,0,0,.5);}
+.ob-card::before{content:"";position:absolute;top:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,191,255,.1),transparent 70%);}
+.ob-card::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(0,191,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,191,255,.03) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.ob-corner{position:absolute;width:20px;height:20px;border-color:var(--neon);opacity:.7;}
+.ob-corner.tl{top:10px;left:10px;border-top:2px solid;border-left:2px solid;border-radius:8px 0 0 0;}
+.ob-corner.br{bottom:10px;right:10px;border-bottom:2px solid;border-right:2px solid;border-color:var(--gold);border-radius:0 0 8px 0;}
+.ob-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--neon);text-align:center;opacity:.7;margin-bottom:14px;position:relative;}
+.ob-tag span{background:transparent;padding:0 8px;}
+.ob-sub{text-align:center;color:var(--gray);font-size:12.5px;margin-bottom:26px;font-family:'Space Mono',monospace;letter-spacing:.3px;line-height:1.6;position:relative;}
+.field{margin-bottom:16px;position:relative;}
+.field label{display:block;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--neon);margin-bottom:7px;text-transform:uppercase;}
+.field input,.field select{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(0,191,255,.18);border-radius:8px;padding:13px 14px;color:var(--white);font-size:15px;outline:none;transition:border .2s, box-shadow .2s;}
+.field input:focus,.field select:focus{border-color:var(--neon);box-shadow:0 0 0 3px rgba(0,191,255,.1), 0 0 16px rgba(0,191,255,.15);}
+.btn-primary{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--dark);font-weight:700;padding:14px;border-radius:8px;font-size:14px;margin-top:8px;transition:transform .15s;font-family:'Space Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 0 20px rgba(201,168,76,.25);}
 .btn-primary:active{transform:scale(.98);}
 .ob-err{color:var(--danger);font-size:12px;min-height:16px;margin-top:-8px;margin-bottom:10px;}
 
@@ -165,17 +170,78 @@ nav.bottom button .ic{font-size:19px;}
 .modal-sheet textarea{width:100%;background:var(--dark3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;color:var(--white);font-size:14px;min-height:80px;resize:vertical;font-family:inherit;}
 
 /* ===== MAWJA Aura (living background) ===== */
-#auraBg{position:fixed;inset:0;z-index:-2;transition:background 3s ease;}
+#auraBg{position:fixed;inset:0;z-index:-3;transition:background 3s ease;}
+#quantumOverlay{position:fixed;inset:0;z-index:-2;opacity:.35;mix-blend-mode:screen;background:linear-gradient(135deg,#1a0a2e 0%,#16213e 25%,#0f3460 50%,#1a0a2e 75%,#16213e 100%);background-size:300% 300%;animation:quantumShift 18s ease-in-out infinite;}
+@keyframes quantumShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 #auraCanvas{position:fixed;inset:0;z-index:-1;width:100%;height:100%;}
+
+/* ===== BOOT SEQUENCE (cinematic intro) ===== */
+#boot{position:fixed;inset:0;background:#000;z-index:500;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .8s ease, visibility .8s ease;}
+#boot.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.boot-scanline{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--neon),transparent);box-shadow:0 0 12px var(--neon);animation:bootscan 2.4s linear infinite;opacity:.8;}
+@keyframes bootscan{0%{top:-2%;}100%{top:102%;}}
+.boot-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,191,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,191,255,.05) 1px,transparent 1px);background-size:32px 32px;animation:bootgrid 6s linear infinite;}
+@keyframes bootgrid{0%{background-position:0 0;}100%{background-position:32px 32px;}}
+.boot-content{position:relative;z-index:2;text-align:center;width:100%;max-width:340px;padding:0 24px;}
+.boot-line{font-family:'Space Mono',monospace;font-size:11px;color:var(--neon-g);text-align:left;direction:ltr;letter-spacing:.5px;height:16px;margin-bottom:4px;opacity:0;white-space:nowrap;overflow:hidden;}
+.boot-line.show{opacity:.85;}
+.boot-logo-wrap{margin:26px 0 20px;}
+.boot-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:44px;letter-spacing:10px;color:var(--gold-l);opacity:0;text-shadow:0 0 20px rgba(201,168,76,.6),0 0 40px rgba(0,191,255,.25);animation:bootglitch .6s steps(2) 1.4s forwards, bootglow 2.4s ease-in-out 2s infinite;}
+@keyframes bootglitch{0%{opacity:0;transform:translateX(-6px);clip-path:inset(0 0 40% 0);}30%{opacity:1;transform:translateX(4px);clip-path:inset(20% 0 0 0);}60%{transform:translateX(-2px);clip-path:inset(0 0 60% 0);}100%{opacity:1;transform:translateX(0);clip-path:inset(0 0 0 0);}}
+@keyframes bootglow{0%,100%{text-shadow:0 0 20px rgba(201,168,76,.6),0 0 40px rgba(0,191,255,.25);}50%{text-shadow:0 0 30px rgba(201,168,76,.9),0 0 60px rgba(0,191,255,.4);}}
+.boot-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--neon);letter-spacing:4px;opacity:0;animation:fadein .5s ease 2s forwards;}
+@keyframes fadein{to{opacity:.6;}}
+.boot-bar-track{width:100%;height:2px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden;margin-top:24px;}
+.boot-bar-fill{width:0%;height:100%;background:linear-gradient(90deg,var(--neon),var(--gold-l));box-shadow:0 0 10px var(--neon);animation:bootfill 2.6s ease forwards;}
+@keyframes bootfill{to{width:100%;}}
+
+/* ===== CINEMATIC HUD RESKIN ===== */
+.brand{font-family:'Orbitron',sans-serif !important;letter-spacing:5px !important;}
+.ob-logo{font-family:'Orbitron',sans-serif !important;letter-spacing:8px !important;}
+.stat .n, .pulse-count, .cta-title b{font-family:'Orbitron',sans-serif !important;}
+.action-card,.stat,.trust-card,.ai-block,.bcard,.post-card,.week-item,.book-list-item{
+  position:relative; backdrop-filter:blur(10px); background:rgba(20,20,32,.55) !important;
+  border:1px solid rgba(0,191,255,.18) !important;
+  box-shadow:0 0 0 1px rgba(201,168,76,.05) inset, 0 8px 24px rgba(0,0,0,.35);
+}
+.action-card::before,.stat::before{content:"";position:absolute;top:0;left:0;width:18px;height:18px;border-top:2px solid var(--neon);border-left:2px solid var(--neon);border-radius:14px 0 0 0;opacity:.6;}
+.action-card::after,.stat::after{content:"";position:absolute;bottom:0;right:0;width:18px;height:18px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);border-radius:0 0 14px 0;opacity:.6;}
+.action-card:active{border-color:rgba(0,191,255,.5) !important;box-shadow:0 0 20px rgba(0,191,255,.15), 0 8px 24px rgba(0,0,0,.35);}
+.btn-primary,.btn-neon{position:relative;overflow:hidden;}
+.btn-primary::after,.btn-neon::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s;}
+.btn-primary:active::after,.btn-neon:active::after{transform:translateX(120%);}
+nav.bottom{background:rgba(8,8,14,.85) !important;border-top:1px solid rgba(0,191,255,.2) !important;box-shadow:0 -4px 20px rgba(0,191,255,.05);}
+nav.bottom button.active{text-shadow:0 0 10px rgba(232,201,122,.6);}
+nav.bottom button.active .ic{filter:drop-shadow(0 0 6px var(--neon));}
 </style>
 </head>
 <body>
 <div id="auraBg"></div>
+<div id="quantumOverlay"></div>
 <canvas id="auraCanvas"></canvas>
+
+<!-- ================= BOOT SEQUENCE ================= -->
+<div id="boot">
+  <div class="boot-scanline"></div>
+  <div class="boot-grid"></div>
+  <div class="boot-content">
+    <div class="boot-line" id="bootLine1"></div>
+    <div class="boot-line" id="bootLine2"></div>
+    <div class="boot-line" id="bootLine3"></div>
+    <div class="boot-logo-wrap">
+      <div class="boot-logo" id="bootLogo">MAWJA</div>
+      <div class="boot-sub">O S &nbsp;·&nbsp; V2080.1</div>
+    </div>
+    <div class="boot-bar-track"><div class="boot-bar-fill" id="bootBarFill"></div></div>
+  </div>
+</div>
 
 <!-- ================= ONBOARDING ================= -->
 <div id="onboard">
   <div class="ob-card">
+    <div class="ob-corner tl"></div>
+    <div class="ob-corner br"></div>
+    <div class="ob-tag">// NEW BUSINESS REGISTRATION</div>
     <div class="ob-logo">MAWJA</div>
     <div class="ob-sub">دفتر البزنس ديالك — عبّي المعلومات باش نبنيو ليك لوحة التحكم</div>
     <div class="field">
@@ -491,7 +557,23 @@ function animateAura(){
   var ctx = c.getContext('2d');
   ctx.clearRect(0,0,c.width,c.height);
   auraStars.forEach(function(s){ s.update(); s.draw(ctx); });
-  auraParticles.forEach(function(p){ p.update(); p.draw(ctx); });
+  auraParticles.forEach(function(p){ p.update(); });
+  /* neural connections between nearby particles */
+  var col = AURA_THEMES[auraCurrent].particle;
+  for(var i=0;i<auraParticles.length;i++){
+    for(var j=i+1;j<auraParticles.length;j++){
+      var dx = auraParticles[i].x-auraParticles[j].x, dy = auraParticles[i].y-auraParticles[j].y;
+      var dist = Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.save();
+        ctx.globalAlpha = 0.12*(1-dist/120);
+        ctx.strokeStyle = col; ctx.lineWidth = 0.6;
+        ctx.beginPath(); ctx.moveTo(auraParticles[i].x,auraParticles[i].y); ctx.lineTo(auraParticles[j].x,auraParticles[j].y); ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+  auraParticles.forEach(function(p){ p.draw(ctx); });
   requestAnimationFrame(animateAura);
 }
 resizeAuraCanvas();
@@ -507,6 +589,30 @@ let bookings = [];
 let diagAnswers = {};
 let selectedDay = null;
 let selectedSlot = null;
+
+/* ============ BOOT SEQUENCE ============ */
+function typeLine(el, text, speed, done){
+  el.classList.add('show');
+  var i = 0;
+  var iv = setInterval(function(){
+    el.textContent = text.slice(0, i+1);
+    i++;
+    if(i >= text.length){ clearInterval(iv); if(done) done(); }
+  }, speed);
+}
+(function runBoot(){
+  var l1 = document.getElementById('bootLine1');
+  var l2 = document.getElementById('bootLine2');
+  var l3 = document.getElementById('bootLine3');
+  typeLine(l1, '> INITIALIZING MAWJA_OS...', 18, function(){
+    typeLine(l2, '> LOADING NEURAL MODULES [OK]', 14, function(){
+      typeLine(l3, '> ESTABLISHING SECURE LINK...', 14);
+    });
+  });
+  setTimeout(function(){
+    document.getElementById('boot').classList.add('hide');
+  }, 3200);
+})();
 
 /* ============ INIT ============ */
 async function init(){
