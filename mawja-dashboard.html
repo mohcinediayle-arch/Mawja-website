@@ -135,9 +135,43 @@ nav.bottom button .ic{font-size:19px;}
 .ref-row input{flex:1;background:var(--dark3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:11px 12px;color:var(--white);}
 .ref-add{background:var(--gold);color:var(--dark);font-weight:700;padding:0 18px;border-radius:10px;}
 .ref-item{background:var(--dark2);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:13.5px;display:flex;justify-content:space-between;}
+
+/* ===== MAWJA Connect (marketplace) ===== */
+.connect-filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;}
+.cf-chip{flex-shrink:0;background:var(--dark3);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:8px 16px;font-size:12.5px;color:var(--gray);}
+.cf-chip.sel{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.1);}
+.btn-add-post{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);max-width:200px;width:calc(100% - 36px);background:linear-gradient(135deg,var(--gold),var(--gold-l));color:var(--dark);font-weight:700;padding:13px;border-radius:14px;font-size:14px;box-shadow:0 8px 24px rgba(201,168,76,.25);z-index:90;}
+.post-card{background:var(--dark2);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:12px;}
+.post-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.post-badge{font-size:10px;padding:4px 10px;border-radius:20px;font-weight:700;}
+.post-badge.staff{background:rgba(0,191,255,.15);color:var(--neon);}
+.post-badge.supplier{background:rgba(201,168,76,.15);color:var(--gold-l);}
+.post-badge.delivery{background:rgba(0,255,157,.15);color:var(--neon-g);}
+.post-city{font-size:11px;color:var(--gray);}
+.post-title{font-size:15px;font-weight:700;margin-bottom:6px;}
+.post-desc{font-size:13px;color:#d5d5da;line-height:1.5;margin-bottom:12px;}
+.post-foot{display:flex;justify-content:space-between;align-items:center;}
+.post-author{font-size:11px;color:var(--gray);}
+.post-contact{background:var(--wa);color:#fff;font-size:12px;padding:8px 14px;border-radius:8px;font-weight:600;}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:150;display:none;align-items:flex-end;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-sheet{background:var(--dark2);width:100%;max-width:520px;border-radius:20px 20px 0 0;padding:24px 20px 30px;max-height:85vh;overflow-y:auto;}
+.modal-sheet h3{font-size:17px;margin-bottom:16px;color:var(--gold-l);}
+.type-row{display:flex;gap:8px;margin-bottom:16px;}
+.type-btn{flex:1;background:var(--dark3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 4px;text-align:center;font-size:11px;color:var(--gray);}
+.type-btn.sel{border-color:var(--gold);color:var(--gold-l);background:rgba(201,168,76,.1);}
+.modal-sheet textarea{width:100%;background:var(--dark3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;color:var(--white);font-size:14px;min-height:80px;resize:vertical;font-family:inherit;}
+
+/* ===== MAWJA Aura (living background) ===== */
+#auraBg{position:fixed;inset:0;z-index:-2;transition:background 3s ease;}
+#auraCanvas{position:fixed;inset:0;z-index:-1;width:100%;height:100%;}
 </style>
 </head>
 <body>
+<div id="auraBg"></div>
+<canvas id="auraCanvas"></canvas>
 
 <!-- ================= ONBOARDING ================= -->
 <div id="onboard">
@@ -213,6 +247,10 @@ nav.bottom button .ic{font-size:19px;}
         <div class="action-icon" style="background:rgba(201,168,76,.15);color:var(--gold-l);">🤝</div>
         <div class="action-txt"><h4>نظام الثقة</h4><p>الضمانات، الإحالات، والمتابعة الأسبوعية</p></div>
       </div>
+      <div class="action-card" onclick="go('connect')">
+        <div class="action-icon" style="background:rgba(0,191,255,.15);color:var(--neon);">🔗</div>
+        <div class="action-txt"><h4>MAWJA Connect</h4><p>عمال، موردين، وليفريزون — شبكة الزبناء ديال MAWJA</p></div>
+      </div>
 
       <a class="reset-link" onclick="resetAll()">تصفير البيانات وإعادة الإعداد</a>
     </section>
@@ -283,15 +321,44 @@ nav.bottom button .ic{font-size:19px;}
       </div>
       <div id="refList"></div>
     </section>
+
+    <!-- CONNECT (marketplace) -->
+    <section class="view" id="v-connect">
+      <div class="section-title">MAWJA Connect — شبكة الزبناء</div>
+      <div class="connect-filters" id="connectFilters">
+        <div class="cf-chip sel" data-t="all">الكل</div>
+        <div class="cf-chip" data-t="staff">👷 عمال</div>
+        <div class="cf-chip" data-t="supplier">📦 موردين</div>
+        <div class="cf-chip" data-t="delivery">🛵 ليفريزون</div>
+      </div>
+      <div id="postsList"></div>
+    </section>
   </main>
+
+  <button class="btn-add-post" onclick="openPostModal()" id="addPostBtn" style="display:none;">+ إعلان جديد</button>
+
+  <div class="modal-overlay" id="postModal">
+    <div class="modal-sheet">
+      <h3>إعلان جديد فـ MAWJA Connect</h3>
+      <div class="type-row" id="typeRow">
+        <div class="type-btn sel" data-t="staff">👷<br>محتاج عامل</div>
+        <div class="type-btn" data-t="supplier">📦<br>مورد/سلعة</div>
+        <div class="type-btn" data-t="delivery">🛵<br>ليفريزون</div>
+      </div>
+      <div class="field"><label>العنوان</label><input id="postTitle" type="text" placeholder="مثال: محتاج بائع لعطلة الصيف"></div>
+      <div class="field"><label>التفاصيل</label><textarea id="postDesc" placeholder="اكتب التفاصيل هنا..."></textarea></div>
+      <div class="ob-err" id="postErr"></div>
+      <button class="btn-primary" onclick="submitPost()">نشر الإعلان</button>
+      <button class="btn-sm btn-outline" style="width:100%;margin-top:10px;" onclick="closePostModal()">إلغاء</button>
+    </div>
+  </div>
 
   <nav class="bottom">
     <button class="nav-btn active" data-v="home" onclick="go('home')"><span class="ic">🏠</span>الرئيسية</button>
     <button class="nav-btn" data-v="card" onclick="go('card')"><span class="ic">🪪</span>الكارت</button>
     <button class="nav-btn" data-v="booking" onclick="go('booking')"><span class="ic">📅</span>الرونديفو</button>
-    <button class="nav-btn" data-v="diag" onclick="go('diag')"><span class="ic">🩺</span>التشخيص</button>
     <button class="nav-btn" data-v="mirror" onclick="go('mirror')"><span class="ic">🪞</span>Mirror</button>
-    <button class="nav-btn" data-v="trust" onclick="go('trust')"><span class="ic">🤝</span>الثقة</button>
+    <button class="nav-btn" data-v="connect" onclick="go('connect')"><span class="ic">🔗</span>Connect</button>
   </nav>
 </div>
 
@@ -360,6 +427,80 @@ const DIAG_BANK = {
   ]
 };
 
+/* ============ MAWJA AURA (living background) ============ */
+var AURA_THEMES = [
+  {id:'ocean-night', hours:[22,23,0,1,2,3],
+   bg:'radial-gradient(ellipse at 30% 80%,#001a2e 0%,#000510 55%,#0A0A0F 100%)', particle:'#00BFFF', stars:true},
+  {id:'golden-dawn', hours:[4,5,6],
+   bg:'radial-gradient(ellipse at 50% 100%,#1a0f00 0%,#100a00 40%,#0A0A0F 100%)', particle:'#C9A84C', stars:false},
+  {id:'cyber-morning', hours:[7,8,9],
+   bg:'radial-gradient(ellipse at 80% 20%,#001a26 0%,#000d13 55%,#0A0A0F 100%)', particle:'#00FF9D', stars:false},
+  {id:'solar-noon', hours:[10,11,12,13],
+   bg:'radial-gradient(ellipse at 50% 0%,#1a1300 0%,#0d0a00 40%,#0A0A0F 100%)', particle:'#E8C97A', stars:false},
+  {id:'royal-afternoon', hours:[14,15,16],
+   bg:'radial-gradient(ellipse at 70% 30%,#160026 0%,#0c0016 50%,#0A0A0F 100%)', particle:'#A78BFA', stars:false},
+  {id:'sunset-fire', hours:[17,18,19],
+   bg:'radial-gradient(ellipse at 50% 80%,#230a00 0%,#160500 40%,#0A0A0F 100%)', particle:'#FF8C42', stars:false},
+  {id:'neon-evening', hours:[20,21],
+   bg:'radial-gradient(ellipse at 20% 50%,#00160c 0%,#000c06 50%,#0A0A0F 100%)', particle:'#00FF9D', stars:true},
+];
+var auraCurrent = 0, auraParticles = [], auraStars = [];
+function AuraParticle(color){ this.color=color; this.reset(); }
+AuraParticle.prototype.reset = function(){
+  this.x = Math.random()*window.innerWidth; this.y = Math.random()*window.innerHeight;
+  this.size = Math.random()*2+0.5; this.sx=(Math.random()-0.5)*0.3; this.sy=(Math.random()-0.5)*0.3-0.15;
+  this.life = Math.random(); this.ml = Math.random()*0.015+0.003;
+};
+AuraParticle.prototype.update = function(){
+  this.x+=this.sx; this.y+=this.sy; this.life+=this.ml;
+  this.op = this.life<0.5 ? this.life*2 : (1-this.life)*2;
+  if(this.life>=1 || this.y<0) this.reset();
+};
+AuraParticle.prototype.draw = function(ctx){
+  ctx.save(); ctx.globalAlpha=(this.op||0)*0.55; ctx.fillStyle=this.color;
+  ctx.shadowBlur=6; ctx.shadowColor=this.color;
+  ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); ctx.restore();
+};
+function AuraStar(){
+  this.x=Math.random()*window.innerWidth; this.y=Math.random()*window.innerHeight;
+  this.size=Math.random()*1.3+0.2; this.tw=Math.random()*Math.PI*2; this.sp=Math.random()*0.02+0.005;
+}
+AuraStar.prototype.update = function(){ this.tw+=this.sp; };
+AuraStar.prototype.draw = function(ctx){
+  ctx.save(); ctx.globalAlpha=0.2+Math.sin(this.tw)*0.3; ctx.fillStyle='#fff';
+  ctx.shadowBlur=3; ctx.shadowColor='#aaccff';
+  ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); ctx.restore();
+};
+function applyAuraTheme(){
+  var t = AURA_THEMES[auraCurrent];
+  document.getElementById('auraBg').style.background = t.bg;
+  auraParticles = Array.from({length:36}, function(){ return new AuraParticle(t.particle); });
+  auraStars = t.stars ? Array.from({length:70}, function(){ return new AuraStar(); }) : [];
+}
+function autoAuraTheme(){
+  var h = new Date().getHours();
+  var idx = AURA_THEMES.findIndex(function(t){ return t.hours.indexOf(h)>=0; });
+  if(idx>=0 && idx!==auraCurrent){ auraCurrent = idx; applyAuraTheme(); }
+}
+function resizeAuraCanvas(){
+  var c = document.getElementById('auraCanvas');
+  c.width = window.innerWidth; c.height = window.innerHeight;
+}
+function animateAura(){
+  var c = document.getElementById('auraCanvas');
+  var ctx = c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+  auraStars.forEach(function(s){ s.update(); s.draw(ctx); });
+  auraParticles.forEach(function(p){ p.update(); p.draw(ctx); });
+  requestAnimationFrame(animateAura);
+}
+resizeAuraCanvas();
+window.addEventListener('resize', resizeAuraCanvas);
+autoAuraTheme();
+applyAuraTheme();
+animateAura();
+setInterval(autoAuraTheme, 60000);
+
 /* ============ STATE ============ */
 let profile = null;
 let bookings = [];
@@ -409,6 +550,7 @@ function showApp(){
   renderBookingSetup();
   renderDiag();
   renderTrust();
+  loadConnectPosts();
   updateStats();
 }
 
@@ -417,7 +559,9 @@ function go(v){
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
   document.getElementById('v-'+v).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.querySelector('.nav-btn[data-v="'+v+'"]').classList.add('active');
+  var btn = document.querySelector('.nav-btn[data-v="'+v+'"]');
+  if(btn) btn.classList.add('active');
+  document.getElementById('addPostBtn').style.display = (v==='connect') ? 'block' : 'none';
   window.scrollTo(0,0);
 }
 
@@ -694,6 +838,76 @@ async function removeReferral(i){
   referrals.splice(i,1);
   await window.storage.set('referrals', JSON.stringify(referrals));
   renderTrust();
+}
+
+/* ============ MAWJA CONNECT (marketplace) ============ */
+var connectPosts = [];
+var connectFilter = 'all';
+var selectedPostType = 'staff';
+var TYPE_LABELS = {staff:'👷 عامل مطلوب', supplier:'📦 مورد/سلعة', delivery:'🛵 ليفريزون'};
+
+async function loadConnectPosts(){
+  try{
+    var r = await window.storage.get('connect-posts', true);
+    connectPosts = r && r.value ? JSON.parse(r.value) : [];
+  }catch(e){ connectPosts = []; }
+  renderConnect();
+}
+document.getElementById('connectFilters').addEventListener('click', function(e){
+  var chip = e.target.closest('.cf-chip');
+  if(!chip) return;
+  document.querySelectorAll('.cf-chip').forEach(c=>c.classList.remove('sel'));
+  chip.classList.add('sel');
+  connectFilter = chip.dataset.t;
+  renderConnect();
+});
+function renderConnect(){
+  var list = document.getElementById('postsList');
+  var filtered = connectFilter==='all' ? connectPosts : connectPosts.filter(p=>p.type===connectFilter);
+  filtered = filtered.slice().sort((a,b)=> b.date - a.date);
+  if(filtered.length===0){ list.innerHTML = '<div class="empty">ما كاين حتى إعلان دابا فهاد التصنيف. كن أول واحد ينشر! 🚀</div>'; return; }
+  list.innerHTML = filtered.map(p=>{
+    var cls = p.type==='staff'?'staff':(p.type==='supplier'?'supplier':'delivery');
+    return '<div class="post-card">'+
+      '<div class="post-top"><span class="post-badge '+cls+'">'+TYPE_LABELS[p.type]+'</span><span class="post-city">📍 '+p.city+'</span></div>'+
+      '<div class="post-title">'+p.title+'</div>'+
+      '<div class="post-desc">'+p.desc+'</div>'+
+      '<div class="post-foot"><span class="post-author">'+p.name+'</span>'+
+      '<a class="post-contact" href="https://wa.me/'+p.phone+'?text='+encodeURIComponent('سلام، شفت الإعلان ديالك فـ MAWJA Connect: '+p.title)+'" target="_blank">تواصل واتساب</a></div>'+
+    '</div>';
+  }).join('');
+}
+function openPostModal(){ document.getElementById('postModal').classList.add('open'); }
+function closePostModal(){ document.getElementById('postModal').classList.remove('open'); document.getElementById('postErr').textContent=''; }
+document.getElementById('typeRow').addEventListener('click', function(e){
+  var btn = e.target.closest('.type-btn');
+  if(!btn) return;
+  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  selectedPostType = btn.dataset.t;
+});
+async function submitPost(){
+  var title = document.getElementById('postTitle').value.trim();
+  var desc = document.getElementById('postDesc').value.trim();
+  var err = document.getElementById('postErr');
+  if(!title || !desc){ err.textContent = 'عمر العنوان والتفاصيل من فضلك'; return; }
+  err.textContent = '';
+  var newPost = {
+    id: Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+    type: selectedPostType, title: title, desc: desc,
+    city: profile.city, name: profile.name, phone: profile.phone,
+    date: Date.now()
+  };
+  try{
+    var r = await window.storage.get('connect-posts', true);
+    connectPosts = r && r.value ? JSON.parse(r.value) : [];
+  }catch(e){ connectPosts = []; }
+  connectPosts.push(newPost);
+  await window.storage.set('connect-posts', JSON.stringify(connectPosts), true);
+  document.getElementById('postTitle').value='';
+  document.getElementById('postDesc').value='';
+  closePostModal();
+  renderConnect();
 }
 
 async function resetAll(){
