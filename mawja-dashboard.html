@@ -238,6 +238,23 @@ nav.bottom button.active .ic{filter:drop-shadow(0 0 6px var(--neon));}
 .chat-input-bar input{flex:1;background:var(--dark3);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:11px 16px;color:var(--white);font-size:14px;}
 .chat-input-bar input:focus{outline:none;border-color:var(--neon);}
 .chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--neon-g));color:#00131a;font-size:16px;flex-shrink:0;}
+
+/* ===== Discover MAWJA (interactive catalog) ===== */
+.cat-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding-bottom:16px;-webkit-overflow-scrolling:touch;}
+.cat-track::-webkit-scrollbar{display:none;}
+.cat-card{scroll-snap-align:center;flex:0 0 88%;background:linear-gradient(160deg,rgba(20,20,32,.85),rgba(10,10,15,.9));border:1px solid rgba(232,201,122,.25);border-radius:20px;padding:26px 22px;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;}
+.cat-card::before{content:"";position:absolute;top:-40px;left:-40px;width:140px;height:140px;background:radial-gradient(circle,rgba(0,191,255,.12),transparent 70%);}
+.cat-emoji{font-size:38px;margin-bottom:14px;}
+.cat-title{font-family:'Orbitron',sans-serif;font-size:19px;font-weight:700;color:var(--gold-l);margin-bottom:8px;}
+.cat-desc{font-size:13px;color:#d5d5da;line-height:1.7;margin-bottom:20px;}
+.cat-stats{display:flex;gap:14px;margin-bottom:22px;}
+.cat-stat{flex:1;background:rgba(255,255,255,.03);border-radius:10px;padding:10px 6px;text-align:center;}
+.cat-stat .v{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--neon-g);}
+.cat-stat .l{font-size:9px;color:var(--gray);margin-top:2px;}
+.cat-cta{margin-top:auto;background:var(--wa);color:#fff;text-align:center;padding:12px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;}
+.cat-dots{display:flex;justify-content:center;gap:6px;margin-bottom:10px;}
+.cat-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);transition:.3s;}
+.cat-dot.on{background:var(--gold-l);width:18px;border-radius:4px;}
 </style>
 </head>
 <body>
@@ -352,6 +369,10 @@ nav.bottom button.active .ic{filter:drop-shadow(0 0 6px var(--neon));}
         <div class="action-icon" style="background:rgba(0,255,157,.15);color:var(--neon-g);">🧠</div>
         <div class="action-txt"><h4>المساعد الذكي</h4><p>سولو أي سؤال على بزنسك — كيجاوب بالذكاء الاصطناعي</p></div>
       </div>
+      <div class="action-card" onclick="go('discover')">
+        <div class="action-icon" style="background:rgba(232,201,122,.15);color:var(--gold-l);">✨</div>
+        <div class="action-txt"><h4>اكتشف MAWJA</h4><p>كتالوج خدماتنا الكامل — اسحب وشوف شنو نقدروا نديرو ليك زيادة</p></div>
+      </div>
 
       <a class="reset-link" onclick="resetAll()">تصفير البيانات وإعادة الإعداد</a>
     </section>
@@ -441,6 +462,13 @@ nav.bottom button.active .ic{filter:drop-shadow(0 0 6px var(--neon));}
       <div class="section-title">🧠 المساعد الذكي — سولو أي حاجة</div>
       <div id="chatLog" class="chat-log"></div>
     </section>
+
+    <!-- DISCOVER MAWJA (interactive catalog) -->
+    <section class="view" id="v-discover">
+      <div class="section-title">✨ اكتشف خدمات MAWJA</div>
+      <div class="cat-track" id="catTrack"></div>
+      <div class="cat-dots" id="catDots"></div>
+    </section>
   </main>
 
   <div class="chat-input-bar" id="chatInputBar" style="display:none;">
@@ -464,6 +492,16 @@ nav.bottom button.active .ic{filter:drop-shadow(0 0 6px var(--neon));}
       <div class="ob-err" id="postErr"></div>
       <button class="btn-primary" onclick="submitPost()">نشر الإعلان</button>
       <button class="btn-sm btn-outline" style="width:100%;margin-top:10px;" onclick="closePostModal()">إلغاء</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="welcomeModal">
+    <div class="modal-sheet" style="text-align:center;">
+      <div style="font-size:40px;margin-bottom:6px;">🧠</div>
+      <h3 id="welcomeTitle" style="margin-bottom:10px;">مرحبا!</h3>
+      <p style="font-size:14px;color:#d5d5da;line-height:1.7;margin-bottom:22px;" id="welcomeMsg"></p>
+      <button class="btn-neon" style="width:100%;margin-bottom:10px;" onclick="welcomeGoMirror()">🪞 إيه، حلل بزنسي دابا</button>
+      <button class="btn-sm btn-outline" style="width:100%;" onclick="closeWelcome()">لا، نبغي نكتشف بروحي</button>
     </div>
   </div>
 
@@ -639,6 +677,25 @@ let diagAnswers = {};
 let selectedDay = null;
 let selectedSlot = null;
 
+/* ============ BOOT SOUND (synthesized, no external file) ============ */
+function playBootSound(){
+  try{
+    var AC = window.AudioContext || window.webkitAudioContext;
+    var ctx = new AC();
+    var now = ctx.currentTime;
+    // نغمة صاعدة خفيفة احترافية
+    [ [220,0,.35,'sine'], [440,0.15,.3,'sine'], [880,0.3,.45,'triangle'] ].forEach(function(t){
+      var osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.type = t[3]; osc.frequency.setValueAtTime(t[0], now+t[1]);
+      gain.gain.setValueAtTime(0, now+t[1]);
+      gain.gain.linearRampToValueAtTime(0.06, now+t[1]+0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, now+t[1]+t[2]);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(now+t[1]); osc.stop(now+t[1]+t[2]+0.05);
+    });
+  }catch(e){ /* المتصفح ما كيدعمش الصوت، ما مشكلش */ }
+}
+
 /* ============ BOOT SEQUENCE ============ */
 function typeLine(el, text, speed, done){
   el.classList.add('show');
@@ -650,6 +707,7 @@ function typeLine(el, text, speed, done){
   }, speed);
 }
 (function runBoot(){
+  playBootSound();
   var l1 = document.getElementById('bootLine1');
   var l2 = document.getElementById('bootLine2');
   var l3 = document.getElementById('bootLine3');
@@ -748,6 +806,21 @@ async function finishOnboard(){
   syncToServer();
   document.getElementById('onboard').style.display='none';
   showApp();
+  showWelcomeAssistant();
+}
+function showWelcomeAssistant(){
+  var sectorLabel = SECTOR_LABELS[profile.sector] || profile.sector;
+  document.getElementById('welcomeTitle').textContent = 'مرحبا ' + profile.name + '! 👋';
+  document.getElementById('welcomeMsg').textContent =
+    'أنا المساعد الرقمي ديال MAWJA. شفت بلي بغيتي تطور ' + sectorLabel + ' ديالك فـ' + profile.city + '. واش بغيتي نديرو ليك تحليل ذكي فوري لبزنسك دابا؟';
+  document.getElementById('welcomeModal').classList.add('open');
+}
+function welcomeGoMirror(){
+  document.getElementById('welcomeModal').classList.remove('open');
+  go('mirror');
+}
+function closeWelcome(){
+  document.getElementById('welcomeModal').classList.remove('open');
 }
 
 function showApp(){
@@ -781,6 +854,7 @@ function go(v){
   document.getElementById('addPostBtn').style.display = (v==='connect') ? 'block' : 'none';
   document.getElementById('chatInputBar').style.display = (v==='assistant') ? 'flex' : 'none';
   if(v==='assistant') renderChat();
+  if(v==='discover') renderDiscover();
   window.scrollTo(0,0);
 }
 
@@ -1183,11 +1257,12 @@ var chatHistory = [];
 function renderChat(){
   var log = document.getElementById('chatLog');
   if(chatHistory.length===0){
-    log.innerHTML = '<div class="chat-empty"><div class="ce-icon">🧠</div>سولني أي سؤال على بزنسك — كيفاش نجيب زبناء، وين نحل، شنو الأسعار المناسبة... أي حاجة كيفما بغات تكون.</div>';
+    log.innerHTML = '<div class="chat-empty"><div class="ce-icon">🧠</div>سولني أي سؤال على بزنسك أو أي قطاع آخر — كيفاش كيخدموا الكبار، كيفاش نجيب زبناء، وين نحل، شنو الأسعار المناسبة. عندي بحث فالإنترنت الحقيقي كي يلزم.</div>';
     return;
   }
   log.innerHTML = chatHistory.map(function(m){
-    return '<div class="chat-bubble '+(m.role==='user'?'user':'bot')+'">'+m.content.replace(/\n/g,'<br>')+'</div>';
+    var badge = m.searched ? '<div style="font-size:10px;color:var(--neon);margin-bottom:6px;opacity:.8;">🔎 بحث فالإنترنت</div>' : '';
+    return '<div class="chat-bubble '+(m.role==='user'?'user':'bot')+'">'+badge+m.content.replace(/\n/g,'<br>')+'</div>';
   }).join('');
   log.scrollTop = log.scrollHeight;
 }
@@ -1212,7 +1287,7 @@ async function sendChat(){
     });
     var data = await r.json();
     if(!r.ok || data.error) throw new Error(data.error||'error');
-    chatHistory.push({role:'assistant', content:data.answer});
+    chatHistory.push({role:'assistant', content:data.answer, searched:!!data.searched});
   }catch(e){
     chatHistory.push({role:'assistant', content:'ما قدرتش نجاوب دابا، عاود جرب من بعد لحظة.'});
   }
@@ -1221,6 +1296,52 @@ async function sendChat(){
 document.getElementById('chatInput').addEventListener('keydown', function(e){
   if(e.key==='Enter') sendChat();
 });
+
+/* ============ DISCOVER MAWJA (interactive catalog) ============ */
+var DISCOVER_CATALOG = [
+  {emoji:'📱', title:'إدارة السوشيال ميديا', desc:'محتوى يومي احترافي، تفاعل حقيقي، ونمو متابعين مبني على استراتيجية ماشي صدفة.', stats:[['+400%','نمو متابعين'],['x3','معدل تفاعل'],['24/7','متابعة']], price:'2,000 د.م/شهر'},
+  {emoji:'🎨', title:'الهوية البصرية', desc:'لوغو، ألوان، خط، ودليل هوية كامل كيخلي بزنسك يتعرف عليه من أول نظرة.', stats:[['48h','أول مسودة'],['∞','تعديلات'],['100%','ملكية كاملة']], price:'2,500 د.م'},
+  {emoji:'📣', title:'الإعلانات الممولة', desc:'حملات Meta وGoogle Ads مبنية على بيانات، ماشي تخمين — كل درهم كيتتبع.', stats:[['x5','عائد متوسط'],['-30%','تكلفة العميل'],['أسبوعي','تقرير']], price:'1,500 د.م/شهر'},
+  {emoji:'🧱', title:'تصميم المواقع', desc:'موقع سريع، احترافي، ومبني للتحويل — ماشي غير "زوين".', stats:[['<2s','سرعة تحميل'],['100%','متجاوب'],['SEO','محسّن']], price:'3,500 د.م'},
+];
+function renderDiscover(){
+  var track = document.getElementById('catTrack');
+  var dots = document.getElementById('catDots');
+  track.innerHTML = DISCOVER_CATALOG.map(function(c,i){
+    return '<div class="cat-card" data-i="'+i+'">'+
+      '<div class="cat-emoji">'+c.emoji+'</div>'+
+      '<div class="cat-title">'+c.title+'</div>'+
+      '<div class="cat-desc">'+c.desc+'</div>'+
+      '<div class="cat-stats">'+c.stats.map(function(s){ return '<div class="cat-stat"><div class="v" data-target="'+s[0]+'">0</div><div class="l">'+s[1]+'</div></div>'; }).join('')+'</div>'+
+      '<a class="cat-cta" href="https://wa.me/212787857355?text='+encodeURIComponent('سلام، بغيت نعرف كثر على خدمة '+c.title+' (شفتها فتطبيق MAWJA)')+'" target="_blank">💬 بغيت هاد الخدمة — '+c.price+'</a>'+
+    '</div>';
+  }).join('');
+  dots.innerHTML = DISCOVER_CATALOG.map(function(_,i){ return '<div class="cat-dot'+(i===0?' on':'')+'"></div>'; }).join('');
+
+  var cards = track.querySelectorAll('.cat-card');
+  var animated = {};
+  function animateCard(i){
+    if(animated[i]) return; animated[i] = true;
+    var card = cards[i];
+    card.querySelectorAll('.cat-stat .v').forEach(function(el){
+      var target = el.dataset.target;
+      var num = parseFloat(target.replace(/[^0-9.]/g,''));
+      if(isNaN(num)){ el.textContent = target; return; }
+      var suffix = target.replace(/[0-9.]/g,'');
+      var cur = 0, steps = 24;
+      var iv = setInterval(function(){
+        cur++; el.textContent = Math.round(num*(cur/steps)) + suffix;
+        if(cur>=steps){ el.textContent = target; clearInterval(iv); }
+      }, 25);
+    });
+  }
+  animateCard(0);
+  track.addEventListener('scroll', function(){
+    var idx = Math.round(track.scrollLeft / (track.clientWidth*0.88+14));
+    dots.querySelectorAll('.cat-dot').forEach(function(d,i){ d.classList.toggle('on', i===idx); });
+    animateCard(idx);
+  });
+}
 
 async function resetAll(){
   if(!confirm('واش متأكد؟ غادي يتمسح كلشي.')) return;
