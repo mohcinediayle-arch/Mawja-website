@@ -36,6 +36,11 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
+        // ❌ غلط
+model: 'claude-sonnet-5',
+
+// ✅ صحيح
+model: 'claude-sonnet-4-6',
         model: 'claude-sonnet-5',
         max_tokens: 900,
         system: systemPrompt,
