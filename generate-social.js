@@ -27,7 +27,7 @@ export default async function handler(req, res) {
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-1.5-flash',
       contents: [{ role: 'user', parts: [{ text: prompt }] }],
       config: {
         maxOutputTokens: 900,
