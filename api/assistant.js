@@ -47,6 +47,7 @@ export default async function handler(req, res) {
   contents.push({
     role: 'user',
     parts: [{ text: question }]
+    model: 'gemini-2.5-flash',
   });
 
   try {
